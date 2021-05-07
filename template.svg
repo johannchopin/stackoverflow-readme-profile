@@ -1,0 +1,79 @@
+<svg version="1.1" baseProfile="full" width="300" height="86" viewBox="0 0 300 86" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {
+      fill: #EAEAEA;
+      font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
+    }
+    .username {
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .reputation {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .so-icon {
+      transform: translateX(110px);
+    }
+    .so-icon path {
+      fill: #fff;
+      opacity: 0.1;
+    }
+    .website, .location {
+      font-size: 10px;
+    }
+    .website {
+      fill: #81C4F8;
+    }
+    .badge-count circle {
+      cx: 0;
+      cy: -4;
+      r: 4;
+    }
+  </style>
+
+  <rect 
+    x="0"
+    y="0"
+    rx="5"
+    ry="5"
+    width="300"
+    height="86"
+    fill="#2D2D2D"
+    stroke-width="2"
+    stroke="#F48024"
+  ></rect>
+  <svg x="11" y="11" width="auto">
+    <image transform="translate(0,0)" width="64" height="64" ry="30" href="https://avatars.githubusercontent.com/u/31794680?v=4" />
+    <g transform="translate(75,13)">
+      <text class="username" transform="translate(0,0)">johannchopin</text>
+      <g transform="translate(0,22)" style="font-weight: 800;">
+        <text class="reputation">7,188</text>
+        <g transform="translate(50, 0)">
+          <g class="badge-count">
+            <circle fill="#FFCC01"/>
+            <text x="7">6</text>
+          </g>
+          <g transform="translate(35, 0)" class="badge-count">
+            <circle fill="#B4B8BC"/>
+            <text x="7">21</text>
+          </g>
+          <g transform="translate(70, 0)" class="badge-count">
+            <circle fill="#D1A684"/>
+            <text x="7">59</text>
+          </g>
+        </g>
+      </g>
+      <g transform="translate(0,38)">
+        <text class="location">Paris, France</text>
+      </g>
+      <g transform="translate(0,50)">
+        <text class="website">https://cv-johannchopin.web.app/</text>
+      </g>
+    </g>
+  </svg>
+
+  <g class="so-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z" class=""></path></svg>
+  </g>
+</svg>

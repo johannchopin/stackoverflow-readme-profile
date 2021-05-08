@@ -9,6 +9,7 @@ export interface Badges {
   bronze: number
 }
 export interface ProfileTemplateContext {
+  avatar: string
   username: string
   reputation: string
   badges: Badges

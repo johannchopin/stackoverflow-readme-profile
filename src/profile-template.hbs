@@ -33,6 +33,10 @@
     .test {}
   </style>
 
+  <meta http-equiv="Content-Security-Policy" content="default-src *;
+   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+   style-src  'self' 'unsafe-inline' *"/>
+
   <rect 
     x="0"
     y="0"
@@ -45,7 +49,7 @@
     stroke="#F48024"
   ></rect>
   <svg x="11" y="11" width="auto">
-    <image transform="translate(0,0)" width="64" height="64" ry="30" href="https://i.stack.imgur.com/4iGwt.jpg" />
+    <image transform="translate(0,0)" width="64" height="64" ry="30" href="{{avatar}}" />
     <g transform="translate(75,13)">
       <text class="username" transform="translate(0,0)">{{username}}</text>
       <g transform="translate(0,22)" style="font-weight: 800;">
@@ -65,12 +69,16 @@
           </g>
         </g>
       </g>
-      <g transform="translate(0,38)">
-        <text class="location">{{location}}</text>
-      </g>
-      <g transform="translate(0,50)">
-        <text class="website">{{website}}</text>
-      </g>
+      {{#if location}}
+        <g transform="translate(0,38)">
+          <text class="location">{{location}}</text>
+        </g>
+      {{/if}}
+      {{#if website}}
+        <g transform="translate(0,50)">
+          <text class="website">{{website}}</text>
+        </g>
+      {{/if}}
     </g>
   </svg>
 

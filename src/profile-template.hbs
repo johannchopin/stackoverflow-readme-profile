@@ -33,10 +33,6 @@
     .test {}
   </style>
 
-  <meta http-equiv="Content-Security-Policy" content="default-src *;
-   img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
-   style-src  'self' 'unsafe-inline' *"/>
-
   <rect 
     x="0"
     y="0"
@@ -49,7 +45,17 @@
     stroke="#F48024"
   ></rect>
   <svg x="11" y="11" width="auto">
-    <image transform="translate(0,0)" width="64" height="64" ry="30" href="{{avatar}}" />
+
+    {{! -- START user avatar -- }}
+     <rect id="imageCtn" transform="translate(0,0)" width="64" height="64"  rx="5"/>
+      <clipPath id="clip">
+        <use href="#imageCtn"/>
+      </clipPath>
+    </defs>
+    <use href="#imageCtn" stroke-width="2" stroke="black"/>
+    <image width="64" height="64" clip-path="url(#clip)" href="{{avatar}}" />
+    {{! -- EMD user avatar -- }}
+
     <g transform="translate(75,13)">
       <text class="username" transform="translate(0,0)">{{username}}</text>
       <g transform="translate(0,22)" style="font-weight: 800;">

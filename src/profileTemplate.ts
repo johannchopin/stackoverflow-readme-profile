@@ -3,11 +3,8 @@ import * as path from 'path'
 import Handlebars from 'handlebars'
 import { minify } from 'html-minifier'
 
-export interface Badges {
-  gold: number
-  silver: number
-  bronze: number
-}
+import { Badges } from './fetch'
+
 export interface ProfileTemplateContext {
   avatar: string
   username: string

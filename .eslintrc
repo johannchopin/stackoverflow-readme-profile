@@ -1,0 +1,56 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb-base/legacy"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "**/__mocks__/**"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
+  "rules": {
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "global": "off",
+    "global-strict": "off",
+    "indent": [
+      "warn",
+      2
+    ],
+    "lines-between-class-members": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "no-unused-vars": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "semi": [
+      "error",
+      "never"
+    ],
+    "strict": [
+      "error",
+      "never"
+    ],
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-unused-vars": "error"
+  }
+}

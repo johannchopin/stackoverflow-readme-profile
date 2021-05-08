@@ -1,0 +1,10 @@
+node_modules/
+dist/
+
+# yarn
+yarn-error.log
+
+# jest
+coverage/
+
+.vscode/

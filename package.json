@@ -1,0 +1,24 @@
+{
+  "name": "stackoverflow-readme-profile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:johannchopin/stackoverflow-readme-stats.git",
+  "author": "johannchopin <johannchopin@pm.me>",
+  "license": "MIT",
+  "scripts": {
+    "test:manual": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files test/run.ts"
+  },
+  "devDependencies": {
+    "@types/html-minifier": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "ts-node-dev": "^1.1.6"
+  },
+  "dependencies": {
+    "@types/handlebars": "^4.1.0",
+    "handlebars": "^4.7.7",
+    "html-minifier": "^4.0.0"
+  }
+}

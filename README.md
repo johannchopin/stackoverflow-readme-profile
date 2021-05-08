@@ -1,5 +1,5 @@
 # stackoverflow-readme-stats
-![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-stats/main/template.svg?token=AHSSL6EJJUHC7BPOSYYI7N3ASVV2S)
+![SO profile](./template.svg)
 
 ## Reputation notation
 - 1.3m

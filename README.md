@@ -1,5 +1,5 @@
 # stackoverflow-readme-stats
-![SO profile](./template.svg)
+![SO profile](./test/profile.svg)
 
 ## Reputation notation
 - 1.3m

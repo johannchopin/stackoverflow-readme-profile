@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/html-minifier": "^4.0.0",
+    "@types/node-fetch": "^2.5.10",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
     "eslint": "^7.13.0",
@@ -21,6 +22,6 @@
     "dotenv": "^9.0.0",
     "handlebars": "^4.7.7",
     "html-minifier": "^4.0.0",
-    "isomorphic-fetch": "^3.0.0"
+    "node-fetch": "^2.6.1"
   }
 }

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getProfileSvg } from '..'
+import { getProfileSvg } from '../src'
 
 export default (req: NextApiRequest, res: NextApiResponse): void => {
   const { userId } = req.query

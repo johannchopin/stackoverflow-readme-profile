@@ -1,5 +1,28 @@
 <svg version="1.1" baseProfile="full" width="300" height="86" viewBox="0 0 300 86" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
   <style>
+    :root {
+      --color-bg: {{theme.colorBg}};
+      --color-link: {{theme.colorLink}};
+      --color-primary: {{theme.colorPrimary}}
+    }
+    .ctn {
+      x: 0;
+      y: 0;
+      rx: 5;
+      ry: 5;
+      fill: var(--color-bg);
+      stroke-width: 2;
+      stroke: var(--color-primary);
+    }
+    .color-gold {
+      fill: {{theme.colorGold}}
+    }
+    .color-silver {
+      fill: {{theme.colorSilver}}
+    }
+    .color-bronze {
+      fill: {{theme.colorBronze}}
+    }
     text {
       fill: #EAEAEA;
       font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -16,7 +39,7 @@
       font-size: 10px;
     }
     .website {
-      fill: #81C4F8;
+      fill: var(--color-link);
     }
     .badge-count circle {
       cx: 0;
@@ -25,16 +48,10 @@
     }
   </style>
 
-  <rect 
-    x="0"
-    y="0"
-    rx="5"
-    ry="5"
+  <rect
     width="300"
     height="86"
-    fill="#2D2D2D"
-    stroke-width="2"
-    stroke="#F48024"
+    class="ctn"
   ></rect>
   <svg x="11" y="11" width="auto">
 
@@ -53,13 +70,13 @@
       <g transform="translate(0,22)" style="font-weight: 800;">
         <text class="reputation">{{reputation}}</text>
         <g transform="translate(50, 0)">
-          <g class="badge-count">
+          <g class="badge-count" fill="#FFCC01">
             <circle fill="#FFCC01"/>
             <text x="7">{{badges.gold}}</text>
           </g>
           <g transform="translate(35, 0)" class="badge-count">
             <circle fill="#B4B8BC"/>
-            <text x="7">{{badges.silver}}</text>
+            <text fill="#B4B8BC" x="7">{{badges.silver}}</text>
           </g>
           <g transform="translate(70, 0)" class="badge-count">
             <circle fill="#D1A684"/>

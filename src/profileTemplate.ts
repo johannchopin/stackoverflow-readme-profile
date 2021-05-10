@@ -3,6 +3,7 @@ import Handlebars from 'handlebars'
 
 import { Badges } from './fetch'
 import { getTemplate } from './utils'
+import { Theme } from './index'
 
 export interface ProfileTemplateContext {
   avatar: string
@@ -11,6 +12,7 @@ export interface ProfileTemplateContext {
   badges: Badges
   location?: string
   website?: string
+  theme: Theme
 }
 
 const PATH_TO_TEMPLATE = path.resolve(__dirname, './templates/profile.hbs')

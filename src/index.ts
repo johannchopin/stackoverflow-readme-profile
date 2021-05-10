@@ -1,11 +1,8 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import fetchUser from './fetch'
-import template from './profileTemplate'
+import { renderProfile } from './profileTemplate'
 import { getUserReputation } from './utils'
-
-import defaultTheme from './themes/default.json'
-import darkTheme from './themes/dark.json'
 
 export interface Params {
   website?: boolean
@@ -38,16 +35,14 @@ export const getProfileSvg = async (
       ...rest
     } = user
 
-    const theme = darkTheme
-
-    return template({
+    return renderProfile({
       ...rest,
       avatar: profile_image,
       username: display_name,
       website: website_url,
       badges: badge_counts,
       reputation: getUserReputation(reputation),
-      theme: { ...defaultTheme, ...theme }
+      theme: 'dark'
     })
   } catch (error) {
     throw new Error(error)

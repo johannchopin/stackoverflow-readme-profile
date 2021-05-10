@@ -1,9 +1,13 @@
 <svg version="1.1" baseProfile="full" width="300" height="86" viewBox="0 0 300 86" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
   <style>
     :root {
+      --color-text: {{theme.colorText}};
       --color-bg: {{theme.colorBg}};
       --color-link: {{theme.colorLink}};
-      --color-primary: {{theme.colorPrimary}}
+      --color-primary: {{theme.colorPrimary}};
+      --color-gold: {{theme.colorGold}};
+      --color-silver: {{theme.colorSilver}};
+      --color-bronze: {{theme.colorBronze}};
     }
     .ctn {
       x: 0;
@@ -14,37 +18,19 @@
       stroke-width: 2;
       stroke: var(--color-primary);
     }
-    .color-gold {
-      fill: {{theme.colorGold}}
-    }
-    .color-silver {
-      fill: {{theme.colorSilver}}
-    }
-    .color-bronze {
-      fill: {{theme.colorBronze}}
-    }
     text {
-      fill: #EAEAEA;
+      fill: {{theme.colorText}};
       font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
     }
     .username {
       font-weight: 500;
       font-size: 16px;
     }
-    .reputation {
-      font-weight: 600;
-      font-size: 14px;
-    }
     .website, .location {
       font-size: 10px;
     }
     .website {
       fill: var(--color-link);
-    }
-    .badge-count circle {
-      cx: 0;
-      cy: -4;
-      r: 4;
     }
   </style>
 
@@ -61,28 +47,14 @@
         <use href="#imageCtn"/>
       </clipPath>
     </defs>
-    <use href="#imageCtn" stroke-width="2" stroke="black"/>
+    <use href="#imageCtn"/>
     <image width="64" height="64" clip-path="url(#clip)" href="{{avatar}}" />
     {{! -- EMD user avatar -- }}
 
     <g transform="translate(75,13)">
       <text class="username" transform="translate(0,0)">{{username}}</text>
       <g transform="translate(0,22)" style="font-weight: 800;">
-        <text class="reputation">{{reputation}}</text>
-        <g transform="translate(50, 0)">
-          <g class="badge-count" fill="#FFCC01">
-            <circle fill="#FFCC01"/>
-            <text x="7">{{badges.gold}}</text>
-          </g>
-          <g transform="translate(35, 0)" class="badge-count">
-            <circle fill="#B4B8BC"/>
-            <text fill="#B4B8BC" x="7">{{badges.silver}}</text>
-          </g>
-          <g transform="translate(70, 0)" class="badge-count">
-            <circle fill="#D1A684"/>
-            <text x="7">{{badges.bronze}}</text>
-          </g>
-        </g>
+        {{> rep-badges reputation=reputation badges=badges }}
       </g>
       {{#if location}}
         <g transform="translate(0,38)">

@@ -2,6 +2,7 @@
 import { config } from 'dotenv'
 import fetchUser from './fetch'
 import template from './profileTemplate'
+import { getUserReputation } from './utils'
 
 export interface Params {
   website?: boolean
@@ -37,7 +38,7 @@ export const getProfileSvg = async (
       username: display_name,
       website: website_url,
       badges: badge_counts,
-      reputation: reputation + ''
+      reputation: getUserReputation(reputation)
     })
   } catch (error) {
     throw new Error(error)

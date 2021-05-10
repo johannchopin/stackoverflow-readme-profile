@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { VercelRequest, VercelResponse } from '@vercel/node'
 import { getProfileSvg } from '../src'
 
-export default (req: NextApiRequest, res: NextApiResponse): void => {
+export default (req: VercelRequest, res: VercelResponse): void => {
   const { userId } = req.query
 
   if (userId) {

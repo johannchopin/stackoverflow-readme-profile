@@ -17,35 +17,36 @@ export interface User {
   'display_name': string
 }
 
-const getUserImageAsBase64 = (url: string, callback: (image: string) => void): void => {
+const getUserImageAsBase64 = async (url: string): Promise<string> => {
   const urlWithoutQueryString = url.split('?')[0]
 
-  fetch(`${urlWithoutQueryString}?s=128`)
-    .then(response => response.buffer())
-    .then(buf => {
-      callback('data:image/;base64,' + buf.toString('base64'))
-    })
+  try {
+    const response = await fetch(`${urlWithoutQueryString}?s=128`)
+    const buffer = await response.buffer()
+
+    return 'data:image/;base64,' + buffer.toString('base64')
+  } catch (error) {
+    throw new Error(`Unable to fetch this user avatar: ${error}`)
+  }
 }
 
 const getApiRoute = (id: number): string => {
   return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow&key=${process.env.SO_API_TOKEN}`
 }
 
-const fetchUser = (id: number, callback:(user?: User) => void): void => {
-  fetch(getApiRoute(id))
-    .then(response => response.json())
-    .then((response) => {
-      const user = response?.items[0] as User
-      if (user) {
-        getUserImageAsBase64(user.profile_image, (image) => {
-          callback({ ...user, profile_image: image })
-        })
-      } else {
-        callback(undefined)
-      }
-    }).catch(() => {
-      callback(undefined)
-    })
+const fetchUser = async (id: number): Promise<User> => {
+  try {
+    const response = await fetch(getApiRoute(id))
+    const data = await response.json()
+
+    const user = data?.items[0] as User
+    if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)
+
+    const image = await getUserImageAsBase64(user.profile_image)
+    return { ...user, profile_image: image }
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 export default fetchUser

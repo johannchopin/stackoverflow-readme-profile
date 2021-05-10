@@ -14,31 +14,32 @@ const DEFAULT_PARAMS: Params = {
 }
 
 config()
-export const getProfileSvg = (
+export const getProfileSvg = async (
   userId: number,
-  callback:(svg?: string) => void,
   params: Params = DEFAULT_PARAMS
-): void => {
-  fetchUser(userId, (user) => {
-    if (user) {
-      const {
-        display_name,
-        profile_image,
-        website_url,
-        badge_counts,
-        reputation,
-        ...rest
-      } = user
-      callback(template({
-        ...rest,
-        avatar: profile_image,
-        username: display_name,
-        website: website_url,
-        badges: badge_counts,
-        reputation: reputation + ''
-      }))
-    }
+): Promise<string> => {
+  try {
+    const user = await fetchUser(userId)
+    const {
+      display_name,
+      profile_image,
+      website_url,
+      badge_counts,
+      reputation,
+      ...rest
+    } = user
 
-    callback()
-  })
+    console.log(params)
+
+    return template({
+      ...rest,
+      avatar: profile_image,
+      username: display_name,
+      website: website_url,
+      badges: badge_counts,
+      reputation: reputation + ''
+    })
+  } catch (error) {
+    throw new Error(error)
+  }
 }

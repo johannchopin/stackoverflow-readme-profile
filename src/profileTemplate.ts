@@ -1,9 +1,8 @@
-import * as fs from 'fs'
 import * as path from 'path'
 import Handlebars from 'handlebars'
-import { minify } from 'html-minifier'
 
 import { Badges } from './fetch'
+import { getTemplate } from './utils'
 
 export interface ProfileTemplateContext {
   avatar: string
@@ -14,15 +13,11 @@ export interface ProfileTemplateContext {
   website?: string
 }
 
-const PATH_TO_TEMPLATE = path.resolve(__dirname, './profile-template.hbs')
+const PATH_TO_TEMPLATE = path.resolve(__dirname, './templates/profile.hbs')
+const PATH_TO_SO_ICON = path.resolve(__dirname, './templates/so-icon.hbs')
 
-const content = fs.readFileSync(PATH_TO_TEMPLATE, 'utf-8')
-const templateString = minify(content, {
-  // minifyCSS: true,
-  ignoreCustomFragments: [/{{[{]?(.*?)[}]?}}/],
-  collapseWhitespace: true
-})
+const soIconTemplate = getTemplate(PATH_TO_SO_ICON)
+Handlebars.registerPartial('so-icon', soIconTemplate)
+const profileTemplate = getTemplate<ProfileTemplateContext>(PATH_TO_TEMPLATE)
 
-const template = Handlebars.compile<ProfileTemplateContext>(templateString)
-
-export default template
+export default profileTemplate

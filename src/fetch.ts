@@ -43,7 +43,10 @@ const fetchUser = async (id: number): Promise<User> => {
     if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)
 
     const image = await getUserImageAsBase64(user.profile_image)
-    return { ...user, profile_image: image }
+    return {
+      ...user,
+      profile_image: image
+    }
   } catch (error) {
     throw new Error(error)
   }

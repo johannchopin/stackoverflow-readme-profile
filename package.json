@@ -12,6 +12,8 @@
     "lint": "yarn eslint . --ext .js,.ts"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
     "@types/html-minifier": "^4.0.0",

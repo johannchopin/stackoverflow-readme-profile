@@ -9,3 +9,5 @@ coverage/
 
 .vscode/
 .env
+
+.vercel

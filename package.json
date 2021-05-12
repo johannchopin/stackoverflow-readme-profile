@@ -6,7 +6,7 @@
   "author": "johannchopin <johannchopin@pm.me>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn vercel dev",
+    "start": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files src/api.ts",
     "test": "jest --silent",
     "test:types": "yarn tsc --noEmit",
     "test:manual": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files test/run.ts",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "dotenv": "^9.0.0",
+    "express": "^4.17.1",
     "handlebars": "^4.7.7",
     "html-minifier": "^4.0.0",
     "node-fetch": "^2.6.1"

@@ -10,8 +10,9 @@ import darkTheme from './themes/dark.json'
 import cobaltTheme from './themes/cobalt.json'
 import monokaiTheme from './themes/monokai.json'
 import graywhiteTheme from './themes/graywhite.json'
+import hotdogTheme from './themes/hotdog.json'
 
-export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai' | 'graywhite'
+export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai' | 'graywhite' | 'hotdog'
 export interface ErrorTemplateContext {
   lines: string[]
 }
@@ -43,7 +44,8 @@ export const THEMES: {[key in Theme]: ThemeObject} = {
   dark: darkTheme,
   cobalt: cobaltTheme,
   monokai: monokaiTheme,
-  graywhite: graywhiteTheme
+  graywhite: graywhiteTheme,
+  hotdog: hotdogTheme
 }
 const LETTER_WIDTH = 9
 const LETTER_MARGIN = 5

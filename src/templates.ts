@@ -3,7 +3,7 @@ import Handlebars from 'handlebars'
 
 import { Badges } from './fetch'
 import { getTemplate, replaceAll } from './utils'
-import { Theme as ThemObject } from './index'
+import { Theme as ThemeObject } from './index'
 
 import defaultTheme from './themes/default.json'
 import darkTheme from './themes/dark.json'
@@ -22,7 +22,7 @@ export interface ProfileTemplateContext {
   badges: Badges
   location?: string
   website?: string
-  theme: ThemObject
+  theme: ThemeObject
   badgesMarginLeft: number
   badgeSilverMarginLeft: number
   badgeBronzeMarginLeft: number
@@ -38,7 +38,7 @@ export interface ProfileParams extends Pick<ProfileTemplateContext,
   theme: Theme
 }
 
-export const THEMES: {[key in Theme]: ThemObject} = {
+export const THEMES: {[key in Theme]: ThemeObject} = {
   default: defaultTheme,
   dark: darkTheme,
   cobalt: cobaltTheme,

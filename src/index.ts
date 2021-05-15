@@ -11,7 +11,8 @@ export interface Params {
 }
 export interface Theme {
   colorBg: string
-  colorPrimary: string
+  colorPrimary: string,
+  colorSoIcon?: string
 }
 
 config()

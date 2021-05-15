@@ -24,7 +24,7 @@ const getUserImageAsBase64 = async (url: string): Promise<string> => {
     const response = await fetch(`${urlWithoutQueryString}?s=128`)
     const buffer = await response.buffer()
 
-    return 'data:image/;base64,' + buffer.toString('base64')
+    return 'data:image/png;base64,' + buffer.toString('base64')
   } catch (error) {
     throw new Error(`Unable to fetch this user avatar: ${error}`)
   }

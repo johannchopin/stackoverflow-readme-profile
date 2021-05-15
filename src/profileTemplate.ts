@@ -7,8 +7,10 @@ import { Theme as ThemObject } from './index'
 
 import defaultTheme from './themes/default.json'
 import darkTheme from './themes/dark.json'
+import cobaltTheme from './themes/cobalt.json'
+import monokaiTheme from './themes/monokai.json'
 
-export type Theme = 'default' | 'dark'
+export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai'
 export interface ProfileTemplateContext {
   avatar: string
   username: string
@@ -34,7 +36,9 @@ export interface ProfileParams extends Pick<ProfileTemplateContext,
 
 const THEMES: {[key in Theme]: ThemObject} = {
   default: defaultTheme,
-  dark: darkTheme
+  dark: darkTheme,
+  cobalt: cobaltTheme,
+  monokai: monokaiTheme
 }
 const LETTER_WIDTH = 9
 const LETTER_MARGIN = 5

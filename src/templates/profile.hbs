@@ -9,8 +9,16 @@
       --color-silver: {{theme.colorSilver}};
       --color-bronze: {{theme.colorBronze}};
     }
+    @keyframes fadeIn {
+      0% {opacity:0;}
+      100% {opacity:1;}
+    }
     svg {
       overflow: visible;
+    }
+    .animate {
+      animation: fadeIn .5s forwards;
+      opacity: 0;
     }
     .ctn {
       x: 0;
@@ -55,17 +63,17 @@
     {{! -- EMD user avatar -- }}
 
     <g transform="translate(75,13)">
-      <text class="username" transform="translate(0,0)">{{username}}</text>
-      <g transform="translate(0,22)" style="font-weight: 800;">
+      <text class="username animate" transform="translate(0,0)">{{username}}</text>
+      <g class="animate" transform="translate(0,22)" style="font-weight: 800; animation-delay: 0.1s;">
         {{> rep-badges reputation=reputation badges=badges }}
       </g>
       {{#if location}}
-        <g transform="translate(0,38)">
+        <g class="animate" style="animation-delay: 0.2s;" transform="translate(0,38)">
           <text class="location">{{location}}</text>
         </g>
       {{/if}}
       {{#if website}}
-        <g transform="translate(0,50)">
+        <g class="animate" style="animation-delay: 0.3s;" transform="translate(0,50)">
           <text class="website">{{website}}</text>
         </g>
       {{/if}}

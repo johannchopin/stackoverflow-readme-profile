@@ -1,28 +1,24 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import fetchUser from './fetch'
-import { renderProfile } from './profileTemplate'
+import { renderProfile, Theme as ThemeType } from './profileTemplate'
 import { getUserReputation } from './utils'
 
 export interface Params {
-  website?: boolean
-  location?: boolean
+  theme: ThemeType
+  website: boolean
+  location: boolean
 }
 export interface Theme {
   colorBg: string
   colorPrimary: string
 }
 
-const DEFAULT_PARAMS: Params = {
-  website: true,
-  location: true
-}
-
 config()
 export const getProfileSvg = async (
   userId: number,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  params: Params = DEFAULT_PARAMS
+  params: Params
 ): Promise<string> => {
   try {
     const user = await fetchUser(userId)
@@ -32,6 +28,7 @@ export const getProfileSvg = async (
       website_url,
       badge_counts,
       reputation,
+      location,
       ...rest
     } = user
 
@@ -39,10 +36,11 @@ export const getProfileSvg = async (
       ...rest,
       avatar: profile_image,
       username: display_name,
-      website: website_url,
+      website: params.website ? website_url : undefined,
+      location: params.location ? location : undefined,
       badges: badge_counts,
       reputation: getUserReputation(reputation),
-      theme: 'dark'
+      theme: params.theme
     })
   } catch (error) {
     throw new Error(error)

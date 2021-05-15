@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import Handlebars from 'handlebars'
 import { minify } from 'html-minifier'
+import { THEMES } from './profileTemplate'
 
 export const getUserReputation = (rep: number): string => {
   if (rep >= 1_000_000) return `${(Math.round(rep / 100_000) / 10).toFixed(1)}m`
@@ -19,4 +20,8 @@ export const getTemplate = <T = {}>(filePath: string): Handlebars.TemplateDelega
   })
 
   return Handlebars.compile<T>(templateString)
+}
+export const isThemeValid = (theme: string): boolean => {
+  // @ts-ignore
+  return THEMES[theme] !== undefined
 }

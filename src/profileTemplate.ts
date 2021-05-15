@@ -34,7 +34,7 @@ export interface ProfileParams extends Pick<ProfileTemplateContext,
   theme: Theme
 }
 
-const THEMES: {[key in Theme]: ThemObject} = {
+export const THEMES: {[key in Theme]: ThemObject} = {
   default: defaultTheme,
   dark: darkTheme,
   cobalt: cobaltTheme,

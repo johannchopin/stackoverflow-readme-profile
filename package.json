@@ -6,7 +6,7 @@
   "author": "johannchopin <johannchopin@pm.me>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files src/api.ts",
+    "start": "yarn ts-node-dev --project ./ts-node-tsconfig.json -- src/api.ts",
     "test": "jest --silent",
     "test:types": "yarn tsc --noEmit",
     "test:manual": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files test/run.ts",

@@ -1,0 +1,31 @@
+<svg version="1.1" baseProfile="full" width="300" height="86" viewBox="0 0 300 86" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+  <style>
+    svg {
+      overflow: visible;
+    }
+    .ctn {
+      x: 0;
+      y: 0;
+      fill: #F8D7DB;
+      stroke-width: 2;
+      stroke: #AD6E75;
+    }
+    text {
+      fill: #AD6E75;
+      font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
+    }
+  </style>
+
+  <rect
+    width="300"
+    height="86"
+    class="ctn"
+    rx="5"
+    ry="5"
+  ></rect>
+  <text x="11" y="11">
+    {{#each lines}}
+      <tspan x="11" dx="6" dy="12">{{this}}</tspan>
+    {{/each}}
+  </text>
+</svg>

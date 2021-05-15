@@ -9,8 +9,12 @@ import defaultTheme from './themes/default.json'
 import darkTheme from './themes/dark.json'
 import cobaltTheme from './themes/cobalt.json'
 import monokaiTheme from './themes/monokai.json'
+import graywhiteTheme from './themes/graywhite.json'
 
-export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai'
+export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai' | 'graywhite'
+export interface ErrorTemplateContext {
+  lines: string[]
+}
 export interface ProfileTemplateContext {
   avatar: string
   username: string
@@ -38,14 +42,18 @@ export const THEMES: {[key in Theme]: ThemObject} = {
   default: defaultTheme,
   dark: darkTheme,
   cobalt: cobaltTheme,
-  monokai: monokaiTheme
+  monokai: monokaiTheme,
+  graywhite: graywhiteTheme
 }
 const LETTER_WIDTH = 9
 const LETTER_MARGIN = 5
 
+const PATH_TO_ERROR_TEMPLATE = path.resolve(__dirname, './templates/error.hbs')
 const PATH_TO_TEMPLATE = path.resolve(__dirname, './templates/profile.hbs')
 const PATH_TO_SO_ICON = path.resolve(__dirname, './templates/so-icon.hbs')
 const PATH_TO_REP_BADGES_TEMPLATE = path.resolve(__dirname, './templates/reputation-badges.hbs')
+
+const errorTemplate = getTemplate<ErrorTemplateContext>(PATH_TO_ERROR_TEMPLATE)
 
 const soIconTemplate = getTemplate(PATH_TO_SO_ICON)
 Handlebars.registerPartial('so-icon', soIconTemplate)
@@ -76,4 +84,10 @@ export const renderProfile = (params: ProfileParams): string => {
     badgeSilverMarginLeft,
     badgeBronzeMarginLeft
   })
+}
+
+export const renderError = (params: {error: string}): string => {
+  const { error } = params
+  const lines = error.match(/.{1,40}/g) || [error]
+  return errorTemplate({ lines })
 }

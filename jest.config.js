@@ -6,10 +6,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts'],
   collectCoverageFrom: [
     "!**/node_modules/**",
-    "src/**",
-    "!src/dashboard-public/**/*",
-    "!src/types/**",
-    "!src/index.ts"
+    "src/**"
   ],
   coverageReporters: ["html", "lcov"],
   bail: true,

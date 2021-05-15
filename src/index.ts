@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import fetchUser from './fetch'
-import { renderProfile, Theme as ThemeType } from './profileTemplate'
+import { renderProfile, Theme as ThemeType } from './templates'
 import { getUserReputation } from './utils'
 
 export interface Params {

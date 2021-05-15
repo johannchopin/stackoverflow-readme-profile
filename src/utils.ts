@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import Handlebars from 'handlebars'
 import { minify } from 'html-minifier'
-import { THEMES } from './profileTemplate'
+import { THEMES } from './templates'
 
 export const getUserReputation = (rep: number): string => {
   if (rep >= 1_000_000) return `${(Math.round(rep / 100_000) / 10).toFixed(1)}m`

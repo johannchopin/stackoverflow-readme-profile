@@ -1,6 +1,6 @@
 import express from 'express'
 import { getProfileSvg } from './index'
-import { Theme } from './profileTemplate'
+import { renderError, Theme } from './templates'
 import { isThemeValid } from './utils'
 
 const app = express()
@@ -12,23 +12,25 @@ app.get('/:id', async (req, res) => {
 
   res.setHeader('Content-Type', 'image/svg+xml')
 
+  let error = ''
+
   if (typeof theme !== 'string' || !isThemeValid(theme as string)) {
-    return
-  }
-  if (typeof website !== 'boolean') {
-    return
-  }
-  if (typeof location !== 'boolean') {
-    return
+    error = 'Invalid theme'
+  } else if (typeof website !== 'boolean') {
+    error = 'Invalid params for website'
+  } else if (typeof location !== 'boolean') {
+    error = 'Invalid value for the location parame'
+  } else {
+    const svg = await getProfileSvg(Number(id), {
+      theme: theme as unknown as Theme,
+      website,
+      location
+    })
+
+    res.send(svg)
   }
 
-  const svg = await getProfileSvg(Number(id), {
-    theme: theme as unknown as Theme,
-    website,
-    location
-  })
-
-  res.send(svg)
+  res.send(renderError({ error }))
 })
 
 app.listen(port, () => {

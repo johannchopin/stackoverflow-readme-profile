@@ -11,6 +11,7 @@ export const getUserReputation = (rep: number): string => {
 
   return rep.toString()
 }
+
 export const getTemplate = <T = {}>(filePath: string): Handlebars.TemplateDelegate<T> => {
   const content = fs.readFileSync(filePath, 'utf-8')
   const templateString = minify(content, {
@@ -21,7 +22,12 @@ export const getTemplate = <T = {}>(filePath: string): Handlebars.TemplateDelega
 
   return Handlebars.compile<T>(templateString)
 }
+
 export const isThemeValid = (theme: string): boolean => {
   // @ts-ignore
   return THEMES[theme] !== undefined
+}
+
+export const replaceAll = (str: string, find: string, replace: string): string => {
+  return str.split(find).join(replace)
 }

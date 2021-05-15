@@ -11,3 +11,4 @@ coverage/
 .env
 
 .vercel
+.DS_Store

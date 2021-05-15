@@ -8,29 +8,32 @@ const port = 5000
 
 app.get('/:id', async (req, res) => {
   const { id } = req.params
-  const { theme = 'default', website = true, location = true } = req.query
+  const { theme = 'default', website = 'true', location = 'true' } = req.query
 
   res.setHeader('Content-Type', 'image/svg+xml')
 
-  let error = ''
+  try {
+    const isWebsiteParamValid = website === 'true' || website === 'false'
+    const isLocationParamValid = location === 'true' || location === 'false'
 
-  if (typeof theme !== 'string' || !isThemeValid(theme as string)) {
-    error = 'Invalid theme'
-  } else if (typeof website !== 'boolean') {
-    error = 'Invalid params for website'
-  } else if (typeof location !== 'boolean') {
-    error = 'Invalid value for the location parame'
-  } else {
+    if (typeof theme !== 'string' || !isThemeValid(theme as string)) {
+      throw new Error(`Invalid theme '${theme}'`)
+    } else if (website && !isWebsiteParamValid) {
+      throw new Error(`Invalid value '${website}' for the website params`)
+    } else if (location && !isLocationParamValid) {
+      throw new Error(`Invalid value '${location}' for the location params`)
+    }
+
     const svg = await getProfileSvg(Number(id), {
       theme: theme as unknown as Theme,
-      website,
-      location
+      website: Boolean(website),
+      location: Boolean(location)
     })
 
     res.send(svg)
+  } catch (error) {
+    res.send(renderError({ error: (error as Error).message }))
   }
-
-  res.send(renderError({ error }))
 })
 
 app.listen(port, () => {

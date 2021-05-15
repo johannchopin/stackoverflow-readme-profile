@@ -14,6 +14,9 @@
       fill: #AD6E75;
       font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
     }
+    tspan {
+      font-weight: bold;
+    }
   </style>
 
   <rect
@@ -23,7 +26,7 @@
     rx="5"
     ry="5"
   ></rect>
-  <text x="11" y="11">
+  <text x="11" y="11" font-weight="bold">
     {{#each lines}}
       <tspan x="11" dx="6" dy="12">{{this}}</tspan>
     {{/each}}

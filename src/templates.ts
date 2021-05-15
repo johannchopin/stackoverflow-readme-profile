@@ -2,7 +2,7 @@ import * as path from 'path'
 import Handlebars from 'handlebars'
 
 import { Badges } from './fetch'
-import { getTemplate } from './utils'
+import { getTemplate, replaceAll } from './utils'
 import { Theme as ThemObject } from './index'
 
 import defaultTheme from './themes/default.json'
@@ -88,6 +88,9 @@ export const renderProfile = (params: ProfileParams): string => {
 
 export const renderError = (params: {error: string}): string => {
   const { error } = params
-  const lines = error.match(/.{1,40}/g) || [error]
+
+  // remove nested error title
+  const errorMsg = replaceAll(error, 'Error: ', '')
+  const lines = `Error: ${errorMsg}`.match(/.{1,45}/g) || [error]
   return errorTemplate({ lines })
 }

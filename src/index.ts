@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import fetchUser from './fetch'
-import { renderProfile, Theme as ThemeType } from './templates'
+import { renderError, renderProfile, Theme as ThemeType } from './templates'
 import { getUserReputation } from './utils'
 
 export interface Params {
@@ -43,6 +43,6 @@ export const getProfileSvg = async (
       theme: params.theme
     })
   } catch (error) {
-    throw new Error(error)
+    return renderError({ error: (error as Error).message })
   }
 }

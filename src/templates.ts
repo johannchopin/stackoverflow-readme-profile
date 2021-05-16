@@ -48,7 +48,7 @@ export const THEMES: {[key in Theme]: ThemeObject} = {
   hotdog: hotdogTheme
 }
 const LETTER_WIDTH = 9
-const LETTER_MARGIN = 5
+const LETTER_MARGIN = 12
 
 const PATH_TO_ERROR_TEMPLATE = path.resolve(__dirname, './templates/error.hbs')
 const PATH_TO_TEMPLATE = path.resolve(__dirname, './templates/profile.hbs')
@@ -69,14 +69,14 @@ const profileTemplate = getTemplate<ProfileTemplateContext>(PATH_TO_TEMPLATE)
 
 export const renderProfile = (params: ProfileParams): string => {
   const { reputation, badges } = params
-  const { gold, silver, bronze } = badges
+  const { gold, silver } = badges
 
   const badgesMarginLeft = LETTER_WIDTH * reputation.length + LETTER_MARGIN
-  let badgeSilverMarginLeft = (LETTER_WIDTH * silver.toString().length)
+  let badgeSilverMarginLeft = (LETTER_WIDTH * gold.toString().length)
   if (gold > 0) badgeSilverMarginLeft += LETTER_MARGIN
 
-  let badgeBronzeMarginLeft = (LETTER_WIDTH * bronze.toString().length)
-  if (silver > 0) badgeBronzeMarginLeft += badgeSilverMarginLeft + 2 * LETTER_MARGIN
+  let badgeBronzeMarginLeft = (LETTER_WIDTH * silver.toString().length)
+  if (silver > 0) badgeBronzeMarginLeft += badgeSilverMarginLeft + LETTER_MARGIN
 
   return profileTemplate({
     ...params,

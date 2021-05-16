@@ -13,14 +13,3 @@
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji">
 </a>
-
-## Reputation notation
-- 1.3m
-- 632k
-- 46.8k
-- 3,747
-- 747
-- 23
-- 1
-
-

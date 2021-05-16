@@ -1,4 +1,4 @@
-import { getUserReputation } from '../utils'
+import { getUserReputation } from '../utils.ts'
 
 describe('Utils functions', () => {
   describe('getUserReputation', () => {

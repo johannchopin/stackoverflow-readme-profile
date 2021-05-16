@@ -2,7 +2,7 @@ import * as path from 'path'
 import Handlebars from 'handlebars'
 
 import { Badges } from './fetch'
-import { getTemplate, replaceAll } from './utils'
+import { getTemplate, getTruncatedText, replaceAll } from './utils'
 import { Theme as ThemeObject } from './index'
 
 import defaultTheme from './themes/default.json'
@@ -56,6 +56,8 @@ const PATH_TO_SO_ICON = path.resolve(__dirname, './templates/so-icon.hbs')
 const PATH_TO_REP_BADGES_TEMPLATE = path.resolve(__dirname, './templates/reputation-badges.hbs')
 
 const errorTemplate = getTemplate<ErrorTemplateContext>(PATH_TO_ERROR_TEMPLATE)
+
+Handlebars.registerHelper('truncatedText', getTruncatedText)
 
 const soIconTemplate = getTemplate(PATH_TO_SO_ICON)
 Handlebars.registerPartial('so-icon', soIconTemplate)

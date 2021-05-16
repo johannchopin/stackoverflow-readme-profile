@@ -78,7 +78,9 @@
       {{/if}}
       {{#if website}}
         <g class="animate" style="animation-delay: 0.3s;" transform="translate(0,50)">
-          <text class="website">{{website}}</text>
+          <a xlink:href="{{website}}" target="_blank">
+            <text class="website">{{truncatedText website 42}}</text>
+          </a>
         </g>
       {{/if}}
     </g>

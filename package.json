@@ -6,11 +6,11 @@
   "author": "johannchopin <johannchopin@pm.me>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn ts-node-dev --project ./ts-node-tsconfig.json -- src/api.ts",
+    "start": "yarn ts-node-dev -- src/api.ts",
     "docs:gen:profile": "yarn ts-node scripts/generateProfileDoc.ts",
     "test": "jest --silent",
     "test:types": "yarn tsc --noEmit",
-    "test:manual": "yarn ts-node-dev --project ./ts-node-tsconfig.json --files test/run.ts",
+    "test:manual": "yarn ts-node-dev --files test/run.ts",
     "lint": "yarn eslint . --ext .js,.ts"
   },
   "devDependencies": {

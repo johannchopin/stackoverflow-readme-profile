@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import he from 'he'
 
 export interface Badges {
   gold: number
@@ -37,7 +38,10 @@ const getApiRoute = (id: number): string => {
 const fetchUser = async (id: number): Promise<User> => {
   try {
     const response = await fetch(getApiRoute(id))
-    const data = await response.json()
+
+    // decode html entities
+    const dataText = await response.text()
+    const data = JSON.parse(he.decode(dataText))
 
     const user = data?.items[0] as User
     if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)

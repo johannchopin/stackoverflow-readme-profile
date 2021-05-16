@@ -5,8 +5,6 @@
   }
   .badge-count circle {
     cx: 0;
-    cy: -4;
-    r: 4;
   }
 </style>
 
@@ -14,19 +12,19 @@
 <g transform="translate({{badgesMarginLeft}}, 0)">
   {{#if badges.gold}}
     <g class="badge-count">
-      <circle fill="var(--color-gold)"></circle>
+      <circle cy="-4" r="4" fill="var(--color-gold)"></circle>
       <text x="7">{{badges.gold}}</text>
     </g>
   {{/if}}
   {{#if badges.silver}}
     <g transform="translate({{badgeSilverMarginLeft}}, 0)" class="badge-count">
-      <circle fill="var(--color-silver)"></circle>
+      <circle cy="-4" r="4" fill="var(--color-silver)"></circle>
       <text x="7">{{badges.silver}}</text>
     </g>
   {{/if}}
   {{#if badges.bronze}}
     <g transform="translate({{badgeBronzeMarginLeft}}, 0)" class="badge-count">
-      <circle fill="var(--color-bronze)"></circle>
+      <circle cy="-4" r="4" fill="var(--color-bronze)"></circle>
       <text x="7">{{badges.bronze}}</text>
     </g>
   {{/if}}

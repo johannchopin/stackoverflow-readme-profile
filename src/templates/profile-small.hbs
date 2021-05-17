@@ -1,0 +1,39 @@
+<svg version="1.1" baseProfile="full" width="240" height="57" viewBox="0 0 240 55" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+  <style>
+    {{> global-styles }}
+    .username {
+      font-weight: 500;
+      font-size: 16px;
+    }
+  </style>
+
+  <rect
+    width="240"
+    height="57"
+    class="ctn"
+    rx="5"
+    ry="5"
+  ></rect>
+
+  {{> so-icon translateX="195px" width="40px" }}
+
+  <svg x="5" y="5">
+
+    {{! -- START user avatar -- }}
+     <rect id="imageCtn" transform="translate(0,0)" width="47" height="47"  rx="5"/>
+      <clipPath id="clip">
+        <use href="#imageCtn"/>
+      </clipPath>
+    </defs>
+    <use href="#imageCtn"/>
+    <image width="47" height="47" clip-path="url(#clip)" href="{{avatar}}" />
+    {{! -- EMD user avatar -- }}
+
+    <g transform="translate(55,20)">
+      <text class="username animate" transform="translate(0,0)">{{username}}</text>
+      <g class="animate" transform="translate(0,20)" style="font-weight: 800; animation-delay: 0.1s;">
+        {{> rep-badges reputation=reputation badges=badges }}
+      </g>
+    </g>
+  </svg>
+</svg>

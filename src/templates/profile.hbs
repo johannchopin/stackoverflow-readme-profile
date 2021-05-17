@@ -1,37 +1,6 @@
 <svg version="1.1" baseProfile="full" width="300" height="86" viewBox="0 0 300 86" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
   <style>
-    :root {
-      --color-text: {{theme.colorText}};
-      --color-bg: {{theme.colorBg}};
-      --color-link: {{theme.colorLink}};
-      --color-primary: {{theme.colorPrimary}};
-      --color-gold: {{theme.colorGold}};
-      --color-silver: {{theme.colorSilver}};
-      --color-bronze: {{theme.colorBronze}};
-      --color-so-icon: {{theme.colorSoIcon}};
-    }
-    @keyframes fadeIn {
-      0% {opacity:0;}
-      100% {opacity:1;}
-    }
-    svg {
-      overflow: visible;
-    }
-    .animate {
-      animation: fadeIn .5s forwards;
-      opacity: 0;
-    }
-    .ctn {
-      x: 0;
-      y: 0;
-      fill: var(--color-bg);
-      stroke-width: 2;
-      stroke: var(--color-primary);
-    }
-    text {
-      fill: {{theme.colorText}};
-      font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
-    }
+    {{> global-styles }}
     .username {
       font-weight: 500;
       font-size: 16px;

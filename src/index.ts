@@ -1,8 +1,12 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
+import { Template } from './const'
 import fetchUser from './fetch'
 import {
-  renderError, renderProfile, renderProfileSmall, Theme as ThemeType
+  renderError,
+  renderProfile,
+  renderProfileSmall,
+  Theme as ThemeType
 } from './templates'
 import { getUserReputation } from './utils'
 
@@ -11,16 +15,11 @@ export interface Params {
   website: boolean
   location: boolean
 }
-export interface Theme {
-  colorBg: string
-  colorPrimary: string,
-  colorSoIcon?: string
-}
 
 config()
 export const getProfileSvg = async (
   userId: number,
-  type: 'profile' | 'profile-small',
+  type: Template,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   params: Params
 ): Promise<string> => {

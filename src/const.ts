@@ -23,3 +23,4 @@ export const THEMES: {[key in ThemeType]: Theme} = {
   graywhite: graywhiteTheme,
   hotdog: hotdogTheme
 }
+export const THEME_NAME: ThemeType[] = ['default', 'dark', 'cobalt', 'monokai', 'graywhite', 'hotdog']

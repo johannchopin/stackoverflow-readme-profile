@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 import Handlebars from 'handlebars'
 import { minify } from 'html-minifier'
-import { THEMES } from './templates'
+
+import { TEMPLATES, THEMES } from './const'
 
 export const getUserReputation = (rep: number): string => {
   if (rep >= 1_000_000) return `${(Math.round(rep / 100_000) / 10).toFixed(1)}m`
@@ -38,4 +39,9 @@ export const getTruncatedText = (text:string, truncAtN: number): string => {
   }
 
   return text
+}
+
+export const isTemplateValid = (templateName: string): boolean => {
+  // @ts-ignore
+  return TEMPLATES.includes(templateName)
 }

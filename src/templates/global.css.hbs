@@ -1,0 +1,32 @@
+:root {
+  --color-text: {{theme.colorText}};
+  --color-bg: {{theme.colorBg}};
+  --color-link: {{theme.colorLink}};
+  --color-primary: {{theme.colorPrimary}};
+  --color-gold: {{theme.colorGold}};
+  --color-silver: {{theme.colorSilver}};
+  --color-bronze: {{theme.colorBronze}};
+  --color-so-icon: {{theme.colorSoIcon}};
+}
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+svg {
+  overflow: visible;
+}
+.animate {
+  animation: fadeIn .5s forwards;
+  opacity: 0;
+}
+text {
+  fill: {{theme.colorText}};
+  font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
+}
+.ctn {
+  x: 0;
+  y: 0;
+  fill: var(--color-bg);
+  stroke-width: 2;
+  stroke: var(--color-primary);
+}

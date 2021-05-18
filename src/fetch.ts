@@ -19,10 +19,17 @@ export interface User {
 }
 
 const getUserImageAsBase64 = async (url: string): Promise<string> => {
-  const urlWithoutQueryString = url.split('?')[0]
+  const urlContainsQueryString = url.includes('?')
+  const imgSizeQueryString = '?s=128'
+
+  if (urlContainsQueryString) {
+    url = url.replace('?', imgSizeQueryString)
+  } else {
+    url += imgSizeQueryString
+  }
 
   try {
-    const response = await fetch(`${urlWithoutQueryString}?s=128`)
+    const response = await fetch(url)
     const buffer = await response.buffer()
 
     return 'data:image/png;base64,' + buffer.toString('base64')

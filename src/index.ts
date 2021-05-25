@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import { Template } from './const'
-import fetchUser from './fetch'
+import { getUser } from './user'
 import {
   renderError,
   renderProfile,
@@ -23,7 +23,7 @@ export const getProfileSvg = async (
   params: Params
 ): Promise<string> => {
   try {
-    const user = await fetchUser(userId)
+    const user = await getUser(userId)
     const { website, location } = user
 
     const renderParams = {

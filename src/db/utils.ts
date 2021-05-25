@@ -17,10 +17,16 @@ export const shouldUpdateUserCache = async (userId: number): Promise<boolean> =>
   return true
 }
 
+export const getStoredUser = async (userId: number): Promise<User | undefined> => {
+  const manager = getMongoManager()
+
+  return manager.findOne(User, { id: userId })
+}
+
 export const storeUser = async (userToInsert: UserType): Promise<void> => {
   const manager = getMongoManager()
 
-  const existingUser = await manager.findOne(User, userToInsert.id)
+  const existingUser = await manager.findOne(User, { id: userToInsert.id })
 
   const user = existingUser || new User()
 

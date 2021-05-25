@@ -11,6 +11,5 @@ export interface User {
   reputation: string
   location?: string
   website?: string
-  link: string
   avatar: string
 }

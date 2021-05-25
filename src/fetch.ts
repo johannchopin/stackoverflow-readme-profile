@@ -2,7 +2,6 @@ import fetch from 'node-fetch'
 import he from 'he'
 import { Badges, User } from './types'
 import { getUserReputation } from './utils'
-import { storeUser } from './db/utils'
 
 export interface UserResponse {
   'badge_counts': Badges
@@ -63,7 +62,6 @@ const fetchUser = async (id: number): Promise<User> => {
       website: user.website_url
     }
 
-    storeUser(userData)
     return userData
   } catch (error) {
     throw new Error(error)

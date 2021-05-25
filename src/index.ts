@@ -8,7 +8,6 @@ import {
   renderProfileSmall,
   Theme as ThemeType
 } from './templates'
-import { getUserReputation } from './utils'
 
 export interface Params {
   theme: ThemeType
@@ -25,24 +24,12 @@ export const getProfileSvg = async (
 ): Promise<string> => {
   try {
     const user = await fetchUser(userId)
-    const {
-      display_name,
-      profile_image,
-      website_url,
-      badge_counts,
-      reputation,
-      location,
-      ...rest
-    } = user
+    const { website, location } = user
 
     const renderParams = {
-      ...rest,
-      avatar: profile_image,
-      username: display_name,
-      website: params.website ? website_url : undefined,
+      ...user,
+      website: params.website ? website : undefined,
       location: params.location ? location : undefined,
-      badges: badge_counts,
-      reputation: getUserReputation(reputation),
       theme: params.theme
     }
 

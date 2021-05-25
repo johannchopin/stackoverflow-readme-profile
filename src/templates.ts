@@ -1,23 +1,18 @@
 import * as path from 'path'
 import Handlebars from 'handlebars'
 
-import { Badges } from './fetch'
 import { getTemplate, getTruncatedText, replaceAll } from './utils'
 import { Theme as ThemeObject, THEMES } from './const'
 
 import defaultTheme from './themes/default.json'
+import { User } from './types'
 
 export type Theme = 'default' | 'dark' | 'cobalt' | 'monokai' | 'graywhite' | 'hotdog'
 export interface ErrorTemplateContext {
   lines: string[]
 }
-export interface ProfileTemplateContext {
-  avatar: string
-  username: string
+export interface ProfileTemplateContext extends Omit<User, 'reputation'> {
   reputation: string
-  badges: Badges
-  location?: string
-  website?: string
   theme: ThemeObject
   badgesMarginLeft: number
   badgeSilverMarginLeft: number

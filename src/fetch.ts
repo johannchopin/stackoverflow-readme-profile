@@ -1,12 +1,10 @@
 import fetch from 'node-fetch'
 import he from 'he'
+import { Badges, User } from './types'
+import { getUserReputation } from './utils'
+import { storeUser } from './db/utils'
 
-export interface Badges {
-  gold: number
-  silver: number
-  bronze: number
-}
-export interface User {
+export interface UserResponse {
   'badge_counts': Badges
   'is_employee': boolean
   'reputation': number
@@ -39,7 +37,8 @@ const getUserImageAsBase64 = async (url: string): Promise<string> => {
 }
 
 const getApiRoute = (id: number): string => {
-  return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow&key=${process.env.SO_API_TOKEN}`
+  const token = process.env.SO_API_TOKEN
+  return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow${token ? `&key=${token}` : ''}`
 }
 
 const fetchUser = async (id: number): Promise<User> => {
@@ -50,14 +49,22 @@ const fetchUser = async (id: number): Promise<User> => {
     const dataText = await response.text()
     const data = JSON.parse(he.decode(dataText))
 
-    const user = data?.items[0] as User
+    const user = data?.items[0] as UserResponse
     if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)
 
     const image = await getUserImageAsBase64(user.profile_image)
-    return {
+    const userData = {
       ...user,
-      profile_image: image
+      id: user.user_id,
+      username: user.display_name,
+      reputation: getUserReputation(user.reputation),
+      avatar: image,
+      badges: user.badge_counts,
+      website: user.website_url
     }
+
+    storeUser(userData)
+    return userData
   } catch (error) {
     throw new Error(error)
   }

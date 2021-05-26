@@ -7,7 +7,8 @@ export const getUser = async (userId: number): Promise<User> => {
   const storedUser = await getStoredUser(userId)
 
   if (storedUser) {
-    const shouldUpdate = Date.now() >= storedUser.updatedAt.getMilliseconds() + MS_IN_DAY
+    const shouldUpdate = Date.now() >= storedUser.updatedAt.getTime() + MS_IN_DAY
+
     if (!shouldUpdate) {
       return {
         ...storedUser,

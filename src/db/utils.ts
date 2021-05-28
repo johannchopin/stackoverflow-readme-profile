@@ -2,6 +2,7 @@ import { getMongoManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
+import { Avatar } from './entity/Avatar'
 import { User } from './entity/User'
 
 export const shouldUpdateUserCache = async (userId: number): Promise<boolean> => {
@@ -17,10 +18,21 @@ export const shouldUpdateUserCache = async (userId: number): Promise<boolean> =>
   return true
 }
 
-export const getStoredUser = async (userId: number): Promise<User | undefined> => {
+export const getUserAvatar = async (userId: number): Promise<Avatar | undefined> => {
+  return getMongoManager().findOne(Avatar, { id: userId })
+}
+
+export const getUser = async (userId: number): Promise<User | undefined> => {
+  return getMongoManager().findOne(User, { id: userId })
+}
+
+export const storeAvatar = async (userId: number, avatarBase64: string): Promise<void> => {
   const manager = getMongoManager()
 
-  return manager.findOne(User, { id: userId })
+  const avatar = new Avatar()
+  avatar.id = userId
+  avatar.base64 = avatarBase64
+  manager.save(avatar)
 }
 
 export const storeUser = async (userToInsert: UserType): Promise<void> => {

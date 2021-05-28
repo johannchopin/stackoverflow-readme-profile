@@ -1,23 +1,49 @@
 import { MS_IN_DAY } from './const'
-import { getStoredUser, storeUser } from './db/utils'
-import fetchUser from './fetch'
+import {
+  getUser as getStoredUser,
+  getUserAvatar,
+  storeAvatar,
+  storeUser
+} from './db/utils'
+import fetchUser, { fetchUserAvatar } from './fetch'
 import { User } from './types'
 
-export const getUser = async (userId: number): Promise<User> => {
+export const getAvatar = async (userId: number, avatarLink: string, shouldUpdate = false): Promise<string> => {
+  const storedAvatar = await getUserAvatar(userId)
+
+  if (shouldUpdate || !storedAvatar) {
+    const avatar = await fetchUserAvatar(avatarLink)
+    storeAvatar(userId, avatar)
+
+    return avatar
+  }
+
+  return storedAvatar.base64
+}
+
+export const getUser = async (userId: number): Promise<Omit<User, 'avatarLink'> & {avatar: string}> => {
   const storedUser = await getStoredUser(userId)
 
   if (storedUser) {
     const shouldUpdate = Date.now() >= storedUser.updatedAt.getTime() + MS_IN_DAY
 
-    if (!shouldUpdate) {
+    if (shouldUpdate) {
+      const user = await fetchUser(userId)
+      const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
+
+      storeUser(user)
       return {
-        ...storedUser,
-        avatar: '',
-        badges: {
-          gold: storedUser.gold || 0,
-          silver: storedUser.silver || 0,
-          bronze: storedUser.bronze || 0
-        }
+        ...user,
+        avatar: await getAvatar(user.id, user.avatarLink, shouldUpdateAvatar)
+      }
+    }
+    return {
+      ...storedUser,
+      avatar: await getAvatar(userId, storedUser.avatarLink),
+      badges: {
+        gold: storedUser.gold || 0,
+        silver: storedUser.silver || 0,
+        bronze: storedUser.bronze || 0
       }
     }
   }
@@ -25,5 +51,8 @@ export const getUser = async (userId: number): Promise<User> => {
   const user = await fetchUser(userId)
 
   storeUser(user)
-  return user
+  return {
+    ...user,
+    avatar: await getAvatar(user.id, user.avatarLink)
+  }
 }

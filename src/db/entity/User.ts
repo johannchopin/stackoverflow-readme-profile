@@ -2,46 +2,42 @@ import {
   Entity,
   ObjectIdColumn,
   Column,
-  OneToOne,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { Avatar } from './Avatar'
 
 @Entity()
 export class User {
-   @ObjectIdColumn()
-   id: number
+  @ObjectIdColumn()
+  id: number
 
-   @Column()
-   username: string
+  @Column()
+  username: string
 
-   @Column()
-   reputation: string
+  @Column()
+  avatarLink: string
 
-   @Column()
-   gold?: number
+  @Column()
+  reputation: string
 
-   @Column()
-   silver?: number
+  @Column()
+  gold?: number
 
-   @Column()
-   bronze?: number
+  @Column()
+  silver?: number
 
-   @Column()
-   location?: string
+  @Column()
+  bronze?: number
 
-   @Column()
-   website?: string
+  @Column()
+  location?: string
+
+  @Column()
+  website?: string
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
-
-   @OneToOne(() => Avatar)
-    @JoinColumn()
-    avatar: Avatar;
 }

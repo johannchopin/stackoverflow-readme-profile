@@ -19,7 +19,7 @@ export interface ProfileTemplateContext extends Omit<User, 'reputation'> {
   badgeBronzeMarginLeft: number
 }
 export interface ProfileParams extends Pick<ProfileTemplateContext,
-  | 'avatar'
+  | 'avatarLink'
   | 'username'
   | 'reputation'
   | 'badges'

@@ -1,14 +1,22 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
-  PrimaryColumn
+  ObjectIdColumn,
+  UpdateDateColumn
 } from 'typeorm'
 
 @Entity()
 export class Avatar {
-   @PrimaryColumn()
-   id: number
+  @ObjectIdColumn()
+  id: number
 
-   @Column('longtext')
-   avatar?: string
+  @Column('longtext')
+  base64: string
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
 }

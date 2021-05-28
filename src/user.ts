@@ -21,7 +21,7 @@ export const getAvatar = async (userId: number, avatarLink: string, shouldUpdate
   return storedAvatar.base64
 }
 
-export const getUser = async (userId: number): Promise<Omit<User, 'avatarLink'> & {avatar: string}> => {
+export const getUser = async (userId: number): Promise<User & {avatar: string}> => {
   const storedUser = await getStoredUser(userId)
 
   if (storedUser) {

@@ -1,7 +1,7 @@
-import { MS_IN_DAY } from './const'
 import {
   getUser as getStoredUser,
   getUserAvatar,
+  shouldUpdateUserCache,
   storeAvatar,
   storeUser
 } from './db/utils'
@@ -25,9 +25,7 @@ export const getUser = async (userId: number): Promise<User & {avatar: string}> 
   const storedUser = await getStoredUser(userId)
 
   if (storedUser) {
-    const shouldUpdate = Date.now() >= storedUser.updatedAt.getTime() + MS_IN_DAY
-
-    if (shouldUpdate) {
+    if (shouldUpdateUserCache(storedUser)) {
       const user = await fetchUser(userId)
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
 

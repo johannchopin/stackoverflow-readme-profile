@@ -5,40 +5,38 @@ import { User as UserType } from '../types'
 import { Avatar } from './entity/Avatar'
 import { User } from './entity/User'
 
-export const shouldUpdateUserCache = async (userId: number): Promise<boolean> => {
-  const manager = getMongoManager()
+export const getUser = async (userId: number): Promise<User | undefined> => {
+  return getMongoManager().findOne(User, { id: userId })
+}
 
-  const storedUser = await manager.findOne(User, userId)
-
-  if (storedUser) {
-    const shouldUpdate = Date.now() >= storedUser.updatedAt.getMilliseconds() + MS_IN_DAY
-    return shouldUpdate
-  }
-
-  return true
+export const shouldUpdateUserCache = async (user: User): Promise<boolean> => {
+  return Date.now() >= user.updatedAt.getMilliseconds() + MS_IN_DAY
 }
 
 export const getUserAvatar = async (userId: number): Promise<Avatar | undefined> => {
   return getMongoManager().findOne(Avatar, { id: userId })
 }
 
-export const getUser = async (userId: number): Promise<User | undefined> => {
-  return getMongoManager().findOne(User, { id: userId })
-}
-
 export const storeAvatar = async (userId: number, avatarBase64: string): Promise<void> => {
   const manager = getMongoManager()
+
+  const existingAvatar = await getUserAvatar(userId)
 
   const avatar = new Avatar()
   avatar.id = userId
   avatar.base64 = avatarBase64
-  manager.save(avatar)
+
+  if (existingAvatar) {
+    await manager.update(Avatar, { id: userId }, avatar)
+  } else {
+    await manager.save(avatar)
+  }
 }
 
 export const storeUser = async (userToInsert: UserType): Promise<void> => {
   const manager = getMongoManager()
 
-  const existingUser = await manager.findOne(User, { id: userToInsert.id })
+  const existingUser = await getUser(userToInsert.id)
 
   const user = existingUser || new User()
 
@@ -50,9 +48,11 @@ export const storeUser = async (userToInsert: UserType): Promise<void> => {
   user.bronze = userToInsert.badges.bronze
   user.location = userToInsert.location
   user.website = userToInsert.website
+  user.avatarLink = userToInsert.avatarLink
 
   if (existingUser) {
-    manager.update(User, { id: userToInsert.id }, { ...user })
+    // TODO: Fix no update in db
+    manager.update(User, { id: userToInsert.id }, user)
   } else {
     manager.save(user)
   }

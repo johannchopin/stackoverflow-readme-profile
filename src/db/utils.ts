@@ -33,12 +33,10 @@ export const storeAvatar = async (userId: number, avatarBase64: string): Promise
   }
 }
 
-export const storeUser = async (userToInsert: UserType): Promise<void> => {
+export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<void> => {
   const manager = getMongoManager()
 
-  const existingUser = await getUser(userToInsert.id)
-
-  const user = existingUser || new User()
+  const user = new User()
 
   user.id = userToInsert.id
   user.username = userToInsert.username
@@ -50,10 +48,18 @@ export const storeUser = async (userToInsert: UserType): Promise<void> => {
   user.website = userToInsert.website
   user.avatarLink = userToInsert.avatarLink
 
-  if (existingUser) {
+  if (action === 'update') {
     // TODO: Fix no update in db
     manager.update(User, { id: userToInsert.id }, user)
   } else {
     manager.save(user)
   }
+}
+
+export const updateUser = async (userToInsert: UserType): Promise<void> => {
+  return storeUser(userToInsert, 'update')
+}
+
+export const createUser = async (userToInsert: UserType): Promise<void> => {
+  return storeUser(userToInsert, 'create')
 }

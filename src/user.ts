@@ -1,9 +1,10 @@
 import {
+  createUser,
   getUser as getStoredUser,
   getUserAvatar,
   shouldUpdateUserCache,
   storeAvatar,
-  storeUser
+  updateUser
 } from './db/utils'
 import fetchUser, { fetchUserAvatar } from './fetch'
 import { User } from './types'
@@ -29,7 +30,7 @@ export const getUser = async (userId: number): Promise<User & {avatar: string}> 
       const user = await fetchUser(userId)
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
 
-      storeUser(user)
+      updateUser(user)
       return {
         ...user,
         avatar: await getAvatar(user.id, user.avatarLink, shouldUpdateAvatar)
@@ -48,7 +49,7 @@ export const getUser = async (userId: number): Promise<User & {avatar: string}> 
 
   const user = await fetchUser(userId)
 
-  storeUser(user)
+  createUser(user)
   return {
     ...user,
     avatar: await getAvatar(user.id, user.avatarLink)

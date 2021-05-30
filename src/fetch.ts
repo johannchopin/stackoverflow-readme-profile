@@ -1,12 +1,9 @@
 import fetch from 'node-fetch'
 import he from 'he'
+import { Badges, User } from './types'
+import { getUserReputation } from './utils'
 
-export interface Badges {
-  gold: number
-  silver: number
-  bronze: number
-}
-export interface User {
+export interface UserResponse {
   'badge_counts': Badges
   'is_employee': boolean
   'reputation': number
@@ -18,7 +15,8 @@ export interface User {
   'display_name': string
 }
 
-const getUserImageAsBase64 = async (url: string): Promise<string> => {
+// give back a base64 encoded image
+export const fetchUserAvatar = async (url: string): Promise<string> => {
   const urlContainsQueryString = url.includes('?')
   const imgSizeQueryString = '?s=128'
 
@@ -32,32 +30,40 @@ const getUserImageAsBase64 = async (url: string): Promise<string> => {
     const response = await fetch(url)
     const buffer = await response.buffer()
 
+    // TODO: get correct image format
     return 'data:image/png;base64,' + buffer.toString('base64')
   } catch (error) {
     throw new Error(`Unable to fetch this user avatar: ${error}`)
   }
 }
 
-const getApiRoute = (id: number): string => {
-  return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow&key=${process.env.SO_API_TOKEN}`
+const getApiEntryPoint = (id: number): string => {
+  const token = process.env.SO_API_TOKEN
+  return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow${token ? `&key=${token}` : ''}`
 }
 
 const fetchUser = async (id: number): Promise<User> => {
   try {
-    const response = await fetch(getApiRoute(id))
+    const response = await fetch(getApiEntryPoint(id))
 
     // decode html entities
     const dataText = await response.text()
     const data = JSON.parse(he.decode(dataText))
 
-    const user = data?.items[0] as User
+    const user = data?.items[0] as UserResponse
     if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)
 
-    const image = await getUserImageAsBase64(user.profile_image)
-    return {
+    const userData: User = {
       ...user,
-      profile_image: image
+      id: user.user_id,
+      username: user.display_name,
+      reputation: getUserReputation(user.reputation),
+      badges: user.badge_counts,
+      avatarLink: user.profile_image,
+      website: user.website_url
     }
+
+    return userData
   } catch (error) {
     throw new Error(error)
   }

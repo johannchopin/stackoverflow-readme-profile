@@ -1,8 +1,23 @@
 import express from 'express'
 import { SECONDS_IN_MIN, Template } from './const'
 import { getProfileSvg } from './index'
+import { createConnection } from 'typeorm'
+
 import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
+import { User } from './db/entity/User'
+import { Avatar } from './db/entity/Avatar'
+
+createConnection({
+  type: 'mongodb',
+  host: 'localhost',
+  port: 27017,
+  database: 'stackoverflow-readme-profile',
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  logging: false,
+  entities: [User, Avatar]
+})
 
 const app = express()
 const PORT = 5000

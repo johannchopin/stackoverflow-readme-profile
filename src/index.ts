@@ -1,14 +1,13 @@
 /* eslint-disable camelcase */
 import { config } from 'dotenv'
 import { Template } from './const'
-import fetchUser from './fetch'
+import { getUser } from './user'
 import {
   renderError,
   renderProfile,
   renderProfileSmall,
   Theme as ThemeType
 } from './templates'
-import { getUserReputation } from './utils'
 
 export interface Params {
   theme: ThemeType
@@ -24,25 +23,13 @@ export const getProfileSvg = async (
   params: Params
 ): Promise<string> => {
   try {
-    const user = await fetchUser(userId)
-    const {
-      display_name,
-      profile_image,
-      website_url,
-      badge_counts,
-      reputation,
-      location,
-      ...rest
-    } = user
+    const user = await getUser(userId)
+    const { website, location } = user
 
     const renderParams = {
-      ...rest,
-      avatar: profile_image,
-      username: display_name,
-      website: params.website ? website_url : undefined,
+      ...user,
+      website: params.website ? website : undefined,
       location: params.location ? location : undefined,
-      badges: badge_counts,
-      reputation: getUserReputation(reputation),
       theme: params.theme
     }
 

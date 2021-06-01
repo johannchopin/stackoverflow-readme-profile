@@ -1,10 +1,10 @@
 # stackoverflow-readme-stats
 ![SO profile](./docs/profile/themes/dark.svg)
 
-<a href="https://github.com/johannchopin/restapify/actions">
+<a href="https://github.com/johannchopin/stackoverflow-readme-profile/actions">
   <img src="https://github.com/johannchopin/stackoverflow-readme-profile/actions/workflows/test.yml/badge.svg" alt="test workflow">
 </a>
-<a href="https://codecov.io/gh/johannchopin/restapify">
+<a href="https://codecov.io/gh/johannchopin/stackoverflow-readme-profile">
   <img src="https://codecov.io/gh/johannchopin/stackoverflow-readme-profile/branch/main/graph/badge.svg" alt="codecov">
 </a>
 <a href="https://semver.org/">

@@ -6,7 +6,7 @@ import {
   storeAvatar,
   updateUser
 } from './db/utils'
-import fetchUser, { fetchUserAvatar } from './fetch'
+import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
 
 export const getAvatar = async (userId: number, avatarLink: string, shouldUpdate = false): Promise<string> => {

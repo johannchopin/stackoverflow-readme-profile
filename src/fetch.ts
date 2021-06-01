@@ -42,7 +42,7 @@ const getApiEntryPoint = (id: number): string => {
   return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow${token ? `&key=${token}` : ''}`
 }
 
-const fetchUser = async (id: number): Promise<User> => {
+export const fetchUser = async (id: number): Promise<User> => {
   try {
     const response = await fetch(getApiEntryPoint(id))
 
@@ -53,20 +53,16 @@ const fetchUser = async (id: number): Promise<User> => {
     const user = data?.items[0] as UserResponse
     if (!user) throw new Error(`Unable to fetch the user with the id ${id}`)
 
-    const userData: User = {
-      ...user,
+    return {
       id: user.user_id,
       username: user.display_name,
       reputation: getUserReputation(user.reputation),
       badges: user.badge_counts,
+      location: user.location,
       avatarLink: user.profile_image,
       website: user.website_url
     }
-
-    return userData
   } catch (error) {
     throw new Error(error)
   }
 }
-
-export default fetchUser

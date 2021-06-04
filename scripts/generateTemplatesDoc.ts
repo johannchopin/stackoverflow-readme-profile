@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import { getProfileSvg } from '../src'
-import { Template, THEME_NAME } from '../src/const'
+import { Template, THEME_NAMES } from '../src/const'
 import { isTemplateValid } from '../src/utils'
 
 const generateDocForTemplate = (template: Template): void => {
@@ -14,10 +14,10 @@ const generateDocForTemplate = (template: Template): void => {
   if (!fs.existsSync(docsPath)) fs.mkdirSync(docsPath)
   if (!fs.existsSync(docsThemePath)) fs.mkdirSync(docsThemePath)
 
-  THEME_NAME.forEach((theme) => {
+  THEME_NAMES.forEach((theme) => {
     const svgFileName = `${theme}.svg`
     doc += `## ${theme} \n ![profile theme ${theme}](./themes/${svgFileName}) \n`
-    getProfileSvg(8583669, template, { website: true, location: true, theme }).then((svg) => {
+    getProfileSvg(8583669, template, { website: true, location: true, theme }, false).then((svg) => {
       fs.writeFileSync(path.resolve(__dirname, `../docs/${template}/themes/${svgFileName}`), svg)
     })
   })

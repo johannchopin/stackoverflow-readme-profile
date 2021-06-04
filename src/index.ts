@@ -20,10 +20,11 @@ export const getProfileSvg = async (
   userId: number,
   type: Template,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  params: Params
+  params: Params,
+  useCache: boolean = true
 ): Promise<string> => {
   try {
-    const user = await getUser(userId)
+    const user = await getUser(userId, useCache)
     const { website, location } = user
 
     const renderParams = {

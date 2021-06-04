@@ -6,7 +6,11 @@ import { Avatar } from './entity/Avatar'
 import { User } from './entity/User'
 
 export const getUser = async (userId: number): Promise<User | undefined> => {
-  return getMongoManager().findOne(User, { id: userId })
+  try {
+    return getMongoManager().findOne(User, { id: userId })
+  } catch (error) {
+    return undefined
+  }
 }
 
 export const shouldUpdateUserCache = async (user: User): Promise<boolean> => {

@@ -9,12 +9,17 @@ import {
 import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
 
-export const getAvatar = async (userId: number, avatarLink: string, shouldUpdate = false): Promise<string> => {
-  const storedAvatar = await getUserAvatar(userId)
+export const getAvatar = async (
+  userId: number,
+  avatarLink: string,
+  shouldUpdate = false,
+  useCache = true
+): Promise<string> => {
+  const storedAvatar = useCache ? await getUserAvatar(userId) : undefined
 
   if (shouldUpdate || !storedAvatar) {
     const avatar = await fetchUserAvatar(avatarLink)
-    storeAvatar(userId, avatar)
+    if (useCache) storeAvatar(userId, avatar)
 
     return avatar
   }
@@ -22,8 +27,8 @@ export const getAvatar = async (userId: number, avatarLink: string, shouldUpdate
   return storedAvatar.base64
 }
 
-export const getUser = async (userId: number): Promise<User & {avatar: string}> => {
-  const storedUser = await getStoredUser(userId)
+export const getUser = async (userId: number, useCache: boolean = true): Promise<User & {avatar: string}> => {
+  const storedUser = useCache ? await getStoredUser(userId) : undefined
 
   if (storedUser) {
     if (shouldUpdateUserCache(storedUser)) {
@@ -49,9 +54,9 @@ export const getUser = async (userId: number): Promise<User & {avatar: string}> 
 
   const user = await fetchUser(userId)
 
-  createUser(user)
+  if (useCache) createUser(user)
   return {
     ...user,
-    avatar: await getAvatar(user.id, user.avatarLink)
+    avatar: await getAvatar(user.id, user.avatarLink, false, useCache)
   }
 }

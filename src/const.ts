@@ -23,7 +23,7 @@ export const THEMES: {[key in ThemeType]: Theme} = {
   graywhite: graywhiteTheme,
   hotdog: hotdogTheme
 }
-export const THEME_NAME: ThemeType[] = ['default', 'dark', 'cobalt', 'monokai', 'graywhite', 'hotdog']
+export const THEME_NAMES: ThemeType[] = ['default', 'dark', 'cobalt', 'monokai', 'graywhite', 'hotdog']
 export const MS_IN_SECONDS = 1000
 export const SECONDS_IN_MIN = 60
 export const MS_IN_DAY = MS_IN_SECONDS * SECONDS_IN_MIN * 60 * 24

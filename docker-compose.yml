@@ -1,15 +1,14 @@
-version: "2"
+version: "3"
 services:
   app:
-    container_name: stackoverflow-readme-profile-app
+    image: stackoverflow-readme-profile-app
     restart: always
     build: .
     ports:
       - "5000:5000"
-    links:
+    depends_on: 
       - mongo
   mongo:
-    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"

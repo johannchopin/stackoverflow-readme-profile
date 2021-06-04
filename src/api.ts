@@ -10,9 +10,7 @@ import { Avatar } from './db/entity/Avatar'
 
 createConnection({
   type: 'mongodb',
-  host: 'localhost',
-  port: 27017,
-  database: 'stackoverflow-readme-profile',
+  url: 'mongodb://mongo:27017/stackoverflow-readme-profile',
   useUnifiedTopology: true,
   useNewUrlParser: true,
   logging: false,

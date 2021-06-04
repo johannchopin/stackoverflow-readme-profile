@@ -6,12 +6,13 @@
   "author": "johannchopin <johannchopin@pm.me>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn ts-node-dev -- src/api.ts",
-    "docs:gen:template": "yarn ts-node scripts/generateTemplatesDoc.ts",
-    "test": "yarn jest --silent",
-    "test:types": "yarn tsc --noEmit",
-    "test:manual": "yarn ts-node-dev --files test/run.ts",
-    "lint": "yarn eslint . --ext .js,.ts"
+    "start": "ts-node-dev -- src/api.ts",
+    "serve": "ts-node -- src/api.ts",
+    "docs:gen:template": "ts-node scripts/generateTemplatesDoc.ts",
+    "test": "jest --silent",
+    "test:types": "tsc --noEmit",
+    "test:manual": "ts-node-dev --files test/run.ts",
+    "lint": "eslint . --ext .js,.ts"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -23,6 +24,7 @@
     "@types/handlebars": "^4.1.0",
     "@types/he": "^1.1.1",
     "@types/html-minifier": "^4.0.0",
+    "@types/mongodb": "^3.6.14",
     "@types/node-fetch": "^2.5.10",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
@@ -42,7 +44,7 @@
     "html-minifier": "^4.0.0",
     "mongodb": "^3.6.8",
     "node-fetch": "^2.6.1",
-    "reflect-metadata": "^0.1.13",
+    "ts-node": "^9.1.1",
     "typeorm": "^0.2.32"
   }
 }

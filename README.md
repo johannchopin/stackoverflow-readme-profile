@@ -65,3 +65,13 @@ Render a smaller profile image without the location and the website
 |    param   |  default  |               description              |
 |:-----------|:---------:|:---------------------------------------|
 | `theme`    | `default` | Theme to use. [Check them out here!](./docs/profile-small/README.md) |
+
+## 🐳 Docker
+
+### Build the image
+You can build the image by using the following command:
+
+```bash
+docker-compose build
+```
+

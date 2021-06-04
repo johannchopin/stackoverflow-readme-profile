@@ -1,4 +1,4 @@
-# Profile themes 
+# Themes for the 'profile' template 
 ## default 
  ![profile theme default](./themes/default.svg) 
 ## dark 

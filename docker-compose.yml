@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: stackoverflow-readme-profile-app
+    image: johannchopin/stackoverflow-readme-profile
     restart: always
     build: .
     ports:
@@ -10,5 +10,3 @@ services:
       - mongo
   mongo:
     image: mongo
-    ports:
-      - "27017:27017"

@@ -65,5 +65,3 @@ Render a smaller profile image without the location and the website
 |    param   |  default  |               description              |
 |:-----------|:---------:|:---------------------------------------|
 | `theme`    | `default` | Theme to use. [Check them out here!](./docs/profile-small/README.md) |
-| `website`  | `true`    | Show or not the website URL            |
-| `location` | `true`    | Show or not the location               |

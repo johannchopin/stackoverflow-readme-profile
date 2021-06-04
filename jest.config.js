@@ -6,7 +6,9 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts'],
   collectCoverageFrom: [
     "!**/node_modules/**",
-    "src/**"
+    "src/**",
+    "!src/db/entity/**",
+    "!**/__tests__/**",
   ],
   coverageReporters: ["html", "lcov"],
   bail: true,

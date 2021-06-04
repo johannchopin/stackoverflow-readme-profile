@@ -35,7 +35,7 @@ Use it like that in your README:
 - [profile](#profile)
 - [profile-small](#profile-small)
 
-## profile
+### profile
 
 Render a profile image by using the `profile` template:
 
@@ -45,7 +45,7 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 
 ![profile](./docs/profile/themes/dark.svg)
 
-### Params (as query strings)
+#### Params (as query strings)
 
 |    param   |  default  |               description              |
 |:-----------|:---------:|:---------------------------------------|
@@ -54,13 +54,13 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 | `location` | `true`    | Show or not the location               |
 
 
-## profile-small
+### profile-small
 
 Render a smaller profile image without the location and the website
 
 ![profile](./docs/profile-small/themes/dark.svg)
 
-### Params (as query strings)
+#### Params (as query strings)
 
 |    param   |  default  |               description              |
 |:-----------|:---------:|:---------------------------------------|

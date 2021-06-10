@@ -50,8 +50,8 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 |    param   |  default  |               description              |
 |:-----------|:---------:|:---------------------------------------|
 | `theme`    | `default` | Theme to use. [Check them out here!](./docs/profile/README.md) |
-| `website`  | `true`    | Show or not the website URL            |
-| `location` | `true`    | Show or not the location               |
+| `website`  | `true`    | Show or not the website URL (`true` \| `false`) |
+| `location` | `true`    | Show or not the location (`true` \| `false`) |
 
 
 ### profile-small

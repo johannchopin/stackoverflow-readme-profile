@@ -45,7 +45,6 @@ jest.mock('node-fetch', () => ({
 describe('Fetch functions', () => {
   describe('fetchUser', () => {
     it('should get the correct user data', async () => {
-      console.log(fetch);
       expect(await fetchUser(42)).toStrictEqual({
         "username": "johannchopin",
         "avatarLink": "https://i.stack.imgur.com/4iGwt.jpg?s=128&g=1",

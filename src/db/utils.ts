@@ -14,7 +14,7 @@ export const getUser = async (userId: number): Promise<User | undefined> => {
 }
 
 export const shouldUpdateUserCache = (user: User): boolean => {
-  return Date.now() >= user.updatedAt.getMilliseconds() + MS_IN_DAY
+  return Date.now() >= new Date(user.updatedAt).getTime() + MS_IN_DAY
 }
 
 export const getUserAvatar = async (userId: number): Promise<Avatar | undefined> => {

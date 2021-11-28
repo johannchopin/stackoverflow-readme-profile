@@ -22,20 +22,28 @@ git clone https://github.com/johannchopin/stackoverflow-readme-profile.git
 cd stackoverflow-readme-profile
 ```
 
-1. Install the dependencies
+2. Install the dependencies
 
 ```bash
 yarn
 ```
 
-3. Add the .env variables
+3. Run a local postgres instance with docker
+
+```
+docker run --name MY_DOCKER_INSTANCE_NAME -p 5432:5432  -e POSTGRES_PASSWORD=MY_PWD  -e POSTGRES_USER=MY_USER  -e POSTGRES_DB=MY_DB_NAME -v my-postgres-db-db:/var/lib/postgresql/data -d postgres:14
+```
+
+4. Add and adapt the `.env` variables
 
 You will find an example of it in `./.env.example`.
 
-4. Run the start script
+5. Run the start script
 
-You can easily see your change by running the express api located in `./src/api.ts`:
+You can easily see your changes by running the express api located in `./src/api.ts`:
 
 ```bash
 yarn start
 ```
+
+6. Navigate to http://localhost:5000/profile/8583669

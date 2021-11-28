@@ -1,14 +1,14 @@
 import {
   Entity,
-  ObjectIdColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  PrimaryColumn
 } from 'typeorm'
 
 @Entity()
 export class User {
-  @ObjectIdColumn()
+  @PrimaryColumn()
   id: number
 
   @Column()
@@ -20,19 +20,19 @@ export class User {
   @Column()
   reputation: string
 
-  @Column()
+  @Column({ nullable: true })
   gold?: number
 
-  @Column()
+  @Column({ nullable: true })
   silver?: number
 
-  @Column()
+  @Column({ nullable: true })
   bronze?: number
 
-  @Column()
+  @Column({ nullable: true })
   location?: string
 
-  @Column()
+  @Column({ nullable: true })
   website?: string
 
   @CreateDateColumn({ type: 'timestamp' })

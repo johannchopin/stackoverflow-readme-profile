@@ -2,16 +2,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ObjectIdColumn,
+  PrimaryColumn,
   UpdateDateColumn
 } from 'typeorm'
 
 @Entity()
 export class Avatar {
-  @ObjectIdColumn()
+  @PrimaryColumn()
   id: number
 
-  @Column('longtext')
+  @Column('text')
   base64: string
 
   @CreateDateColumn({ type: 'timestamp' })

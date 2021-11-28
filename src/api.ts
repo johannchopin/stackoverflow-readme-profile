@@ -9,11 +9,13 @@ import { User } from './db/entity/User'
 import { Avatar } from './db/entity/Avatar'
 
 createConnection({
-  type: 'mongodb',
-  url: 'mongodb://mongo:27017/stackoverflow-readme-profile',
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  logging: false,
+  type: 'postgres',
+  host: 'localhost',
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  synchronize: true,
   entities: [User, Avatar]
 })
 

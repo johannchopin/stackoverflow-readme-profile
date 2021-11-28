@@ -44,6 +44,7 @@
     "html-minifier": "^4.0.0",
     "mongodb": "^3.6.8",
     "node-fetch": "^2.6.1",
+    "pg": "^8.7.1",
     "ts-node": "^9.1.1",
     "typeorm": "^0.2.32"
   }

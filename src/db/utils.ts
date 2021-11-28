@@ -1,4 +1,4 @@
-import { getMongoManager } from 'typeorm'
+import { getManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
@@ -7,22 +7,22 @@ import { User } from './entity/User'
 
 export const getUser = async (userId: number): Promise<User | undefined> => {
   try {
-    return getMongoManager().findOne(User, { id: userId })
+    return getManager().findOne(User, userId)
   } catch (error) {
     return undefined
   }
 }
 
-export const shouldUpdateUserCache = async (user: User): Promise<boolean> => {
+export const shouldUpdateUserCache = (user: User): boolean => {
   return Date.now() >= user.updatedAt.getMilliseconds() + MS_IN_DAY
 }
 
 export const getUserAvatar = async (userId: number): Promise<Avatar | undefined> => {
-  return getMongoManager().findOne(Avatar, { id: userId })
+  return getManager().findOne(Avatar, { id: userId })
 }
 
 export const storeAvatar = async (userId: number, avatarBase64: string): Promise<void> => {
-  const manager = getMongoManager()
+  const manager = getManager()
 
   const existingAvatar = await getUserAvatar(userId)
 
@@ -38,7 +38,7 @@ export const storeAvatar = async (userId: number, avatarBase64: string): Promise
 }
 
 export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<void> => {
-  const manager = getMongoManager()
+  const manager = getManager()
 
   const user = new User()
 
@@ -53,11 +53,10 @@ export const storeUser = async (userToInsert: UserType, action: 'create' | 'upda
   user.avatarLink = userToInsert.avatarLink
 
   if (action === 'update') {
-    // TODO: Fix no update in db
-    manager.update(User, { id: userToInsert.id }, user)
-  } else {
-    manager.save(user)
+    user.updatedAt = new Date()
   }
+
+  manager.save(user)
 }
 
 export const updateUser = async (userToInsert: UserType): Promise<void> => {

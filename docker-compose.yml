@@ -3,10 +3,27 @@ services:
   app:
     image: johannchopin/stackoverflow-readme-profile
     restart: always
-    build: .
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - "5000:5000"
+    container_name: stackoverflow-readme-profile
     depends_on: 
-      - mongo
-  mongo:
-    image: mongo
+      - db
+    volumes: 
+      - .:/app
+      - /app/node_modules
+
+  db:
+    image: postgres
+    restart: always
+    container_name: postgres-db
+    environment: 
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data

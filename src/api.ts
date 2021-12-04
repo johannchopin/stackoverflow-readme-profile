@@ -10,13 +10,16 @@ import { Avatar } from './db/entity/Avatar'
 
 createConnection({
   type: 'postgres',
-  host: 'localhost',
+  host: process.env.localhost,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
   entities: [User, Avatar]
+}).catch(error => {
+  console.error('Data Access Error : ', error)
+  process.exit()
 })
 
 const app = express()

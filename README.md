@@ -72,6 +72,19 @@ Render a smaller profile image without the location and the website
 You can build the image by using the following command:
 
 ```bash
-docker-compose build
+docker build -t <yourImageName> .
 ```
 
+### Push the image
+You can build the image by using the following command:
+
+```bash
+docker push johannchopin/stackoverflow-readme-profile
+```
+
+### Run the application
+To run the app together with postgresql:
+
+```bash
+docker compose up
+```

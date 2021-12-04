@@ -3,20 +3,17 @@ services:
   app:
     image: johannchopin/stackoverflow-readme-profile
     restart: always
-    build: 
-      context: .
-      dockerfile: ./Dockerfile
     ports:
       - "5000:5000"
     container_name: stackoverflow-readme-profile
     depends_on: 
       - db
-    volumes: 
-      - .:/app
-      - /app/node_modules
+    environment:
+      - DB_PORT=${DB_PORT}
+      - DB_HOST=${DB_HOST}  
 
   db:
-    image: postgres
+    image: postgrespre
     restart: always
     container_name: postgres-db
     environment: 
@@ -26,4 +23,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+      
+volumes:
+  pgdata:

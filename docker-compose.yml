@@ -13,7 +13,7 @@ services:
       - DB_HOST=${DB_HOST}  
 
   db:
-    image: postgrespre
+    image: postgres
     restart: always
     container_name: postgres-db
     environment: 

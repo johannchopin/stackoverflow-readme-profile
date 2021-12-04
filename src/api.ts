@@ -10,7 +10,7 @@ import { Avatar } from './db/entity/Avatar'
 
 createConnection({
   type: 'postgres',
-  host: process.env.localhost,
+  host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,

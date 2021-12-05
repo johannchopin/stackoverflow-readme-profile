@@ -2,7 +2,7 @@
 
 Easily share your Stackoverflow's profile on your README.
 
-![SO profile](./docs/profile/themes/dark.svg)
+![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile/themes/dark.svg)
 
 <a href="https://github.com/johannchopin/stackoverflow-readme-profile/actions">
   <img src="https://github.com/johannchopin/stackoverflow-readme-profile/actions/workflows/test.yml/badge.svg" alt="test workflow">

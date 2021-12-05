@@ -1,4 +1,4 @@
-# (🚧WIP) stackoverflow-readme-profile
+# stackoverflow-readme-profile
 
 Easily share your Stackoverflow's profile on your README.
 

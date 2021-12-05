@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:17-alpine
 WORKDIR /app
 COPY ./package.json ./yarn.lock /app/
 RUN npm install

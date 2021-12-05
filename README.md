@@ -76,7 +76,7 @@ docker build -t <yourImageName> .
 ```
 
 ### Push the image
-You can build the image by using the following command:
+You can push the image by using the following command:
 
 ```bash
 docker push johannchopin/stackoverflow-readme-profile

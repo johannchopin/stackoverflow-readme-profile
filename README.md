@@ -89,3 +89,8 @@ To run the app together with postgresql you will need to copy the `docker-compos
 docker-compose pull # be sure to get the latest johannchopin/stackoverflow-readme-profile image version
 docker-compose up # start the engine
 ```
+
+### Stop the application
+```bash
+docker-compose stop
+```

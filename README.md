@@ -89,7 +89,7 @@ docker push johannchopin/stackoverflow-readme-profile
 ```
 
 ### Run the application
-To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server and then run:
+To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server. Near to it add a new `.env` file and adapt the  variables. You will find an example of it in `./.env.example`. You can then run:
 
 ```bash
 docker-compose pull # be sure to get the latest johannchopin/stackoverflow-readme-profile image version

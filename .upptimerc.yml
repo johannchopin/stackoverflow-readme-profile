@@ -6,8 +6,6 @@ sites:
     url: https://stackoverflow-readme-profile.johannchopin.fr/profile/8583669
   - name: stackoverflow-readme-profile / profile-small
     url: https://stackoverflow-readme-profile.johannchopin.fr/profile-small/8583669
-  - name: stackoverflow-readme-profile / profile-poop
-    url: https://stackoverflow-readme-profile.johannchopin.fr/profile-small/8583669
 status-website:
   baseUrl: /stackoverflow-readme-profile
   name: stackoverflow-readme-profile Status Website

@@ -37,8 +37,8 @@ Use it like that in your README:
 
 ## 📄 Templates
 
-- [profile](#profile)
-- [profile-small](#profile-small)
+- [profile](#profile) ![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjohannchopin%2Fstackoverflow-readme-profile%2Fmain%2Fapi%2Fstackoverflow-readme-profile-profile%2Fuptime.json)
+- [profile-small](#profile-small) ![Uptime](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjohannchopin%2Fstackoverflow-readme-profile%2Fmain%2Fapi%2Fstackoverflow-readme-profile-profile-small%2Fuptime.json)
 
 ### profile
 

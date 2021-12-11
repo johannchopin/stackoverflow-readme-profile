@@ -17,7 +17,7 @@ Easily share your Stackoverflow's profile on your README.
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji">
 </a>
 
-----
+---
 
 ## ⁉️ How to use?
 
@@ -33,9 +33,10 @@ Use it like that in your README:
 [![johannchopin's SO profile](https://stackoverflow-readme-profile.johannchopin.fr/:template/:id)](https://github.com/johannchopin/stackoverflow-readme-profile)
 ```
 
-----
+---
 
 ## 📄 Templates
+
 - [profile](#profile)
 - [profile-small](#profile-small)
 
@@ -51,12 +52,11 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 
 #### Params (as query strings)
 
-|    param   |  default  |               description              |
-|:-----------|:---------:|:---------------------------------------|
+| param      |  default  | description                                                    |
+| :--------- | :-------: | :------------------------------------------------------------- |
 | `theme`    | `default` | Theme to use. [Check them out here!](./docs/profile/README.md) |
-| `website`  | `true`    | Show or not the website URL (`true` \| `false`) |
-| `location` | `true`    | Show or not the location (`true` \| `false`) |
-
+| `website`  |  `true`   | Show or not the website URL (`true` \| `false`)                |
+| `location` |  `true`   | Show or not the location (`true` \| `false`)                   |
 
 ### profile-small
 
@@ -66,15 +66,16 @@ Render a smaller profile image without the location and the website
 
 #### Params (as query strings)
 
-|    param   |  default  |               description              |
-|:-----------|:---------:|:---------------------------------------|
-| `theme`    | `default` | Theme to use. [Check them out here!](./docs/profile-small/README.md) |
+| param   |  default  | description                                                          |
+| :------ | :-------: | :------------------------------------------------------------------- |
+| `theme` | `default` | Theme to use. [Check them out here!](./docs/profile-small/README.md) |
 
-----
+---
 
 ## 🐳 Docker
 
 ### Build the image
+
 You can build the image by using the following command:
 
 ```bash
@@ -82,6 +83,7 @@ docker build -t johannchopin/stackoverflow-readme-profile .
 ```
 
 ### Push the image
+
 You can push the image by using the following command:
 
 ```bash
@@ -89,7 +91,8 @@ docker push johannchopin/stackoverflow-readme-profile
 ```
 
 ### Run the application
-To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server. Near to it add a new `.env` file and adapt the  variables. You will find an example of it in `./.env.example`. You can then run:
+
+To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server. Near to it add a new `.env` file and adapt the variables. You will find an example of it in `./.env.example`. You can then run:
 
 ```bash
 docker-compose pull # be sure to get the latest johannchopin/stackoverflow-readme-profile image version
@@ -97,6 +100,7 @@ docker-compose up # start the engine
 ```
 
 ### Stop the application
+
 ```bash
 docker-compose stop
 ```

@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import Handlebars from 'handlebars'
 import { minify } from 'html-minifier'
+import * as jimp from 'jimp'
 
 import { TEMPLATES, THEMES } from './const'
 
@@ -44,4 +45,14 @@ export const getTruncatedText = (text:string, truncAtN: number): string => {
 export const isTemplateValid = (templateName: string): boolean => {
   // @ts-ignore
   return TEMPLATES.includes(templateName)
+}
+
+export const getResizedBase64 = async (
+  base64: string,
+  width: number,
+  height: number
+): Promise<string> => {
+  const imageBuffer = Buffer.from(base64.replace('data:image/png;base64,', ''), 'base64')
+  const image = await jimp.read(imageBuffer)
+  return image.resize(width, height).getBase64Async(jimp.MIME_PNG)
 }

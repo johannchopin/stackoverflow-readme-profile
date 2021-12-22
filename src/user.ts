@@ -8,6 +8,7 @@ import {
 } from './db/utils'
 import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
+import { getResizedBase64 } from './utils'
 
 export const getAvatar = async (
   userId: number,
@@ -18,7 +19,8 @@ export const getAvatar = async (
   const storedAvatar = useCache ? await getUserAvatar(userId) : undefined
 
   if (shouldUpdate || !storedAvatar) {
-    const avatar = await fetchUserAvatar(avatarLink)
+    let avatar = await fetchUserAvatar(avatarLink)
+    avatar = await getResizedBase64(avatar, 100, 100) // resize avatar to smaller one
     if (useCache) storeAvatar(userId, avatar)
 
     return avatar

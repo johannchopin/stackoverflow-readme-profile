@@ -25,7 +25,7 @@ const generateDocForTemplate = (
     const svgFileName = `${themeName}.svg`
     doc += `## ${themeName} \n ![profile theme ${themeName}](./themes/${svgFileName}) \n`
 
-    const svg = templateGenerator(dummyProfile as ProfileParams | ProfileSmallParams)
+    const svg = templateGenerator({ ...dummyProfile, theme: themeName } as ProfileParams | ProfileSmallParams)
 
     console.log(`> Theme '${themeName}' generated`)
 

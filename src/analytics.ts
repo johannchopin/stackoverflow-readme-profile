@@ -30,8 +30,8 @@ const getActiveUsersAnalytics = (users: User[]): ActiveUsersAnalytics => {
     const activeInDay = lastUpdate > (now - MS_IN_DAY)
 
     if (activeInDay) analytics.day += 1
-    else if (activeInWeek) analytics.week += 1
-    else if (activeInMonth) analytics.month += 1
+    if (activeInWeek) analytics.week += 1
+    if (activeInMonth) analytics.month += 1
   })
 
   return analytics

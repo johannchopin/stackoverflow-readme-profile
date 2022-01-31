@@ -4,35 +4,39 @@
     "url": "https://stackoverflow-readme-profile.johannchopin.fr/profile/8583669",
     "icon": "https://favicons.githubusercontent.com/stackoverflow-readme-profile.johannchopin.fr",
     "slug": "stackoverflow-readme-profile-profile",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 1533,
-    "timeDay": 1677,
-    "timeWeek": 1494,
-    "timeMonth": 1534,
-    "timeYear": 1533,
-    "dailyMinutesDown": {}
+    "time": 1517,
+    "timeDay": 1168,
+    "timeWeek": 1390,
+    "timeMonth": 1506,
+    "timeYear": 1517,
+    "dailyMinutesDown": {
+      "2022-01-31": 0
+    }
   },
   {
     "name": "stackoverflow-readme-profile / profile-small",
     "url": "https://stackoverflow-readme-profile.johannchopin.fr/profile-small/8583669",
     "icon": "https://favicons.githubusercontent.com/stackoverflow-readme-profile.johannchopin.fr",
     "slug": "stackoverflow-readme-profile-profile-small",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 330,
-    "timeDay": 297,
-    "timeWeek": 225,
-    "timeMonth": 409,
-    "timeYear": 330,
-    "dailyMinutesDown": {}
+    "time": 326,
+    "timeDay": 195,
+    "timeWeek": 208,
+    "timeMonth": 399,
+    "timeYear": 326,
+    "dailyMinutesDown": {
+      "2022-01-31": 0
+    }
   }
 ]

@@ -7,6 +7,7 @@ import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
 import { User } from './db/entity/User'
 import { Avatar } from './db/entity/Avatar'
+import { getAnalytics } from './analytics'
 
 createConnection({
   type: 'postgres',
@@ -67,6 +68,10 @@ app.get('/:template/:id', async (req, res) => {
   } catch (error) {
     res.send(renderError({ error: (error as Error).message }))
   }
+})
+
+app.get('/_analytics', async (req, res) => {
+  res.json(await getAnalytics())
 })
 
 app.listen(PORT, () => {

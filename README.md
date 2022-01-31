@@ -19,7 +19,7 @@ Easily share your Stackoverflow's profile on your README.
 
 ---
 
-## ⁉️ How to use?
+## 💡 How to use?
 
 You can generate your SO profile by calling this url with the corresponding [template name](#templates) and you SO user id:
 

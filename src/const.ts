@@ -27,3 +27,5 @@ export const THEME_NAMES: ThemeType[] = ['default', 'dark', 'cobalt', 'monokai',
 export const MS_IN_SECONDS = 1000
 export const SECONDS_IN_MIN = 60
 export const MS_IN_DAY = MS_IN_SECONDS * SECONDS_IN_MIN * 60 * 24
+export const MS_IN_WEEK = MS_IN_DAY * 7
+export const MS_IN_MONTH = MS_IN_WEEK * 4

@@ -5,6 +5,10 @@ import { User as UserType } from '../types'
 import { Avatar } from './entity/Avatar'
 import { User } from './entity/User'
 
+export const getUsers = async (): Promise<User[]> => {
+  return getManager().find(User)
+}
+
 export const getUser = async (userId: number): Promise<User | undefined> => {
   try {
     return getManager().findOne(User, userId)

@@ -6,15 +6,15 @@
     "slug": "stackoverflow-readme-profile-profile",
     "status": "up",
     "uptime": "99.99%",
-    "uptimeDay": "99.59%",
+    "uptimeDay": "100.00%",
     "uptimeWeek": "99.94%",
     "uptimeMonth": "99.99%",
     "uptimeYear": "99.99%",
-    "time": 1514,
-    "timeDay": 1177,
-    "timeWeek": 1415,
-    "timeMonth": 1509,
-    "timeYear": 1514,
+    "time": 1510,
+    "timeDay": 1292,
+    "timeWeek": 1408,
+    "timeMonth": 1499,
+    "timeYear": 1510,
     "dailyMinutesDown": {
       "2022-01-31": 6
     }
@@ -26,15 +26,15 @@
     "slug": "stackoverflow-readme-profile-profile-small",
     "status": "up",
     "uptime": "99.99%",
-    "uptimeDay": "99.59%",
+    "uptimeDay": "100.00%",
     "uptimeWeek": "99.94%",
     "uptimeMonth": "99.99%",
     "uptimeYear": "99.99%",
-    "time": 322,
-    "timeDay": 181,
-    "timeWeek": 213,
-    "timeMonth": 393,
-    "timeYear": 322,
+    "time": 321,
+    "timeDay": 234,
+    "timeWeek": 217,
+    "timeMonth": 392,
+    "timeYear": 321,
     "dailyMinutesDown": {
       "2022-01-31": 6
     }

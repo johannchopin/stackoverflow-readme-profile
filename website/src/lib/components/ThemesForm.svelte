@@ -5,9 +5,11 @@
   import { user } from '$lib/stores/user'
 </script>
 
-<form class="d-flex flex-wrap mt-3">
+<h2 class="mt-5">Select the theme:</h2>
+
+<form class="d-flex flex-wrap">
   {#each Object.keys(THEMES) as themeName}
-    <div class="m-1 cursor-pointer">
+    <div class="d-flex align-items-center m-2 cursor-pointer">
       <input
         class="form-check-input"
         type="radio"
@@ -16,7 +18,7 @@
         id={`theme-${themeName}`}
         bind:group={$user.theme}
       >
-      <label class="form-check-label" for={`theme-${themeName}`}>
+      <label class="form-check-label ms-1" for={`theme-${themeName}`}>
         <ThemePreview {themeName} theme={THEMES[themeName]} class="cursor-pointer" />
       </label>
     </div>

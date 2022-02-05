@@ -1,8 +1,14 @@
-<script>
+<script lang="ts">
   import { user } from "$lib/stores/user";
   import Profiles from "$lib/components/Profiles.svelte";
   import UserIdForm from "$lib/components/UserIdForm.svelte";
   import ThemesForm from "$lib/components/ThemesForm.svelte";
+  import Footer from "$lib/components/Footer.svelte";
+
+  let userId
+  const onSubmit = (): void => {
+    $user.id = userId
+  }
 </script>
 
 <main class="container">
@@ -12,13 +18,25 @@
     Easily share your Stackoverflow's profile on your README
   </p>
 
-  <UserIdForm />
-  <ThemesForm />
+  <form class="mt-5" on:submit|preventDefault={onSubmit}>
+    <UserIdForm bind:userId />
+    <ThemesForm />
+
+    <button
+      class="btn btn-outline-primary mt-5"
+      type="submit"
+    >
+      Generate my profiles
+    </button>
+  </form>
+
 
   {#if $user.id}
-     <Profiles />
+    <Profiles />
   {/if}
 </main>
+
+<Footer />
 
 <style lang="scss">
   h1 {

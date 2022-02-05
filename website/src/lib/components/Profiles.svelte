@@ -4,9 +4,10 @@
 
   import { TEMPLATES } from '../../../../src/const'
 </script>
-<section>
+
+<section class="mt-5">
 {#each TEMPLATES as template}
-   <Profile 
+  <Profile 
     userId={$user.id}
     {template}
     theme={$user.theme}

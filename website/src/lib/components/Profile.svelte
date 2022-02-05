@@ -8,5 +8,5 @@
   $: pathToProfile = `${API_BASEURL}/${template}/${userId}?theme=${theme}`
 </script>
 
-<h2>Use the profile: {template}</h2>
+<h2 class="mt-5 fw-bold text-primary bg-dark w-fit-content rounded px-2 p-1">{template}</h2>
 <img src={pathToProfile} alt={`user ${userId} stackoverflow ${template}`} />

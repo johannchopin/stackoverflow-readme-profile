@@ -1,4 +1,9 @@
-<svelte:body class=""/>
+<script>
+  import { user } from "$lib/stores/user";
+  import Profiles from "$lib/components/Profiles.svelte";
+  import UserIdForm from "$lib/components/UserIdForm.svelte";
+  import ThemesForm from "$lib/components/ThemesForm.svelte";
+</script>
 
 <main class="container">
   <h1 class="mb-0 mt-5">stackoverflow-readme-profile</h1>
@@ -7,10 +12,12 @@
     Easily share your Stackoverflow's profile on your README
   </p>
 
-  <div class="form-floating mb-3">
-    <input type="number" class="form-control bg-dark text-light" id="soId" placeholder="8583669">
-    <label for="soId">Your SO identifier (ex: 8583669)</label>
-  </div>
+  <UserIdForm />
+  <ThemesForm />
+
+  {#if $user.id}
+     <Profiles />
+  {/if}
 </main>
 
 <style lang="scss">

@@ -26,7 +26,7 @@
       class="btn btn-outline-primary mt-5"
       type="submit"
     >
-      Generate my profiles
+      Generate your profiles
     </button>
   </form>
 

@@ -1,31 +1,37 @@
 <script lang="ts">
-  import { user } from '$lib/stores/user'
   import { MY_SO_ID } from '$lib/constants';
+  import QuestionIcon from './icons/Question.svelte';
 
   export let userId
 </script>
 
-<div class="col-12 col-md-7 m-auto form-floating">
-  <input
-    type="text"
-    class="form-control bg-dark text-light"
-    id="soId"
-    placeholder={MY_SO_ID.toString()}
-    minlength={2}
-    maxlength={20}
-    required
-    autocomplete="off"
-    bind:value={userId}
-  />
-  <label for="soId" class="ms-2">Your SO identifier (ex: <code>{MY_SO_ID}</code>)</label>
-</div>
+<label for="soId" class="form-label d-flex align-items-center w-fit-content">
+  <h2 class="m-0 p-0 fs-3">
+    <span class="fw-bold text-primary">1.</span>
+    Please enter your Stackoverflow identifier
+  </h2>
+  <a
+    href="https://meta.stackoverflow.com/questions/281254/how-to-find-my-userid-in-stack-overflow"
+    target="_blank"
+    class="mx-3"
+  >
+    <span aria-hidden="true">
+      <QuestionIcon />
+    </span>
+    <span class="visually-hidden">
+      How to find my UserID in Stack Overflow
+    </span>
+  </a>
+</label>
 
-<style>
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-    color: var(--bs-primary)!important;
-}
-</style>
+<input
+  type="text"
+  class="form-control w-50 bg-dark text-light"
+  id="soId"
+  placeholder={`Example: ${MY_SO_ID.toString()}`}
+  minlength={2}
+  maxlength={20}
+  required
+  autocomplete="off"
+  bind:value={userId}
+/>

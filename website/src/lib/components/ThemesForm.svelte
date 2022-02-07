@@ -5,7 +5,10 @@
   import { user } from '$lib/stores/user'
 </script>
 
-<h2 class="mt-5">Select the theme:</h2>
+<h2 class="mt-5 fs-3">
+  <span class="fw-bold text-primary">2.</span>
+  Select the theme:
+</h2>
 
 <form class="d-flex flex-wrap">
   {#each Object.keys(THEMES) as themeName}

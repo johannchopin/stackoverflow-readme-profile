@@ -2,6 +2,8 @@
   import { MY_SO_ID } from '$lib/constants';
   import QuestionIcon from './icons/Question.svelte';
 
+  const FIND_ID_TITLE = 'How to find my UserID in Stack Overflow'
+
   export let userId
 </script>
 
@@ -14,12 +16,11 @@
     href="https://meta.stackoverflow.com/questions/281254/how-to-find-my-userid-in-stack-overflow"
     target="_blank"
     class="mx-3"
+    title={FIND_ID_TITLE}
+    aria-label={FIND_ID_TITLE}
   >
     <span aria-hidden="true">
       <QuestionIcon />
-    </span>
-    <span class="visually-hidden">
-      How to find my UserID in Stack Overflow
     </span>
   </a>
 </label>

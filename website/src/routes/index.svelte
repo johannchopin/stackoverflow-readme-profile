@@ -4,6 +4,7 @@
   import UserIdForm from "$lib/components/UserIdForm.svelte";
   import ThemesForm from "$lib/components/ThemesForm.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import SocialLinks from "$lib/components/SocialLinks.svelte";
 
   let userId
   const onSubmit = (): void => {
@@ -11,8 +12,10 @@
   }
 </script>
 
-<main class="container">
-  <h1 class="mb-0 mt-5">stackoverflow-readme-profile</h1>
+<main class="container pt-0 pt-md-5">
+  <SocialLinks class="mt-5" />
+
+  <h1 class="mb-0 mt-3">stackoverflow-readme-profile</h1>
   <p class="ms-3">
     <span class="fw-bold text-primary me-1">&#x3e;</span>
     Easily share your Stackoverflow's profile on your README

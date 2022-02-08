@@ -3,9 +3,10 @@
   import ThemePreview from './ThemePreview.svelte'
 
   import { user } from '$lib/stores/user'
+  import { SELECT_THEME_TITLE_ID } from '$lib/constants';
 </script>
 
-<h2 class="mt-5 fs-3">
+<h2 class="mt-5 fs-3" id={SELECT_THEME_TITLE_ID}>
   <span class="fw-bold text-primary">2.</span>
   Select the theme:
 </h2>

@@ -59,8 +59,8 @@ app.get('/:template/:id', async (req, res) => {
       Number(id),
       template as Template, {
         theme: theme as unknown as Theme,
-        website: Boolean(website),
-        location: Boolean(location)
+        website: website === 'true',
+        location: location === 'true'
       }
     )
 

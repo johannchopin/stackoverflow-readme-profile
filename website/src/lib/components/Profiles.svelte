@@ -12,7 +12,7 @@
   </h2>
 
 {#each TEMPLATES as template}
-  <Profile 
+  <Profile
     userId={$user.id}
     {template}
     theme={$user.theme}

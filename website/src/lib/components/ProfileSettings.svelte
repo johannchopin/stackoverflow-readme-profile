@@ -5,21 +5,30 @@
 
   export let template: string
   export let settings: TemplateSettings
+
+  const TADA_ANIMATION_DURATION = 1000
+  const HIGHLIGHT_CLASS = 'highlight'
+  const themesCtn = document.getElementById(SELECT_THEME_TITLE_ID)
+
+  const onGoToThemeClick = (): void => {
+    themesCtn.classList.add(HIGHLIGHT_CLASS)
+    setTimeout(() => {
+      themesCtn.classList.remove(HIGHLIGHT_CLASS)
+    }, TADA_ANIMATION_DURATION)
+  }
 </script>
 
-<div class="mb-3 row">
-  <label for={`${template}-template`} class="col-4 col-form-label w-fit-content">
+<div class="mb-3 d-flex">
+  <label for={`${template}-template`} class="w-fit-content w-50">
     <code class="bg-dark rounded p-1">theme</code>
   </label>
-  <div class="col-8 d-flex">
-    <input
-      type="text"
-      readonly
-      class="form-control p-1"
-      id={`${template}-template`}
-      value={$user.theme}
+  <div class="d-flex">
+    <code class="bg-dark text-primary rounded p-1">{$user.theme}</code>
+    <a
+      href={`#${SELECT_THEME_TITLE_ID}`}
+      class="btn btn-outline-secondary border-2 p-0 px-1 ms-1"
+      on:click={onGoToThemeClick}
     >
-    <a href={`#${SELECT_THEME_TITLE_ID}`} class="btn btn-outline-secondary border-2 p-1 px-2 ms-1">
       <span aria-hidden="true"><PenIcon /></span>
       <span class="visually-hidden">Edit the theme</span>
     </a>
@@ -28,12 +37,18 @@
 
 {#each Object.keys(settings) as setting}
   {#if settings[setting].type === 'boolean'}
-    <div class="d-flex mt-2">
-      <label class="form-check-label" for={`${template}-${setting}`}>
+    <div class="mt-2 d-flex">
+      <label class="form-check-label w-50" for={`${template}-${setting}`}>
         <code class="bg-dark rounded p-1">{setting}</code>
       </label>
-      <div class="form-switch ms-4">
-        <input class="form-check-input" type="checkbox" role="switch" id={`${template}-${setting}`} bind:checked={settings[setting].value}>
+      <div class="form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id={`${template}-${setting}`}
+          bind:checked={settings[setting].value}
+        >
       </div>
     </div>
   {/if}

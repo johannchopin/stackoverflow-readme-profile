@@ -24,7 +24,7 @@
 <div class="row">
   <img src={pathToProfile} alt={`user ${userId} stackoverflow ${template}`} class="col-12 col-md-3" />
 
-  <div class="col-12 col-md-3 mt-3 mt-md-0">
+  <div class="col-8 col-md-3 mt-3 mt-md-0">
     <h4>Options:</h4>
     <ProfileSettings {template} bind:settings={$user.templates_settings[template]} />
   </div>

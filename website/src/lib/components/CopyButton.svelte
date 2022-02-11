@@ -20,7 +20,7 @@
 
 
 <button
-  class={`btn btn-success border- border-2 p-0 px-1 m-1 ${$$restProps.class}`}
+  class={`btn btn-light border- border-2 p-0 px-1 m-1 ${$$restProps.class}`}
   title={TITLE}
   aria-label={TITLE}
   on:click={save}

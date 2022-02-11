@@ -1,6 +1,8 @@
 export const MY_SO_ID = 8583669
 export const API_BASEURL = 'https://stackoverflow-readme-profile.johannchopin.fr'
-export const GITHUB_REPO_URL = 'https://github.com/johannchopin/stackoverflow-readme-profile'
+export const GITHUB_REPO_USER = 'johannchopin'
+export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
+export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}`
 
 export const SELECT_THEME_TITLE_ID = 'selectTheme'
 

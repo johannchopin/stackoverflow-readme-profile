@@ -27,3 +27,13 @@ input[type=number] {
 .w-fit-content {
   width: fit-content;
 }
+
+.mt-6 {
+  margin-top: 6rem !important;
+} 
+
+code {
+  @extend .rounded;
+  @extend .bg-dark;
+  @extend .px-1;
+}

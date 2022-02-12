@@ -1,4 +1,4 @@
-import { API_BASEURL } from "./constants"
+import { API_BASEURL, SO_BASE_URL } from "./constants"
 import type { TemplateSettings } from "./stores/user"
 
 export const replaceAll = (str: string, find: string, replace: string): string => {
@@ -16,7 +16,7 @@ export const getProfileCode = (codeTemplate: string, userId: number, path: strin
 export const setClipboard = (text) => { navigator.clipboard.writeText(text) }
 
 export const getPathToProfile = (userId: number, template: string, theme: string, options: TemplateSettings): string => {
-  let queryStringsObject = { theme }
+  const queryStringsObject = { theme }
 
   Object.keys(options).forEach((option) => {
     queryStringsObject[option] = options[option].value
@@ -24,4 +24,8 @@ export const getPathToProfile = (userId: number, template: string, theme: string
 
   const queryStrings = new URLSearchParams(queryStringsObject).toString()
   return `${API_BASEURL}/${template}/${userId}?${queryStrings}`
+}
+
+export const getUserIdInProfileUrl = (url: string): number => {
+  return Number(url.replace(`${SO_BASE_URL}/users/`, '').split('/')[0])
 }

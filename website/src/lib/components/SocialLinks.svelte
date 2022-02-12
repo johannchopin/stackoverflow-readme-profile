@@ -1,9 +1,9 @@
 <script>
-  import { GITHUB_REPO_URL } from "$lib/constants";
+  import { GITHUB_REPO_NAME, GITHUB_REPO_URL, GITHUB_REPO_USER } from "$lib/constants";
   import GithubIcon from "./icons/Github.svelte";
 </script>
 
-<nav {...$$restProps}>
+<nav {...$$restProps} class={`d-flex justify-content-end align-items-center ${$$restProps.class}`}>
   <a href={GITHUB_REPO_URL} target="_blank" class="me-2 link-light text-decoration-none">
     <span aria-hidden="true">
       <GithubIcon />
@@ -11,16 +11,7 @@
     </span>
     <span class="visually-hidden">Link to GitHub's repository</span>
   </a>
-  <a href="https://github.com/johannchopin/stackoverflow-readme-profile/actions">
-    <img src="https://github.com/johannchopin/stackoverflow-readme-profile/actions/workflows/test.yml/badge.svg" alt="test workflow">
-  </a>
-  <a href="https://codecov.io/gh/johannchopin/stackoverflow-readme-profile">
-    <img src="https://codecov.io/gh/johannchopin/stackoverflow-readme-profile/branch/main/graph/badge.svg" alt="codecov">
-  </a>
-  <a href="https://semver.org/">
-    <img src="https://img.shields.io/badge/Versioning-SemVer-blue" alt="This projet uses SemVer for versioning"/>
-  </a>
-  <a href="https://gitmoji.dev">
-    <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji">
+  <a class="p-1" href={`${GITHUB_REPO_URL}/stargazers`} target="_blank">
+    <img alt="GitHub Repo stars" src={`https://img.shields.io/github/stars/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}?style=social`}>
   </a>
 </nav>

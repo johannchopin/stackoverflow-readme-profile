@@ -13,7 +13,7 @@
 </script>
 
 <main class="container pt-0 pt-md-5">
-  <SocialLinks class="mt-5" />
+  <SocialLinks class="mt-3" />
 
   <h1 class="mb-0 mt-3 fs-3 fw-bold">stackoverflow-readme-profile</h1>
   <p class="ms-3">
@@ -21,12 +21,12 @@
     Easily share your Stackoverflow's profile on your README
   </p>
 
-  <form class="mt-5" on:submit|preventDefault={onSubmit}>
+  <form class="mt-6" on:submit|preventDefault={onSubmit}>
     <UserIdForm bind:userId />
     <ThemesForm />
 
     <button
-      class="btn btn-outline-primary mt-5"
+      class="btn btn-outline-primary mt-6"
       type="submit"
     >
       Generate your profiles

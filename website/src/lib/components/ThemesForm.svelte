@@ -6,7 +6,7 @@
   import { SELECT_THEME_TITLE_ID } from '$lib/constants';
 </script>
 
-<section id={SELECT_THEME_TITLE_ID} class="mt-5">
+<section id={SELECT_THEME_TITLE_ID} class="mt-6">
   <h2 class="fs-3">
     <span class="fw-bold text-primary">2.</span>
     Select the theme:

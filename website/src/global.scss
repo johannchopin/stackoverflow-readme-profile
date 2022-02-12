@@ -28,6 +28,10 @@ input[type=number] {
   width: fit-content;
 }
 
+.mt-6 {
+  margin-top: 6rem !important;
+} 
+
 code {
   @extend .rounded;
   @extend .bg-dark;

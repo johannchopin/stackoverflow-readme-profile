@@ -46,6 +46,10 @@
   @import '../../node_modules/bootstrap/scss/variables';
   @import '../../node_modules/bootstrap/scss/mixins';
 
+  main {
+    min-height: 100vh;
+  }
+
   @include media-breakpoint-up(md) {
     h1 {
       font-size: 2.5em!important;

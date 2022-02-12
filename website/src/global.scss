@@ -27,3 +27,9 @@ input[type=number] {
 .w-fit-content {
   width: fit-content;
 }
+
+code {
+  @extend .rounded;
+  @extend .bg-dark;
+  @extend .px-1;
+}

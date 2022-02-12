@@ -16,7 +16,7 @@ export const getProfileCode = (codeTemplate: string, userId: number, path: strin
 export const setClipboard = (text) => { navigator.clipboard.writeText(text) }
 
 export const getPathToProfile = (userId: number, template: string, theme: string, options: TemplateSettings): string => {
-  let queryStringsObject = { theme }
+  const queryStringsObject = { theme }
 
   Object.keys(options).forEach((option) => {
     queryStringsObject[option] = options[option].value

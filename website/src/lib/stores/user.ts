@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 import type { Template } from '../../../../src/const'
 
-export type TemplateSetting = 'boolean' | 'string'
+export type TemplateSetting = 'boolean' | 'string'
 export type TemplateSettings = {
   [key: string]: {
     type: TemplateSetting

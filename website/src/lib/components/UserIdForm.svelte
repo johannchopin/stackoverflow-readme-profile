@@ -7,10 +7,11 @@
   const FIND_ID_TITLE = 'How to find my UserID in Stack Overflow'
 
   export let userId
-  let currentInput: string = ''
+  let currentInput = ''
   let isInputInvalid = false
 
   const onInputChange = (input: string): void => {
+    // eslint-disable-next-line
     // @ts-ignore
     const isInputNumber = !isNaN(input)
 

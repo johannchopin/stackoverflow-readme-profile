@@ -1397,6 +1397,11 @@ svelte-check@^2.2.6:
     svelte-preprocess "^4.0.0"
     typescript "*"
 
+svelte-emoji@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/svelte-emoji/-/svelte-emoji-1.0.2.tgz#43212210bc77fcd766cc846022a98c787a2a6cbd"
+  integrity sha512-vJCBsgrSKZONxBn7ICZxCKzDRaJk7Bi3dALwa3PrIiPS8DP8Fw64N38EuuY90eKNuLmOm4DLNRM+hSeH0V2G5g==
+
 svelte-hmr@^0.14.9:
   version "0.14.9"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.9.tgz#35f277efc789e1a6230185717347cddb2f8e9833"

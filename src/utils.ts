@@ -16,13 +16,8 @@ export const getUserReputation = (rep: number): string => {
 
 export const getTemplate = <T = {}>(filePath: string): Handlebars.TemplateDelegate<T> => {
   const content = fs.readFileSync(filePath, 'utf-8')
-  const templateString = minify(content, {
-    // minifyCSS: true,
-    ignoreCustomFragments: [/{{[{]?(.*?)[}]?}}/],
-    collapseWhitespace: true
-  })
 
-  return Handlebars.compile<T>(templateString)
+  return Handlebars.compile<T>(content)
 }
 
 export const isThemeValid = (theme: string): boolean => {
@@ -55,4 +50,19 @@ export const getResizedBase64 = async (
   const imageBuffer = Buffer.from(base64.replace('data:image/png;base64,', ''), 'base64')
   const image = await jimp.read(imageBuffer)
   return image.resize(width, height).getBase64Async(jimp.MIME_PNG)
+}
+
+const getStringWithoutLineBreaks = (string: string): string => {
+  return string.replace(/\r?\n|\r/g, '')
+}
+
+export const getMinified = (htmlString: string): string => {
+  htmlString = minify(htmlString, {
+    // minifyCSS: true,
+    ignoreCustomFragments: [/{{[{]?(.*?)[}]?}}/],
+    collapseWhitespace: true
+  })
+  htmlString = replaceAll(htmlString, '   ', '')
+  htmlString = replaceAll(htmlString, '  ', '')
+  return getStringWithoutLineBreaks(htmlString)
 }

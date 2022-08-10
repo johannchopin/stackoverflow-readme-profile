@@ -21,6 +21,8 @@ Easily share your Stackoverflow's profile on your README.
 
 ## 💡 How to use?
 
+> Use the [online generator](https://johannchopin.github.io/stackoverflow-readme-profile/) for a quicker setup
+
 You can generate your SO profile by calling this url with the corresponding [template name](#templates) and your SO user id:
 
 ```

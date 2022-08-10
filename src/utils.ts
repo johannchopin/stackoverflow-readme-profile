@@ -56,3 +56,13 @@ export const getResizedBase64 = async (
   const image = await jimp.read(imageBuffer)
   return image.resize(width, height).getBase64Async(jimp.MIME_PNG)
 }
+
+const getStringWithoutLineBreaks = (string: string): string => {
+  return string.replace(/\r?\n|\r/g, '')
+}
+
+export const getMinified = (htmlString: string): string => {
+  htmlString = replaceAll(htmlString, '   ', '')
+  htmlString = replaceAll(htmlString, '  ', '')
+  return getStringWithoutLineBreaks(htmlString)
+}

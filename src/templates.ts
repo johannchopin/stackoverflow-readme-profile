@@ -1,7 +1,12 @@
 import * as path from 'path'
 import Handlebars from 'handlebars'
 
-import { getTemplate, getTruncatedText, replaceAll } from './utils'
+import {
+  getMinified,
+  getTemplate,
+  getTruncatedText,
+  replaceAll
+} from './utils'
 import { Theme as ThemeObject, THEMES } from './const'
 
 import defaultTheme from './themes/default.json'
@@ -72,13 +77,18 @@ export const renderProfileHelper = (params: ProfileParams, template: Handlebars.
 
   Handlebars.registerPartial('global-styles', () => globalStylesTemplate({ theme }))
 
-  return template({
+  const renderedTemplate = template({
     ...params,
     theme,
     badgesMarginLeft,
     badgeSilverMarginLeft,
     badgeBronzeMarginLeft
   })
+
+  console.log(renderedTemplate)
+  console.log(getMinified(renderedTemplate))
+
+  return getMinified(renderedTemplate)
 }
 
 export const renderProfile = (params: ProfileParams): string => {
@@ -95,5 +105,5 @@ export const renderError = (params: {error: string}): string => {
   // remove nested error title
   const errorMsg = replaceAll(error, 'Error: ', '')
   const lines = `Error: ${errorMsg}`.match(/.{1,45}/g) || [error]
-  return errorTemplate({ lines })
+  return getMinified(errorTemplate({ lines }))
 }

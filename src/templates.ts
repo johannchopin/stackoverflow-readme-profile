@@ -85,9 +85,6 @@ export const renderProfileHelper = (params: ProfileParams, template: Handlebars.
     badgeBronzeMarginLeft
   })
 
-  console.log(renderedTemplate)
-  console.log(getMinified(renderedTemplate))
-
   return getMinified(renderedTemplate)
 }
 

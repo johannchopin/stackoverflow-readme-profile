@@ -36,6 +36,7 @@
     "vercel": "^22.0.1"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
     "handlebars": "^4.7.7",
@@ -43,7 +44,7 @@
     "html-minifier": "^4.0.0",
     "jimp": "^0.16.1",
     "mongodb": "^3.6.8",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "2.6.1",
     "pg": "^8.7.1",
     "ts-node": "^10.9.1",
     "typeorm": "^0.2.32"

@@ -28,6 +28,8 @@ const scrapePopularTags = async (): Promise<string[]> => {
     }
   })
 
+  console.log('>> popular tags fetched')
+
   return fetchedTags
 }
 

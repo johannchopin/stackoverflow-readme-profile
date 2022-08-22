@@ -5,27 +5,11 @@ import { createConnection } from 'typeorm'
 
 import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
+import { initDatabase } from './db/init'
 import { User } from './db/entity/User'
 import { Avatar } from './db/entity/Avatar'
+import { PopularTag } from './db/entity/PopularTag'
 import { getAnalytics } from './analytics'
-
-createConnection({
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  synchronize: true,
-  entities: [User, Avatar]
-}).catch(error => {
-  console.error('Data Access Error : ', error)
-  process.exit()
-})
-
-const app = express()
-const PORT = 5000
-const CACHE_PERIOD = 10 * SECONDS_IN_MIN // 10mins
 
 const checkQueryStrings = (query: {theme: string; website?: string; location?: string}): void => {
   const { theme, website, location } = query
@@ -41,39 +25,63 @@ const checkQueryStrings = (query: {theme: string; website?: string; location?: s
   }
 }
 
-app.get('/:template/:id', async (req, res) => {
-  const { id, template } = req.params
-  const { theme = 'default', website = 'true', location = 'true' } = req.query
+const run = async (): Promise<void> => {
+  await createConnection({
+    type: 'postgres',
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    synchronize: true,
+    entities: [User, Avatar, PopularTag]
+  }).catch(error => {
+    console.error('Data Access Error : ', error)
+    process.exit()
+  })
 
-  const templateValid = isTemplateValid(template)
-  try {
-    if (!templateValid) throw new Error(`Invalid template '${template}'`)
+  initDatabase()
 
-    res.setHeader('Content-Type', 'image/svg+xml')
-    res.setHeader('Cache-control', `public, max-age=${CACHE_PERIOD}`)
+  const app = express()
+  const PORT = 5000
+  const CACHE_PERIOD = 10 * SECONDS_IN_MIN // 10mins
 
-    // @ts-ignore
-    checkQueryStrings({ theme, website, location })
+  app.get('/:template/:id', async (req, res) => {
+    const { id, template } = req.params
+    const { theme = 'default', website = 'true', location = 'true' } = req.query
 
-    const svg = await getProfileSvg(
-      Number(id),
-      template as Template, {
-        theme: theme as unknown as Theme,
-        website: website === 'true',
-        location: location === 'true'
-      }
-    )
+    const templateValid = isTemplateValid(template)
+    try {
+      if (!templateValid) throw new Error(`Invalid template '${template}'`)
 
-    res.send(svg)
-  } catch (error) {
-    res.send(renderError({ error: (error as Error).message }))
-  }
-})
+      res.setHeader('Content-Type', 'image/svg+xml')
+      res.setHeader('Cache-control', `public, max-age=${CACHE_PERIOD}`)
 
-app.get('/_analytics', async (req, res) => {
-  res.json(await getAnalytics())
-})
+      // @ts-ignore
+      checkQueryStrings({ theme, website, location })
 
-app.listen(PORT, () => {
-  console.log(`stackoverflow-readme-profile's api listening at http://localhost:${PORT}`)
-})
+      const svg = await getProfileSvg(
+        Number(id),
+        template as Template, {
+          theme: theme as unknown as Theme,
+          website: website === 'true',
+          location: location === 'true'
+        }
+      )
+
+      res.send(svg)
+    } catch (error) {
+      res.send(renderError({ error: (error as Error).message }))
+    }
+  })
+
+  app.get('/_analytics', async (req, res) => {
+    res.json(await getAnalytics())
+  })
+
+  app.listen(PORT, () => {
+    console.log(`stackoverflow-readme-profile's api listening at http://localhost:${PORT}`)
+  })
+}
+
+run()

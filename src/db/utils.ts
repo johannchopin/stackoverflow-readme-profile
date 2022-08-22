@@ -1,8 +1,10 @@
 import { getManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
+import scrapePopularTags from '../scrapers/scrapePopularTags'
 
 import { User as UserType } from '../types'
 import { Avatar } from './entity/Avatar'
+import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 
 export const getUsers = async (): Promise<User[]> => {
@@ -69,4 +71,21 @@ export const updateUser = async (userToInsert: UserType): Promise<void> => {
 
 export const createUser = async (userToInsert: UserType): Promise<void> => {
   return storeUser(userToInsert, 'create')
+}
+
+export const resetPopularTags = async (): Promise<void> => {
+  const manager = getManager()
+
+  manager.getRepository(PopularTag).clear()
+
+  const fetchedTags = await scrapePopularTags()
+
+  const tags: PopularTag[] = fetchedTags.map((fetchedTag, index) => {
+    const tag = new PopularTag()
+    tag.id = index
+    tag.name = fetchedTag
+    return tag
+  })
+
+  manager.save(tags)
 }

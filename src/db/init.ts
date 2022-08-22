@@ -7,10 +7,10 @@ const initPopularTagsTable = async (): Promise<void> => {
   const storedTags = await manager.find(PopularTag)
 
   if (storedTags.length === 0) {
-    resetPopularTags()
+    await resetPopularTags()
   }
 }
 
 export const initDatabase = async (): Promise<void> => {
-  initPopularTagsTable() // force popular tags table population
+  initPopularTagsTable()
 }

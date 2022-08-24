@@ -1,14 +1,10 @@
 import express from 'express'
 import { SECONDS_IN_MIN, Template } from './const'
 import { getProfileSvg } from './index'
-import { createConnection } from 'typeorm'
 
 import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
 import { initDatabase } from './db/init'
-import { User } from './db/entity/User'
-import { Avatar } from './db/entity/Avatar'
-import { PopularTag } from './db/entity/PopularTag'
 import { getAnalytics } from './analytics'
 
 const checkQueryStrings = (query: {theme: string; website?: string; location?: string}): void => {
@@ -26,20 +22,6 @@ const checkQueryStrings = (query: {theme: string; website?: string; location?: s
 }
 
 const run = async (): Promise<void> => {
-  await createConnection({
-    type: 'postgres',
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    synchronize: true,
-    entities: [User, Avatar, PopularTag]
-  }).catch(error => {
-    console.error('Data Access Error : ', error)
-    process.exit()
-  })
-
   initDatabase()
 
   const app = express()

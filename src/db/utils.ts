@@ -73,7 +73,11 @@ export const createUser = async (userToInsert: UserType): Promise<void> => {
   return storeUser(userToInsert, 'create')
 }
 
-export const resetPopularTags = async (): Promise<void> => {
+export const getPopularTags = async (): Promise<PopularTag[]> => {
+  return getManager().find(PopularTag)
+}
+
+export const resetPopularTags = async (): Promise<PopularTag[]> => {
   const manager = getManager()
 
   manager.getRepository(PopularTag).clear()
@@ -88,4 +92,5 @@ export const resetPopularTags = async (): Promise<void> => {
   })
 
   manager.save(tags)
+  return tags
 }

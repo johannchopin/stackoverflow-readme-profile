@@ -66,3 +66,7 @@ export const getMinified = (htmlString: string): string => {
   htmlString = replaceAll(htmlString, '  ', '')
   return getStringWithoutLineBreaks(htmlString)
 }
+
+export const sleep = (ms: number): Promise<never> => {
+  return new Promise(res => setTimeout(res, ms))
+}

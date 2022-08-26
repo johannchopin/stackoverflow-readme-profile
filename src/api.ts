@@ -1,4 +1,6 @@
 import express from 'express'
+import cors from 'cors'
+
 import { SECONDS_IN_MIN, Template } from './const'
 import { getProfileSvg } from './index'
 
@@ -6,6 +8,7 @@ import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
 import { initDatabase } from './db/init'
 import { getAnalytics } from './analytics'
+import scraperRouter from './scrapers/router'
 
 const checkQueryStrings = (query: {theme: string; website?: string; location?: string}): void => {
   const { theme, website, location } = query
@@ -27,6 +30,15 @@ const run = async (): Promise<void> => {
   const app = express()
   const PORT = 5000
   const CACHE_PERIOD = 10 * SECONDS_IN_MIN // 10mins
+
+  app.use(express.json())
+  app.use(cors())
+
+  app.use('/badges-league', scraperRouter)
+
+  app.get('/_analytics', async (req, res) => {
+    res.json(await getAnalytics())
+  })
 
   app.get('/:template/:id', async (req, res) => {
     const { id, template } = req.params
@@ -55,10 +67,6 @@ const run = async (): Promise<void> => {
     } catch (error) {
       res.send(renderError({ error: (error as Error).message }))
     }
-  })
-
-  app.get('/_analytics', async (req, res) => {
-    res.json(await getAnalytics())
   })
 
   app.listen(PORT, () => {

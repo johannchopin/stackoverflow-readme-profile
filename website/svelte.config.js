@@ -11,13 +11,13 @@ const config = {
 
 	kit: {
 		adapter: adapterStatic({
-      // default options are shown
-      pages: 'build',
-      assets: 'build',
-      fallback: null
-    }),
+			// default options are shown
+			pages: 'build',
+			assets: 'build',
+			fallback: null
+		}),
 		paths: {
-			base: prod ? "/stackoverflow-readme-profile": ""
+			base: prod ? "/stackoverflow-readme-profile" : ""
 		}
 	}
 };

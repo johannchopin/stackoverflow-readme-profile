@@ -2,7 +2,7 @@ import { getManager } from 'typeorm'
 import { PopularTag } from '../db/entity/PopularTag'
 import { TopUser } from '../db/entity/TopUser'
 import { Logger } from '../Logger'
-import { Api } from './Api'
+import { ApiService } from './ApiService'
 import { Auth } from './Auth'
 
 const initTopUsersTableForTag = async (tag: string, users: [number, number][]): Promise<void> => {
@@ -22,16 +22,16 @@ const initTopUsersTableForTag = async (tag: string, users: [number, number][]): 
   Logger.log(`Store top users for tag: ${tag}`)
 }
 
-export const computeTagsPercentageScale = async (): Promise<void> => {
+export const computeTagsPercentageScale = async (cookie: string): Promise<void> => {
   Logger.log('Start tags scraping')
   const manager = getManager()
 
-  const auth = await new Auth(manager).init()
+  const auth = await new Auth(cookie).init()
   const isAuthenticated = await auth.isValid()
 
   if (!isAuthenticated) process.exit(1)
 
-  const api = new Api(auth)
+  const api = new ApiService(auth)
 
   const tags = (await manager.find(PopularTag, {
     select: ['name']
@@ -43,8 +43,11 @@ export const computeTagsPercentageScale = async (): Promise<void> => {
   // eslint-disable-next-line no-restricted-syntax
   for (const tag of tags) {
     // eslint-disable-next-line no-await-in-loop
-    const topUsers = await api.getTopUsersByTag(tag) as [number, number][]
-    // eslint-disable-next-line no-await-in-loop
-    await initTopUsersTableForTag(tag, topUsers)
+    let topUsers = await api.getTopUsersByTag(decodeURIComponent(tag))
+
+    if (topUsers) {
+      // eslint-disable-next-line no-await-in-loop
+      await initTopUsersTableForTag(tag, topUsers)
+    }
   }
 }

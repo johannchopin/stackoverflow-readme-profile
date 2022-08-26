@@ -5,7 +5,6 @@ import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
 import { TopUser } from './entity/TopUser'
-import { Cookie } from './entity/Cookie'
 import { resetPopularTags } from './utils'
 import { Logger } from '../Logger'
 
@@ -31,7 +30,7 @@ export const connect = async (): Promise<void> => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     synchronize: true,
-    entities: [User, Avatar, PopularTag, TopUser, Cookie]
+    entities: [User, Avatar, PopularTag, TopUser]
   }).catch(error => {
     Logger.log('Data Access Error: ')
     Logger.log(error)

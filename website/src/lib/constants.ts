@@ -1,7 +1,8 @@
 export const MY_SO_ID = 8583669
 export const SO_BASE_URL = 'https://stackoverflow.com'
 export const MY_SO_PROFILE_URL = `${SO_BASE_URL}/users/8583669/johannchopin`
-export const API_BASEURL = 'https://stackoverflow-readme-profile.johannchopin.fr'
+export const API_BASEURL = import.meta.env.VITE_API_BASEURL
+
 export const GITHUB_REPO_USER = 'johannchopin'
 export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}`

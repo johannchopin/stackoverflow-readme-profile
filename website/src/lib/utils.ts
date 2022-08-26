@@ -7,8 +7,8 @@ export const replaceAll = (str: string, find: string, replace: string): string =
 
 export const getProfileCode = (codeTemplate: string, userId: number, path: string): string => {
   return replaceAll(
-    replaceAll(codeTemplate, ':id', userId.toString()), 
-    ':path', 
+    replaceAll(codeTemplate, ':id', userId.toString()),
+    ':path',
     path
   )
 }

@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
 import TAGS_TO_INCLUDE from './tags_to_include.json'
+import { Logger } from '../Logger'
 
 const TOP_TAG_PAGES = [1, 2, 3].map(pageIndex => `https://stackoverflow.com/tags?page=${pageIndex}&tab=popular`)
 
@@ -28,7 +29,7 @@ const scrapePopularTags = async (): Promise<string[]> => {
     }
   })
 
-  console.log('>> popular tags fetched')
+  Logger.log('popular tags fetched')
 
   return fetchedTags
 }

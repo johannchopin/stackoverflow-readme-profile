@@ -69,8 +69,6 @@ export class ApiService {
 
         const data = await this.getJobResponse(jobId)
 
-        console.log(data)
-
         const topUsers: [number, number][] = []
 
         // @ts-ignore

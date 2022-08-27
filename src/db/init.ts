@@ -1,23 +1,11 @@
 import { config } from 'dotenv'
-import { getManager, createConnection } from 'typeorm'
+import { createConnection } from 'typeorm'
 
 import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
 import { TopUser } from './entity/TopUser'
-import { resetPopularTags } from './utils'
 import { Logger } from '../Logger'
-
-const initPopularTagsTable = async (): Promise<PopularTag[]> => {
-  const manager = getManager()
-  const storedTags = await manager.find(PopularTag)
-
-  if (storedTags.length === 0) {
-    return resetPopularTags()
-  }
-
-  return storedTags
-}
 
 export const connect = async (): Promise<void> => {
   config()
@@ -30,6 +18,7 @@ export const connect = async (): Promise<void> => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     synchronize: true,
+    logging: ['error'],
     entities: [User, Avatar, PopularTag, TopUser]
   }).catch(error => {
     Logger.log('Data Access Error: ')

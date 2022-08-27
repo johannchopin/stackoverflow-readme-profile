@@ -29,7 +29,7 @@ export const replaceAll = (str: string, find: string, replace: string): string =
   return str.split(find).join(replace)
 }
 
-export const getTruncatedText = (text:string, truncAtN: number): string => {
+export const getTruncatedText = (text: string, truncAtN: number): string => {
   if (text.length > truncAtN) {
     return `${text.slice(0, truncAtN - 3)}...`
   }

@@ -3,9 +3,13 @@ import {
   NextFunction, Router, Request, Response
 } from 'express'
 import { body } from 'express-validator'
+import { getManager } from 'typeorm'
+import { PopularTag } from '../db/entity/PopularTag'
+import { Logger } from '../Logger'
 import { sleep } from '../utils'
 import { Auth } from './Auth'
 import { computeTagsPercentageScale } from './computeTagsPercentageScale'
+import scrapePopularTags from './scrapePopularTags'
 
 const router = Router()
 
@@ -23,7 +27,7 @@ const guarded = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 router.post(
-  '/compute',
+  '/',
   guarded,
   body('cookie').trim().escape(),
   async (req, res) => {
@@ -38,6 +42,42 @@ router.post(
     }
 
     res.status(400).send('Invalid SEDE cookie provided!')
+  }
+)
+
+router.get(
+  '/badges',
+  async (req, res) => {
+    const manager = getManager()
+
+    const tags = await (await manager.getRepository(PopularTag).find({ select: ['name'] }))
+
+    res.status(200).json(tags.map(tag => decodeURIComponent(tag.name)))
+  }
+)
+
+router.post(
+  '/badges',
+  guarded,
+  async (req, res) => {
+    const scrapedTags = await scrapePopularTags()
+
+    const manager = getManager()
+
+    manager.getRepository(PopularTag).clear()
+
+    const tags: PopularTag[] = scrapedTags.map((fetchedTag, index) => {
+      const tag = new PopularTag()
+      tag.id = index
+      tag.name = fetchedTag
+      return tag
+    })
+
+    manager.save(tags)
+
+    Logger.log('Top badges stored in DB')
+
+    res.status(202).json(scrapedTags)
   }
 )
 

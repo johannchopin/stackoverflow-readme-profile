@@ -7,15 +7,7 @@
   import GithubIcon from "./icons/Github.svelte";
 </script>
 
-<nav
-  {...$$restProps}
-  class={`d-flex justify-content-end align-items-center ${$$restProps.class}`}
->
-  <a href="/badges-league" class="me-4 link-light text-decoration-none">
-    <span class="badge rounded-2 text-bg-dark border border-primary border-2"
-      >Badges league</span
-    >
-  </a>
+<nav {...$$restProps} class={`d-flex align-items-center ${$$restProps.class}`}>
   <a
     href={GITHUB_REPO_URL}
     target="_blank"

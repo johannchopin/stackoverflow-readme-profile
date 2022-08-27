@@ -3,6 +3,7 @@
   import Footer from "$lib/components/Footer.svelte";
   import SocialLinks from "$lib/components/SocialLinks.svelte";
   import "../global.scss";
+  import Navbar from "$lib/components/Navbar.svelte";
 
   onMount(async () => {
     await import("../../node_modules/bootstrap/dist/js/bootstrap");
@@ -10,7 +11,10 @@
 </script>
 
 <main class="container pt-0 pt-md-5">
-  <SocialLinks class="mt-3" />
+  <div class="mt-3 d-flex justify-content-end">
+    <Navbar />
+    <SocialLinks />
+  </div>
   <slot />
 </main>
 

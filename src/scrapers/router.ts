@@ -81,8 +81,8 @@ router.post(
   }
 )
 
-router.get('/test', guarded, (req, res) => {
-  res.json([])
+router.get('/auth', guarded, (req, res) => {
+  res.status(200).send()
 })
 
 export default router

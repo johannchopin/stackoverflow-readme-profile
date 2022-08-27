@@ -12,6 +12,7 @@
   const getHeaders = () => {
     return new Headers({
       authorization: apiToken,
+      "Content-Type": "application/json",
     });
   };
 

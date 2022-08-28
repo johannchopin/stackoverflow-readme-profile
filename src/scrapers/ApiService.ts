@@ -14,7 +14,10 @@ export class ApiService {
   private getJobResponse = async (jobId: string, signal: AbortSignal): Promise<any | undefined> => {
     return new Promise<any>((resolve) => {
       const fetchTopUserInterval = setInterval(async () => {
-        if (signal.aborted) resolve(undefined)
+        if (signal.aborted) {
+          clearInterval(fetchTopUserInterval)
+          resolve(undefined)
+        }
 
         Logger.log('try to fetch')
 

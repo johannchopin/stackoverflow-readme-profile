@@ -91,7 +91,7 @@
 <h1 class="mb-0 mt-3 fs-3 fw-bold">Badges League admin zone</h1>
 
 {#if lastLeagueComputation}
-  <p class="w-fit-content border border-primary p-1 rounded-2 mt-3">
+  <p class="w-fit-content ms-auto border border-primary p-1 rounded-2 mt-5">
     <span class="text-primary">Last computation:</span>
 
     <span class="fw-bold">
@@ -102,7 +102,7 @@
 {/if}
 
 {#if apiToken}
-  <div class="accordion mt-5" id="accordion">
+  <div class="accordion mt-1" id="accordion">
     <div class="accordion-item">
       <h2 class="accordion-header" id="computePopularTagsHeader">
         <button

@@ -1,11 +1,11 @@
 import { getManager } from 'typeorm'
-import { LogType } from '../db/entity/Log'
-import { PopularTag } from '../db/entity/PopularTag'
-import { TopUser } from '../db/entity/TopUser'
-import { storeLog } from '../db/utils'
-import { Logger } from '../Logger'
-import { ApiService } from './ApiService'
-import { Auth } from './Auth'
+import { LogType } from '../../db/entity/Log'
+import { PopularTag } from '../../db/entity/PopularTag'
+import { TopUser } from '../../db/entity/TopUser'
+import { storeLog } from '../../db/utils'
+import { Logger } from '../../Logger'
+import { ApiService } from '../ApiService'
+import { Auth } from '../Auth'
 
 const insertTopUsersInTable = async (tag: string, users: [number, number][]): Promise<void> => {
   const manager = getManager()

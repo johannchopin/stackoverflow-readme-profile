@@ -2,6 +2,9 @@ import fetch, { Headers } from 'node-fetch'
 import { Logger } from '../Logger'
 import { Auth } from './Auth'
 
+// type to define [score, amount]
+export type ScoreAmountItem = [number, number]
+
 export class ApiService {
   constructor(private authInstance: Auth) {
     return this
@@ -19,7 +22,7 @@ export class ApiService {
           resolve(undefined)
         }
 
-        Logger.log('try to fetch')
+        Logger.log('Try to fetch')
 
         const topUsersResponse = await fetch(
           `https://data.stackexchange.com/query/job/${jobId}`,
@@ -74,6 +77,60 @@ export class ApiService {
           Logger.log(`Fetched top users for tag: ${tag}`)
 
           return topUsers
+        }
+        return []
+      } catch (error) {
+        Logger.log('Error trying to get response of a query job')
+        Logger.log(error)
+        return undefined
+      }
+    } catch (error) {
+      Logger.log('Error trying to start a query job')
+      Logger.log(error)
+
+      return undefined
+    }
+  }
+
+  public getAmountUsersByScoreByTag = async (
+    tag: string,
+    signal: AbortSignal
+  ): Promise<ScoreAmountItem[] | undefined> => {
+    const headers = this.getHeaders()
+
+    const params = new URLSearchParams()
+    params.append('tagName', tag)
+
+    try {
+      Logger.log(`Start "Count users by score of a specific tag" job for tag: ${tag}`)
+
+      const jobIdResponse = await fetch(
+        'https://data.stackexchange.com/query/run/1/1631574/1989329',
+        {
+          method: 'POST',
+          headers,
+          body: params
+        }
+      )
+
+      const res = await jobIdResponse.json()
+      const isResponseACache = res.fromCache
+
+      try {
+        let scoreAmountItems: any
+
+        if (isResponseACache) scoreAmountItems = res.resultSets[0].rows
+        else {
+          const jobId = await (res).job_id
+          Logger.log(`Start fetching score amount for tag: ${tag}`)
+          const data = await this.getJobResponse(jobId, signal)
+
+          scoreAmountItems = data?.resultSets[0]?.rows
+        }
+
+        if (scoreAmountItems) {
+          Logger.log('Fetched')
+          return scoreAmountItems
         }
         return []
       } catch (error) {

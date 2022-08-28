@@ -10,8 +10,8 @@ import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { sleep } from '../utils'
 import { Auth } from './Auth'
-import { computeTagsPercentageScale } from './computeTagsPercentageScale'
-import scrapePopularTags from './scrapePopularTags'
+import computeScoreScaleByTag from './helpers/computeScoreScaleByTag'
+import getScrapedPopularTags from './helpers/getScrapedPopularTags'
 import { getComputationStatus, getLastComputationDate } from './utils'
 
 const router = Router()
@@ -48,13 +48,15 @@ router.post(
 
         res.status(202).send()
 
+        const auth = await new Auth(cookie).init()
+
         await sleep(2000) // be sure that cookie valid job is done
 
         await storeLog(LogType.LEAGUE_COMPUTATION_START)
-        await computeTagsPercentageScale(cookie, tagsPercentageComputationController.signal)
+        await computeScoreScaleByTag(auth, tagsPercentageComputationController.signal)
+        await storeLog(LogType.LEAGUE_COMPUTATION_END)
         return
       }
-
       res.status(400).send('Invalid SEDE cookie provided!')
     } catch (error) {
       Logger.error('Issue by computing the league')
@@ -102,7 +104,7 @@ router.post(
   '/badges',
   guarded,
   async (req, res) => {
-    const scrapedTags = await scrapePopularTags()
+    const scrapedTags = await getScrapedPopularTags()
 
     const manager = getManager()
 

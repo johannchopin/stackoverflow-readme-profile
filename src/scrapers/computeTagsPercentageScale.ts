@@ -40,11 +40,14 @@ export const computeTagsPercentageScale = async (cookie: string, signal: AbortSi
   await manager.getRepository(TopUser).clear()
   Logger.log('top user table cleared')
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const tag of tags) {
     if (!signal.aborted) {
+      // eslint-disable-next-line no-await-in-loop
       let topUsers = await api.getTopUsersByTag(decodeURIComponent(tag), signal)
 
       if (!signal.aborted && topUsers) {
+        // eslint-disable-next-line no-await-in-loop
         await insertTopUsersInTable(tag, topUsers)
       }
     }

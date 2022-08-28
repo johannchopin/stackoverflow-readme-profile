@@ -54,7 +54,7 @@ router.post(
   async (req, res) => {
     tagsPercentageComputationController.signal.addEventListener('aborted', () => {
       tagsPercentageComputationController = new AbortController()
-      Logger.log("Computation aborted by client")
+      Logger.log('Computation aborted by client')
 
       res.status(200).send()
     })

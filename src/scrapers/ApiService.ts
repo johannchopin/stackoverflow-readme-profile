@@ -11,9 +11,11 @@ export class ApiService {
     return new Headers({ Cookie: this.authInstance.cookie as string })
   }
 
-  private getJobResponse = async (jobId: string): Promise<any> => {
+  private getJobResponse = async (jobId: string, signal: AbortSignal): Promise<any | undefined> => {
     return new Promise<any>((resolve) => {
       const fetchTopUserInterval = setInterval(async () => {
+        if (signal.aborted) resolve(undefined)
+
         Logger.log('try to fetch')
 
         const topUsersResponse = await fetch(
@@ -31,7 +33,7 @@ export class ApiService {
   }
 
   // return type is [userId, userScore]
-  public getTopUsersByTag = async (tag: string): Promise<[number, number][] | undefined> => {
+  public getTopUsersByTag = async (tag: string, signal: AbortSignal): Promise<[number, number][] | undefined> => {
     const headers = this.getHeaders()
 
     const params = new URLSearchParams()
@@ -67,21 +69,24 @@ export class ApiService {
         }
         */
 
-        const data = await this.getJobResponse(jobId)
+        const data = await this.getJobResponse(jobId, signal)
 
-        const topUsers: [number, number][] = []
+        if (data) {
+          const topUsers: [number, number][] = []
 
-        // @ts-ignore
-        data.resultSets[0].rows.forEach((row) => {
-          const topUserId = row[0].id
-          const topUserScore = row[1]
-          const topUser: [number, number] = [topUserId, topUserScore]
-          topUsers.push(topUser)
-        })
+          // @ts-ignore
+          data.resultSets[0].rows.forEach((row) => {
+            const topUserId = row[0].id
+            const topUserScore = row[1]
+            const topUser: [number, number] = [topUserId, topUserScore]
+            topUsers.push(topUser)
+          })
 
-        Logger.log(`Fetched top users for tag: ${tag}`)
+          Logger.log(`Fetched top users for tag: ${tag}`)
 
-        return topUsers
+          return topUsers
+        }
+        return []
       } catch (error) {
         Logger.log('Error trying to get response of a query job')
         Logger.log(error)

@@ -13,6 +13,8 @@ import scrapePopularTags from './scrapePopularTags'
 
 const router = Router()
 
+let tagsPercentageComputationController = new AbortController()
+
 const guarded = (req: Request, res: Response, next: NextFunction): void => {
   const bearer = req.headers.authorization
 
@@ -37,11 +39,27 @@ router.post(
       res.status(202).send()
 
       await sleep(2000) // be sure that cookie valid job is done
-      computeTagsPercentageScale(cookie)
+
+      computeTagsPercentageScale(cookie, tagsPercentageComputationController.signal)
       return
     }
 
     res.status(400).send('Invalid SEDE cookie provided!')
+  }
+)
+
+router.post(
+  '/cancel',
+  guarded,
+  async (req, res) => {
+    tagsPercentageComputationController.signal.addEventListener('aborted', () => {
+      tagsPercentageComputationController = new AbortController()
+      Logger.log("Computation aborted by client")
+
+      res.status(200).send()
+    })
+
+    tagsPercentageComputationController.abort()
   }
 )
 

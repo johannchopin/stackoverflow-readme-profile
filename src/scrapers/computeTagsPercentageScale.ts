@@ -5,7 +5,7 @@ import { Logger } from '../Logger'
 import { ApiService } from './ApiService'
 import { Auth } from './Auth'
 
-const initTopUsersTableForTag = async (tag: string, users: [number, number][]): Promise<void> => {
+const insertTopUsersInTable = async (tag: string, users: [number, number][]): Promise<void> => {
   const manager = getManager()
   const topUsers: TopUser[] = []
 
@@ -22,7 +22,7 @@ const initTopUsersTableForTag = async (tag: string, users: [number, number][]): 
   Logger.log(`Store top users for tag: ${tag}`)
 }
 
-export const computeTagsPercentageScale = async (cookie: string): Promise<void> => {
+export const computeTagsPercentageScale = async (cookie: string, signal: AbortSignal): Promise<void> => {
   Logger.log('Start tags scraping')
   const manager = getManager()
 
@@ -40,14 +40,15 @@ export const computeTagsPercentageScale = async (cookie: string): Promise<void> 
   await manager.getRepository(TopUser).clear()
   Logger.log('top user table cleared')
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const tag of tags) {
-    // eslint-disable-next-line no-await-in-loop
-    let topUsers = await api.getTopUsersByTag(decodeURIComponent(tag))
+    if (!signal.aborted) {
+      let topUsers = await api.getTopUsersByTag(decodeURIComponent(tag), signal)
 
-    if (topUsers) {
-      // eslint-disable-next-line no-await-in-loop
-      await initTopUsersTableForTag(tag, topUsers)
+      if (!signal.aborted && topUsers) {
+        await insertTopUsersInTable(tag, topUsers)
+      }
     }
   }
+
+  if (signal.aborted) signal.dispatchEvent(new Event('aborted'))
 }

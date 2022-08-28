@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
   import Login from "$lib/components/Login.svelte";
   import { API_BASEURL } from "$lib/constants";
 
   let apiToken;
   let cookie;
+  let isComputingLeague = false;
 
   const getBody = () => {
     return JSON.stringify({ cookie });
@@ -30,7 +31,25 @@
     alert("Badges updated!");
   };
 
+  const cancelBadgesComputation = async (): Promise<void> => {
+    const res = await fetch(`${API_BASEURL}/badges-league/cancel`, {
+      method: "POST",
+      headers: getHeaders(),
+    });
+
+    if (res.status === 200) {
+      isComputingLeague = false;
+      alert("Computation canceled");
+      return;
+    }
+
+    isComputingLeague = false;
+    alert("Something went wrong!");
+  };
+
   const startLeagueComputation = async () => {
+    isComputingLeague = true;
+
     const res = await fetch(`${API_BASEURL}/badges-league`, {
       method: "POST",
       headers: getHeaders(),
@@ -39,9 +58,11 @@
 
     if (res.status === 403) {
       alert("invalid admin access");
+      isComputingLeague = false;
       return;
     } else if (res.status === 400) {
       alert("Invalid SEDE cookie provided");
+      isComputingLeague = false;
       return;
     }
 
@@ -119,10 +140,31 @@
                 bind:value={cookie}
               />
             </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary" disabled={!cookie}
-                >Start computation</button
+            <div class="col-12 d-flex">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                disabled={!cookie || isComputingLeague}
               >
+                {#if isComputingLeague}
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  Loading...
+                {:else}
+                  Start computation
+                {/if}
+              </button>
+
+              {#if isComputingLeague}
+                <button
+                  type="button"
+                  class="btn btn-danger ms-2"
+                  on:click={cancelBadgesComputation}>Cancel</button
+                >
+              {/if}
             </div>
           </form>
         </div>

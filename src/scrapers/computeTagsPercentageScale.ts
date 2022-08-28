@@ -49,8 +49,7 @@ export const computeTagsPercentageScale = async (cookie: string, signal: AbortSi
       let topUsers = await api.getTopUsersByTag(decodeURIComponent(tag), signal)
 
       if (!signal.aborted && topUsers) {
-        // eslint-disable-next-line no-await-in-loop
-        await insertTopUsersInTable(tag, topUsers)
+        insertTopUsersInTable(tag, topUsers)
       }
     }
   }

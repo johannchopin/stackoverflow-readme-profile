@@ -58,20 +58,6 @@ export class ApiService {
 
       try {
         Logger.log(`Start fetching top users for tag: ${tag}`)
-        /*
-        // problem we got zip as response
-
-        let data: any
-        try {
-          data = JSON.parse(responseRawBody)
-          Logger.log('success')
-        } catch (error) {
-          Logger.log('Top user response is not json')
-          console.log(await topUsersResponse.type)
-          return undefined
-        }
-        */
-
         const data = await this.getJobResponse(jobId, signal)
 
         if (data) {

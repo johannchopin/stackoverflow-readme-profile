@@ -3,6 +3,7 @@ import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
 import { Avatar } from './entity/Avatar'
+import { Log, LogType } from './entity/Log'
 import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 
@@ -42,7 +43,7 @@ export const storeAvatar = async (userId: number, avatarBase64: string): Promise
   }
 }
 
-export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<void> => {
+export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<User> => {
   const manager = getManager()
 
   const user = new User()
@@ -61,17 +62,27 @@ export const storeUser = async (userToInsert: UserType, action: 'create' | 'upda
     user.updatedAt = new Date()
   }
 
-  manager.save(user)
+  return manager.save(user)
 }
 
-export const updateUser = async (userToInsert: UserType): Promise<void> => {
+export const updateUser = async (userToInsert: UserType): Promise<User> => {
   return storeUser(userToInsert, 'update')
 }
 
-export const createUser = async (userToInsert: UserType): Promise<void> => {
+export const createUser = async (userToInsert: UserType): Promise<User> => {
   return storeUser(userToInsert, 'create')
 }
 
 export const getPopularTags = async (): Promise<PopularTag[]> => {
   return getManager().find(PopularTag)
+}
+
+export const storeLog = (type?: LogType, message?: string): Promise<Log> => {
+  const manager = getManager()
+
+  const log = new Log()
+  log.type = type
+  log.message = message
+
+  return manager.save(log)
 }

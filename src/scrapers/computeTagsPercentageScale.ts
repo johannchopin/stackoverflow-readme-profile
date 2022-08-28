@@ -1,6 +1,8 @@
 import { getManager } from 'typeorm'
+import { LogType } from '../db/entity/Log'
 import { PopularTag } from '../db/entity/PopularTag'
 import { TopUser } from '../db/entity/TopUser'
+import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { ApiService } from './ApiService'
 import { Auth } from './Auth'
@@ -54,4 +56,7 @@ export const computeTagsPercentageScale = async (cookie: string, signal: AbortSi
   }
 
   if (signal.aborted) signal.dispatchEvent(new Event('aborted'))
+  else {
+    storeLog(LogType.LEAGUE_COMPUTATION_END)
+  }
 }

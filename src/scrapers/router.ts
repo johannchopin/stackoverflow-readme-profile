@@ -4,7 +4,9 @@ import {
 } from 'express'
 import { body } from 'express-validator'
 import { getManager } from 'typeorm'
+import { LogType } from '../db/entity/Log'
 import { PopularTag } from '../db/entity/PopularTag'
+import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { sleep } from '../utils'
 import { Auth } from './Auth'
@@ -40,6 +42,7 @@ router.post(
 
       await sleep(2000) // be sure that cookie valid job is done
 
+      storeLog(LogType.LEAGUE_COMPUTATION_START)
       computeTagsPercentageScale(cookie, tagsPercentageComputationController.signal)
       return
     }
@@ -55,6 +58,7 @@ router.post(
     tagsPercentageComputationController.signal.addEventListener('aborted', () => {
       tagsPercentageComputationController = new AbortController()
       Logger.log('Computation aborted by client')
+      storeLog(LogType.LEAGUE_COMPUTATION_STOP)
 
       res.status(200).send()
     })

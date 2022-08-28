@@ -6,6 +6,7 @@ import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
 import { TopUser } from './entity/TopUser'
 import { Logger } from '../Logger'
+import { Log } from './entity/Log'
 
 export const connect = async (): Promise<void> => {
   config()
@@ -19,7 +20,7 @@ export const connect = async (): Promise<void> => {
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: ['error'],
-    entities: [User, Avatar, PopularTag, TopUser]
+    entities: [User, Avatar, PopularTag, TopUser, Log]
   }).catch(error => {
     Logger.log('Data Access Error: ')
     Logger.log(error)

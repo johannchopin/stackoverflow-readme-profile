@@ -6,6 +6,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 
+// eslint-disable-next-line no-shadow
 export enum LogType {
   LEAGUE_COMPUTATION_START = 'start_compute',
   LEAGUE_COMPUTATION_STOP = 'stop_compute',
@@ -20,7 +21,7 @@ export class Log {
   id: number
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: LogType,
     default: LogType.MESSAGE
   })

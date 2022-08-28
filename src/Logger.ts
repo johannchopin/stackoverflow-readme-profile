@@ -10,6 +10,5 @@ export class Logger {
 
   static error = (message: string): void => {
     console.log(Logger.getTimeLog(), ' ❌ ', message)
-
   }
 }

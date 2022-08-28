@@ -34,7 +34,7 @@ router.post(
   '/',
   guarded,
   body('cookie').trim().escape(),
-  async (req, res, next) => {
+  async (req, res) => {
     const cookie = req.body.cookie
     try {
       if (cookie && await Auth.isCookieValid(cookie)) {
@@ -52,7 +52,6 @@ router.post(
       Logger.error('Issue by computing the league')
       await storeLog(LogType.ERROR, error)
       await storeLog(LogType.LEAGUE_COMPUTATION_END)
-      return
     }
   }
 )

@@ -2,10 +2,12 @@
   import Question from "$lib/components/icons/Question.svelte";
   import Login from "$lib/components/Login.svelte";
   import { API_BASEURL } from "$lib/constants";
+  import { onMount } from "svelte";
 
   let apiToken;
   let cookie;
   let isComputingLeague = false;
+  let lastLeagueComputation: Date;
 
   const getBody = () => {
     return JSON.stringify({ cookie });
@@ -16,6 +18,14 @@
       authorization: apiToken,
       "Content-Type": "application/json",
     });
+  };
+
+  const getComputationStatus = async (): Promise<void> => {
+    const res = await fetch(`${API_BASEURL}/badges-league/status`);
+    const { status, lastComputation } = await res.json();
+
+    isComputingLeague = status === "busy";
+    if (lastComputation) lastLeagueComputation = new Date(lastComputation);
   };
 
   const computeBadgesToUseInLeague = async () => {
@@ -65,13 +75,31 @@
       alert("Invalid SEDE cookie provided");
       isComputingLeague = false;
       return;
+    } else if (res.status === 409) {
+      alert("Currently computing");
+      return;
     }
 
     alert("Success!");
   };
+
+  onMount(() => {
+    getComputationStatus();
+  });
 </script>
 
 <h1 class="mb-0 mt-3 fs-3 fw-bold">Badges League admin zone</h1>
+
+{#if lastLeagueComputation}
+  <p class="w-fit-content border border-primary p-1 rounded-2 mt-3">
+    <span class="text-primary">Last computation:</span>
+
+    <span class="fw-bold">
+      {lastLeagueComputation.toLocaleDateString()}
+      {lastLeagueComputation.getHours()}:{lastLeagueComputation.getMinutes()}:{lastLeagueComputation.getSeconds()}
+    </span>
+  </p>
+{/if}
 
 {#if apiToken}
   <div class="accordion mt-5" id="accordion">
@@ -186,7 +214,6 @@
                   Start computation
                 {/if}
               </button>
-
               {#if isComputingLeague}
                 <button
                   type="button"

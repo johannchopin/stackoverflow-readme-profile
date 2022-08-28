@@ -12,6 +12,7 @@ import { sleep } from '../utils'
 import { Auth } from './Auth'
 import { computeTagsPercentageScale } from './computeTagsPercentageScale'
 import scrapePopularTags from './scrapePopularTags'
+import { getComputationStatus, getLastComputationDate } from './utils'
 
 const router = Router()
 
@@ -38,6 +39,13 @@ router.post(
     const cookie = req.body.cookie
     try {
       if (cookie && await Auth.isCookieValid(cookie)) {
+        const computationStatus = await getComputationStatus()
+
+        if (computationStatus === 'busy') {
+          res.status(409).send()
+          return
+        }
+
         res.status(202).send()
 
         await sleep(2000) // be sure that cookie valid job is done
@@ -51,7 +59,7 @@ router.post(
     } catch (error) {
       Logger.error('Issue by computing the league')
       await storeLog(LogType.ERROR, error)
-      await storeLog(LogType.LEAGUE_COMPUTATION_END)
+      await storeLog(LogType.LEAGUE_COMPUTATION_STOP)
     }
   }
 )
@@ -71,6 +79,13 @@ router.post(
     tagsPercentageComputationController.abort()
   }
 )
+
+router.get('/status', async (req, res) => {
+  const status = await getComputationStatus()
+  const lastComputation = await getLastComputationDate()
+
+  res.status(200).json({ status, lastComputation })
+})
 
 router.get(
   '/badges',

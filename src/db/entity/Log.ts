@@ -2,8 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
+  PrimaryGeneratedColumn
 } from 'typeorm'
 
 // eslint-disable-next-line no-shadow

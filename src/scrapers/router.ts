@@ -34,20 +34,26 @@ router.post(
   '/',
   guarded,
   body('cookie').trim().escape(),
-  async (req, res) => {
+  async (req, res, next) => {
     const cookie = req.body.cookie
+    try {
+      if (cookie && await Auth.isCookieValid(cookie)) {
+        res.status(202).send()
 
-    if (cookie && await Auth.isCookieValid(cookie)) {
-      res.status(202).send()
+        await sleep(2000) // be sure that cookie valid job is done
 
-      await sleep(2000) // be sure that cookie valid job is done
+        await storeLog(LogType.LEAGUE_COMPUTATION_START)
+        await computeTagsPercentageScale(cookie, tagsPercentageComputationController.signal)
+        return
+      }
 
-      storeLog(LogType.LEAGUE_COMPUTATION_START)
-      computeTagsPercentageScale(cookie, tagsPercentageComputationController.signal)
+      res.status(400).send('Invalid SEDE cookie provided!')
+    } catch (error) {
+      Logger.error('Issue by computing the league')
+      await storeLog(LogType.ERROR, error)
+      await storeLog(LogType.LEAGUE_COMPUTATION_END)
       return
     }
-
-    res.status(400).send('Invalid SEDE cookie provided!')
   }
 )
 

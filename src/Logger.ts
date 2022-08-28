@@ -7,4 +7,9 @@ export class Logger {
   static log = (message: string): void => {
     console.log(Logger.getTimeLog(), ' ', message)
   }
+
+  static error = (message: string): void => {
+    console.log(Logger.getTimeLog(), ' ❌ ', message)
+
+  }
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Question from "$lib/components/icons/Question.svelte";
   import Login from "$lib/components/Login.svelte";
   import { API_BASEURL } from "$lib/constants";
 
@@ -132,11 +133,39 @@
             on:submit|preventDefault={startLeagueComputation}
           >
             <div class="col-md-6">
-              <label for="sedeCookie" class="form-label">SEDE Cookie</label>
+              <div class="d-flex">
+                <label for="sedeCookie" class="form-label">SEDE Cookie</label>
+                <a
+                  class="ms-2"
+                  data-bs-toggle="collapse"
+                  href="#collapseSEDEInfo"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseSEDEInfo"
+                >
+                  <Question />
+                </a>
+              </div>
+
+              <div class="collapse" id="collapseSEDEInfo">
+                <div class="card card-body bg-dark">
+                  <p>
+                    To get a SEDE cookie go to a SEDE page like
+                    <a
+                      href="https://data.stackexchange.com/stackoverflow/query/1631255/check-auth-cookie"
+                      target="_blank"
+                    >
+                      this one
+                    </a>. Then run a query and get the cookie from the query
+                    request header
+                  </p>
+                </div>
+              </div>
               <input
                 type="text"
                 id="sedeCookie"
                 class="form-control"
+                placeholder="OptanonConsent=datestamp=..."
                 bind:value={cookie}
               />
             </div>

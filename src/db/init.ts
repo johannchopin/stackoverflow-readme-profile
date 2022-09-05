@@ -5,8 +5,10 @@ import { Logger } from '../Logger'
 import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
-import { Log } from './entity/Log'
+import { Log, LogType } from './entity/Log'
 import { ScoreAmountByTag } from './entity/ScoreAmountByTag'
+import { ScorePercentileByTag } from './entity/ScorePercentileByTag'
+import { storeLog } from './utils'
 
 export const connect = async (): Promise<void> => {
   config()
@@ -20,7 +22,7 @@ export const connect = async (): Promise<void> => {
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: ['error'],
-    entities: [User, Avatar, PopularTag, Log, ScoreAmountByTag]
+    entities: [User, Avatar, PopularTag, Log, ScoreAmountByTag, ScorePercentileByTag]
   }).catch(error => {
     Logger.log('Data Access Error: ')
     Logger.log(error)
@@ -31,6 +33,7 @@ export const connect = async (): Promise<void> => {
 export const initDatabase = async (): Promise<void> => {
   await connect()
 
+  storeLog(LogType.SERVER_START)
   Logger.log('Database connected')
   // await initPopularTagsTable()
 }

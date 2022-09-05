@@ -14,7 +14,9 @@ export const getComputationStatus = async (): Promise<ComputationStatus> => {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const log of logs) {
-    if (log.type === LogType.LEAGUE_COMPUTATION_END || log.type === LogType.LEAGUE_COMPUTATION_STOP) {
+    if (log.type === LogType.LEAGUE_COMPUTATION_END
+      || log.type === LogType.LEAGUE_COMPUTATION_STOP
+      || log.type === LogType.SERVER_START) {
       return 'available'
     }
 

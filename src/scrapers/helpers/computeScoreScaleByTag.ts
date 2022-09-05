@@ -3,6 +3,7 @@ import { ScoreAmountByTag } from '../../db/entity/ScoreAmountByTag'
 import { Logger } from '../../Logger'
 import { ApiService, ScoreAmountItem } from '../ApiService'
 import { Auth } from '../Auth'
+import computeScoreRepartitionByPercentage from './computeScoreRepartitionByPercentage'
 import getStoredTopTags from './getStoredTopTags'
 
 export type AmountEntry = [number, number]
@@ -12,8 +13,11 @@ const deleteScoreAmountItemsInTable = async (manager: EntityManager, tag: string
     .execute()
 }
 
-const insertScoreAmountItemsInTable = async (tag: string, items: ScoreAmountItem[]): Promise<void> => {
-  const manager = getManager()
+const insertScoreAmountItemsInTable = async (
+  manager: EntityManager,
+  tag: string,
+  items: ScoreAmountItem[]
+): Promise<void> => {
   const topUsers: ScoreAmountByTag[] = []
 
   await deleteScoreAmountItemsInTable(manager, tag)
@@ -46,7 +50,8 @@ const computeScoreScaleByTag = async (auth: Auth, signal: AbortSignal): Promise<
       const scoreAmountItems = await api.getAmountUsersByScoreByTag(decodeURIComponent(tag), signal)
 
       if (!signal.aborted && scoreAmountItems) {
-        insertScoreAmountItemsInTable(tag, scoreAmountItems)
+        insertScoreAmountItemsInTable(manager, tag, scoreAmountItems)
+        computeScoreRepartitionByPercentage(manager, tag, scoreAmountItems)
       }
     }
   }

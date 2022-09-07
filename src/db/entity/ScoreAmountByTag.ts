@@ -6,12 +6,12 @@ import {
 
 @Entity()
 export class ScoreAmountByTag {
-  @PrimaryColumn()
+  @PrimaryColumn({ type: 'smallint' })
   score: number
 
-  @PrimaryColumn()
+  @PrimaryColumn({ type: 'smallint' })
   tag: string
 
-  @Column()
+  @Column({ type: 'integer' })
   amount: number
 }

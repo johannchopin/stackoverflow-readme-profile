@@ -6,10 +6,10 @@ import {
 
 @Entity()
 export class ScorePercentileByTag {
-  @Column()
+  @Column({ type: 'smallint' })
   score: number
 
-  @PrimaryColumn()
+  @PrimaryColumn({ type: 'float4' })
   percentage: number
 
   @PrimaryColumn()

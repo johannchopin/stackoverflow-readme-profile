@@ -17,7 +17,7 @@
     try {
       const res = await (
         await fetch(
-          `${API_BASEURL}/badges-league/badges/${encodeURIComponent(tag)}`
+          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(tag)}`
         )
       ).json();
       selectedTagScorePercentile = res.scorePercentile;
@@ -31,11 +31,11 @@
   }
 
   onMount(async () => {
-    tags = await (await fetch(`${API_BASEURL}/badges-league/badges`)).json();
+    tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
   });
 </script>
 
-<h1 class="mb-0 mt-3 fs-3 fw-bold">Welcome to the Badges League</h1>
+<h1 class="mb-0 mt-3 fs-3 fw-bold">Welcome to the Tags League</h1>
 
 <div class="d-flex justify-content-center flex-wrap mt-5">
   {#each tags as tag}

@@ -91,7 +91,7 @@ router.get('/status', async (req, res) => {
 })
 
 router.get(
-  '/badges',
+  '/tags',
   async (req, res) => {
     const manager = getManager()
 
@@ -102,7 +102,7 @@ router.get(
 )
 
 router.post(
-  '/badges',
+  '/tags',
   guarded,
   async (req, res) => {
     const scrapedTags = await getScrapedPopularTags()
@@ -120,20 +120,20 @@ router.post(
 
     manager.save(tags)
 
-    Logger.log('Top badges stored in DB')
+    Logger.log('Top tags stored in DB')
 
     res.status(202).json(scrapedTags)
   }
 )
 
 router.get(
-  '/badges/:badgeName',
+  '/tags/:tagName',
   async (req, res) => {
     const manager = getManager()
-    const badge = encodeURIComponent(req.params.badgeName)
+    const tag = encodeURIComponent(req.params.tagName)
 
     const scorePercentages = await (await manager.getRepository(ScorePercentileByTag).find({
-      where: { tag: badge },
+      where: { tag },
       order: { score: 'DESC' },
       select: ['percentage', 'score']
     }))

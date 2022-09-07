@@ -21,15 +21,15 @@
   };
 
   const getComputationStatus = async (): Promise<void> => {
-    const res = await fetch(`${API_BASEURL}/badges-league/status`);
+    const res = await fetch(`${API_BASEURL}/tags-league/status`);
     const { status, lastComputation } = await res.json();
 
     isComputingLeague = status === "busy";
     if (lastComputation) lastLeagueComputation = new Date(lastComputation);
   };
 
-  const computeBadgesToUseInLeague = async () => {
-    const res = await fetch(`${API_BASEURL}/badges-league/badges`, {
+  const computeTagsToUseInLeague = async () => {
+    const res = await fetch(`${API_BASEURL}/tags-league/tags`, {
       method: "POST",
       headers: getHeaders(),
     });
@@ -39,11 +39,11 @@
       return;
     }
 
-    alert("Badges updated!");
+    alert("Tags updated!");
   };
 
-  const cancelBadgesComputation = async (): Promise<void> => {
-    const res = await fetch(`${API_BASEURL}/badges-league/cancel`, {
+  const cancelTagsComputation = async (): Promise<void> => {
+    const res = await fetch(`${API_BASEURL}/tags-league/cancel`, {
       method: "POST",
       headers: getHeaders(),
     });
@@ -61,7 +61,7 @@
   const startLeagueComputation = async () => {
     isComputingLeague = true;
 
-    const res = await fetch(`${API_BASEURL}/badges-league`, {
+    const res = await fetch(`${API_BASEURL}/tags-league`, {
       method: "POST",
       headers: getHeaders(),
       body: getBody(),
@@ -88,7 +88,7 @@
   });
 </script>
 
-<h1 class="mb-0 mt-3 fs-3 fw-bold">Badges League admin zone</h1>
+<h1 class="mb-0 mt-3 fs-3 fw-bold">Tags League admin zone</h1>
 
 {#if lastLeagueComputation}
   <p class="w-fit-content ms-auto border border-primary p-1 rounded-2 mt-5">
@@ -113,7 +113,7 @@
           data-bs-target="#computePopularTags"
           aria-controls="computePopularTags"
         >
-          Compute Badges to be used in the league
+          Compute Tags to be used in the league
         </button>
       </h2>
       <div
@@ -125,7 +125,7 @@
         <div class="accordion-body">
           <form
             class="row g-3"
-            on:submit|preventDefault={computeBadgesToUseInLeague}
+            on:submit|preventDefault={computeTagsToUseInLeague}
           >
             <div class="col-12">
               <button type="submit" class="btn btn-primary"
@@ -146,7 +146,7 @@
           data-bs-target="#computeLeagueCalculation"
           aria-controls="computeLeagueCalculation"
         >
-          Compute Badges League
+          Compute Tags League
         </button>
       </h2>
       <div
@@ -218,7 +218,7 @@
                 <button
                   type="button"
                   class="btn btn-danger ms-2"
-                  on:click={cancelBadgesComputation}>Cancel</button
+                  on:click={cancelTagsComputation}>Cancel</button
                 >
               {/if}
             </div>

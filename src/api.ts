@@ -10,7 +10,7 @@ import { initDatabase } from './db/init'
 import { getAnalytics } from './analytics'
 import scraperRouter from './scrapers/router'
 
-const checkQueryStrings = (query: {theme: string; website?: string; location?: string}): void => {
+const checkQueryStrings = (query: { theme: string; website?: string; location?: string }): void => {
   const { theme, website, location } = query
   const isWebsiteParamValid = website === 'true' || website === 'false'
   const isLocationParamValid = location === 'true' || location === 'false'
@@ -34,7 +34,7 @@ const run = async (): Promise<void> => {
   app.use(express.json())
   app.use(cors())
 
-  app.use('/badges-league', scraperRouter)
+  app.use('/tags-league', scraperRouter)
 
   app.get('/_analytics', async (req, res) => {
     res.json(await getAnalytics())
@@ -57,10 +57,10 @@ const run = async (): Promise<void> => {
       const svg = await getProfileSvg(
         Number(id),
         template as Template, {
-          theme: theme as unknown as Theme,
-          website: website === 'true',
-          location: location === 'true'
-        }
+        theme: theme as unknown as Theme,
+        website: website === 'true',
+        location: location === 'true'
+      }
       )
 
       res.send(svg)

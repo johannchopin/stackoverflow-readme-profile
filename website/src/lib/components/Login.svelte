@@ -21,7 +21,7 @@
   };
 
   const isTokenValid = async (token: string): Promise<boolean> => {
-    const res = await fetch(`${API_BASEURL}/badges-league/auth`, {
+    const res = await fetch(`${API_BASEURL}/tags-league/auth`, {
       headers: new Headers({
         authorization: token,
       }),

@@ -56,11 +56,12 @@ const run = async (): Promise<void> => {
 
       const svg = await getProfileSvg(
         Number(id),
-        template as Template, {
-        theme: theme as unknown as Theme,
-        website: website === 'true',
-        location: location === 'true'
-      }
+        template as Template,
+        {
+          theme: theme as unknown as Theme,
+          website: website === 'true',
+          location: location === 'true'
+        }
       )
 
       res.send(svg)

@@ -51,7 +51,7 @@ const computeScoreScaleByTag = async (auth: Auth, signal: AbortSignal): Promise<
 
       if (!signal.aborted && scoreAmountItems) {
         insertScoreAmountItemsInTable(manager, tag, scoreAmountItems)
-        computeScoreRepartitionByPercentage(manager, tag, scoreAmountItems)
+        computeScoreRepartitionByPercentage(tag, scoreAmountItems)
       }
     }
   }

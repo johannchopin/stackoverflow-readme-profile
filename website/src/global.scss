@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 .bg-body {
-  background-color: $bg-color !important;
+  background-color: $bg-color  !important;
 }
 
 html,
@@ -42,4 +42,31 @@ code {
   @extend .rounded;
   @extend .bg-dark;
   @extend .px-1;
+}
+
+.so-tag {
+  color: #9cc1db;
+  background-color: #3d4951;
+  font-size: 0.8rem;
+  border: solid 2px transparent;
+
+  @extend .rounded-2;
+  @extend .p-1;
+  @extend .px-2;
+
+  &.clickable {
+
+    &:hover,
+    &:focus,
+    &.selected {
+      color: #cde1ee;
+      background-color: #435460;
+    }
+
+    &.selected {
+      border-color: #cde1ee;
+    }
+  }
+
+
 }

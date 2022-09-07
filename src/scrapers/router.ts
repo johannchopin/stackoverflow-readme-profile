@@ -144,7 +144,7 @@ router.get(
     }
 
     res.json({
-      scorePercentage: scorePercentages.map(scorePercentage => [scorePercentage.score, scorePercentage.percentage])
+      scorePercentages: scorePercentages.map(scorePercentage => [scorePercentage.score, scorePercentage.percentage])
     })
   }
 )

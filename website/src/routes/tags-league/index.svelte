@@ -4,73 +4,54 @@
   import { page } from "$app/stores";
 
   import { API_BASEURL } from "$lib/constants";
+  import TagDetails from "$lib/components/tags-league/TagDetails.svelte";
+  import SoCup from "$lib/components/icons/SoCup.svelte";
 
   let tags: string[] = [];
   $: selectedTag = $page.url.searchParams.get("tag");
-  let selectedTagScorePercentile: number[];
 
   const getTagRandomDelay = (): string => {
     return (Math.random() * (0 - 1.2) + 1.2).toFixed(4);
   };
-
-  const fetchTagScoreRanking = async (tag: string): Promise<void> => {
-    try {
-      const res = await (
-        await fetch(
-          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(tag)}`
-        )
-      ).json();
-      selectedTagScorePercentile = res.scorePercentile;
-    } catch (error) {}
-  };
-
-  $: {
-    if (selectedTag) {
-      fetchTagScoreRanking(selectedTag);
-    }
-  }
 
   onMount(async () => {
     tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
   });
 </script>
 
-<h1 class="mb-0 mt-3 fs-3 fw-bold">Welcome to the Tags League</h1>
+<h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
+  Welcome to the
+  <span class="fs-3 so-tag w-fit-content d-flex align-items-center ms-2">
+    <span class="me-2"><SoCup /></span>
+    Tags League
+  </span>
+</h1>
 
-<div class="d-flex justify-content-center flex-wrap mt-5">
+<ul class="d-flex justify-content-center flex-wrap mt-5 list-unstyled">
   {#each tags as tag}
-    <a
-      href={"?tag=" + encodeURIComponent(tag)}
-      class="so-tag rounded-2 text-bg-dark m-1 p-1 px-2 text-decoration-none"
-      class:selected={tag === selectedTag}
-      style="animation-delay: {getTagRandomDelay()}s;">{tag}</a
-    >
+    <li class="m-1" style="animation-delay: {getTagRandomDelay()}s;">
+      <a
+        href={"?tag=" + encodeURIComponent(tag)}
+        class="so-tag clickable text-bg-dark text-decoration-none"
+        class:selected={tag === selectedTag}>{tag}</a
+      >
+    </li>
   {/each}
-</div>
+</ul>
 
 {#if selectedTag}
-  {selectedTag}
+  <TagDetails tag={selectedTag} />
 {/if}
 
 <style lang="scss">
-  .so-tag {
+  h1 :global(svg) {
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+
+  ul li {
     opacity: 0;
     animation: apparition 0.3s forwards;
-    color: #9cc1db;
-    background-color: #3d4951;
-    font-size: 0.8rem;
-    border: solid 2px transparent;
-
-    &:hover,
-    &:focus,
-    &.selected {
-      color: #cde1ee;
-      background-color: #435460;
-    }
-
-    &.selected {
-      border-color: #cde1ee;
-    }
   }
 
   @keyframes apparition {

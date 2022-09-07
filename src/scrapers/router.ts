@@ -6,6 +6,7 @@ import { body } from 'express-validator'
 import { getManager } from 'typeorm'
 import { LogType } from '../db/entity/Log'
 import { PopularTag } from '../db/entity/PopularTag'
+import { ScorePercentileByTag } from '../db/entity/ScorePercentileByTag'
 import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { sleep } from '../utils'
@@ -122,6 +123,29 @@ router.post(
     Logger.log('Top badges stored in DB')
 
     res.status(202).json(scrapedTags)
+  }
+)
+
+router.get(
+  '/badges/:badgeName',
+  async (req, res) => {
+    const manager = getManager()
+    const badge = encodeURIComponent(req.params.badgeName)
+
+    const scorePercentages = await (await manager.getRepository(ScorePercentileByTag).find({
+      where: { tag: badge },
+      order: { score: 'DESC' },
+      select: ['percentage', 'score']
+    }))
+
+    if (scorePercentages.length <= 0) {
+      res.status(404).send()
+      return
+    }
+
+    res.json({
+      scorePercentage: scorePercentages.map(scorePercentage => [scorePercentage.score, scorePercentage.percentage])
+    })
   }
 )
 

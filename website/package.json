@@ -28,6 +28,7 @@
   },
   "type": "module",
   "dependencies": {
-    "bootstrap": "^5.1.3"
+    "bootstrap": "^5.1.3",
+    "highcharts": "^10.2.1"
   }
 }

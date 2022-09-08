@@ -6,6 +6,7 @@ import { body } from 'express-validator'
 import { getManager } from 'typeorm'
 import { LogType } from '../db/entity/Log'
 import { PopularTag } from '../db/entity/PopularTag'
+import { ScoreAmountByTag } from '../db/entity/ScoreAmountByTag'
 import { ScorePercentileByTag } from '../db/entity/ScorePercentileByTag'
 import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
@@ -13,7 +14,7 @@ import { sleep } from '../utils'
 import { Auth } from './Auth'
 import computeScoreScaleByTag from './helpers/computeScoreScaleByTag'
 import getScrapedPopularTags from './helpers/getScrapedPopularTags'
-import { getComputationStatus, getLastComputationDate } from './utils'
+import { getComputationStatus, getLastComputationDate, getOptimisedScoreAmountArray } from './utils'
 
 const router = Router()
 
@@ -147,6 +148,31 @@ router.get(
       scorePercentages: scorePercentages.map(
         scorePercentage => [scorePercentage.score, scorePercentage.percentage]
       )
+    })
+  }
+)
+
+router.get(
+  '/tags/:tagName/users',
+  async (req, res) => {
+    const manager = getManager()
+    const tag = encodeURIComponent(req.params.tagName)
+
+    const scoreAmounts = await (await manager.getRepository(ScoreAmountByTag).find({
+      where: { tag },
+      order: { score: 'DESC' },
+      select: ['score', 'amount']
+    }))
+
+    if (scoreAmounts.length <= 0) {
+      res.status(404).send()
+      return
+    }
+
+    const optimisedScoreAmounts = getOptimisedScoreAmountArray(scoreAmounts.map((scoreAmount) => ([scoreAmount.score, scoreAmount.amount])))
+
+    res.json({
+      scoreAmounts: optimisedScoreAmounts
     })
   }
 )

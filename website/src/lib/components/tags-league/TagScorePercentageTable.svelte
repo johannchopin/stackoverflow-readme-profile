@@ -2,7 +2,7 @@
   export let scorePercentages: [number, number][];
 </script>
 
-<div class="tableFixHead w-fit-content m-auto">
+<div class="tableFixHead w-fit-content m-auto rounded">
   <table
     class="table table-dark table-sm table-bordered w-fit-content rounded-2"
   >

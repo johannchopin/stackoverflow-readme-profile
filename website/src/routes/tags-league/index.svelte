@@ -8,6 +8,7 @@
   import SoCup from "$lib/components/icons/SoCup.svelte";
 
   let tags: string[] = [];
+  let filter = "";
   $: selectedTag = $page.url.searchParams.get("tag");
 
   const getTagRandomDelay = (): string => {
@@ -27,14 +28,27 @@
   </span>
 </h1>
 
-<ul class="d-flex justify-content-center flex-wrap mt-5 list-unstyled">
+<div class="input-group m-0  mt-5 row">
+  <div class="col-6 col-md-4 ms-auto p-0">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Filter tags"
+      bind:value={filter}
+    />
+  </div>
+</div>
+
+<ul class="d-flex justify-content-center flex-wrap mt-2 list-unstyled">
   {#each tags as tag}
-    <li class="m-1" style="animation-delay: {getTagRandomDelay()}s;">
+    <li class="my-1" style="animation-delay: {getTagRandomDelay()}s;">
       <a
         href={"?tag=" + encodeURIComponent(tag)}
-        class="so-tag clickable text-bg-dark text-decoration-none"
-        class:selected={tag === selectedTag}>{tag}</a
-      >
+        class="mx-1 so-tag clickable text-bg-dark text-decoration-none"
+        class:selected={tag === selectedTag}
+        class:d-none={filter.length > 0 && !tag.includes(filter)}
+        >{tag}
+      </a>
     </li>
   {/each}
 </ul>

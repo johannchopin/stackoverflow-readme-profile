@@ -45,8 +45,12 @@
 </h2>
 
 {#if scorePercentages && scoreAmounts}
-  <div class="d-flex">
-    <TagScorePercentageTable {scorePercentages} />
-    <UsersRepartionByTag {scorePercentages} {scoreAmounts} />
+  <div class="row">
+    <div class="col-12 col-md-4 my-2">
+      <TagScorePercentageTable {scorePercentages} />
+    </div>
+    <div class="col-12 col-md-8 my-2">
+      <UsersRepartionByTag {scorePercentages} {scoreAmounts} />
+    </div>
   </div>
 {/if}

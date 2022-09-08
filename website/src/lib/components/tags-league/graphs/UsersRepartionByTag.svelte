@@ -8,19 +8,40 @@
   const CHART_ID = "userRepartionByTag";
   let isMounted = false;
 
-  const renderChart = (scoreAmounts) => {
+  const renderChart = (scoreAmounts, scorePercentages) => {
+    const percentages: number[] = [];
+    const minScores: number[] = [];
+    const userAmounts: number[] = [];
+
+    scorePercentages.forEach(([score, percentage]) => {
+      minScores.push(score);
+      percentages.push(percentage);
+    });
+
+    let scoreAmountsIndex = 0;
+    minScores.forEach((minScore, index) => {
+      while (scoreAmounts[scoreAmountsIndex][0] >= minScore) {
+        if (userAmounts[index] === undefined) userAmounts[index] = 0;
+        userAmounts[index] += scoreAmounts[scoreAmountsIndex][1];
+        scoreAmountsIndex += 1;
+      }
+    });
+
     Highcharts.chart(CHART_ID, {
       chart: {
-        zoomType: "xy",
+        zoomType: "x",
       },
       title: {
-        text: "Scores repartion with according's users amount",
+        text: "Required scores by top percentage and corresponding users amount",
         align: "left",
       },
       xAxis: [
         {
-          categories: scoreAmounts.map(([score]) => score),
+          categories: percentages,
           crosshair: true,
+          title: {
+            text: "Top %",
+          },
         },
       ],
       yAxis: [
@@ -72,19 +93,19 @@
           name: "Amount of users",
           type: "column",
           yAxis: 1,
-          data: scoreAmounts.map(([score, amount]) => amount),
+          data: userAmounts,
         },
         {
           name: "Score",
           type: "spline",
-          data: scoreAmounts.map(([score, amount]) => score),
+          data: minScores,
         },
       ],
     });
   };
 
   $: {
-    if (isMounted) renderChart(scoreAmounts);
+    if (isMounted) renderChart(scoreAmounts, scorePercentages);
   }
 
   onMount(() => {

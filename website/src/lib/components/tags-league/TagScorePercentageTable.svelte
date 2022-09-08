@@ -2,14 +2,14 @@
   export let scorePercentages: [number, number][];
 </script>
 
-<div class="tableFixHead w-fit-content">
+<div class="tableFixHead w-fit-content m-auto">
   <table
     class="table table-dark table-sm table-bordered w-fit-content rounded-2"
   >
     <thead>
       <tr>
-        <th>Top Percentage</th>
-        <th>Required Score</th>
+        <th class="p-2">Top Percentage</th>
+        <th class="p-2">Required Score</th>
       </tr>
     </thead>
     <tbody>
@@ -28,8 +28,8 @@
     overflow-y: auto;
     height: 300px;
   }
-  .tableFixHead thead th {
+  .tableFixHead thead {
     position: sticky;
-    top: 0;
+    top: -1px;
   }
 </style>

@@ -23,7 +23,12 @@
   }
 </script>
 
-<h2>{tag}</h2>
+<h2 class="fs-4 mt-5">
+  Insights of the tag
+  <span class="fs-4 so-tag">
+    {tag}
+  </span>
+</h2>
 
 {#if scorePercentages}
   <TagScorePercentageTable {scorePercentages} />

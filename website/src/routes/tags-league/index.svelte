@@ -54,6 +54,7 @@
 </ul>
 
 {#if selectedTag}
+  <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
   <TagDetails tag={selectedTag} />
 {/if}
 
@@ -63,9 +64,14 @@
     width: 1.8rem;
   }
 
-  ul li {
+  ul li,
+  input {
     opacity: 0;
     animation: apparition 0.3s forwards;
+  }
+
+  input {
+    animation-delay: 1.7s;
   }
 
   @keyframes apparition {

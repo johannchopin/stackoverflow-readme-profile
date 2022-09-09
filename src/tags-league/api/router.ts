@@ -4,34 +4,22 @@ import {
 } from 'express'
 import { body } from 'express-validator'
 import { getManager } from 'typeorm'
-import { LogType } from '../db/entity/Log'
-import { PopularTag } from '../db/entity/PopularTag'
-import { ScoreAmountByTag } from '../db/entity/ScoreAmountByTag'
-import { ScorePercentileByTag } from '../db/entity/ScorePercentileByTag'
-import { storeLog } from '../db/utils'
-import { Logger } from '../Logger'
-import { sleep } from '../utils'
-import { Auth } from './Auth'
-import computeScoreScaleByTag from './helpers/computeScoreScaleByTag'
-import getScrapedPopularTags from './helpers/getScrapedPopularTags'
-import { getComputationStatus, getLastComputationDate, getOptimisedScoreAmountArray } from './utils'
+import { LogType } from '../../db/entity/Log'
+import { PopularTag } from '../../db/entity/PopularTag'
+import { ScoreAmountByTag } from '../../db/entity/ScoreAmountByTag'
+import { ScorePercentileByTag } from '../../db/entity/ScorePercentileByTag'
+import { storeLog } from '../../db/utils'
+import { Logger } from '../../Logger'
+import { sleep } from '../../utils'
+import { Auth } from '../Auth'
+import computeScoreScaleByTag from '../helpers/computeScoreScaleByTag'
+import getScrapedPopularTags from '../helpers/getScrapedPopularTags'
+import { getComputationStatus, getLastComputationDate, getOptimisedScoreAmountArray } from '../utils'
+import authRouter, { guarded } from './auth'
 
 const router = Router()
-
+router.use(authRouter)
 let tagsPercentageComputationController = new AbortController()
-
-const guarded = (req: Request, res: Response, next: NextFunction): void => {
-  const bearer = req.headers.authorization
-
-  if (!bearer || bearer !== process.env.API_TOKEN) {
-    setTimeout(() => {
-      // add delay to response to avoid brut force
-      res.status(403).send()
-    }, 2000)
-  } else {
-    next()
-  }
-}
 
 router.post(
   '/',
@@ -178,9 +166,5 @@ router.get(
     })
   }
 )
-
-router.get('/auth', guarded, (req, res) => {
-  res.status(200).send()
-})
 
 export default router

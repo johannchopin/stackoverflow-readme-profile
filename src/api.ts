@@ -8,7 +8,7 @@ import { renderError, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
 import { initDatabase } from './db/init'
 import { getAnalytics } from './analytics'
-import scraperRouter from './tags-league/router'
+import scraperRouter from './tags-league/api/router'
 
 const checkQueryStrings = (query: { theme: string; website?: string; location?: string }): void => {
   const { theme, website, location } = query

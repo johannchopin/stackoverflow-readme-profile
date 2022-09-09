@@ -7,7 +7,7 @@
   export let tag: string;
 
   let scorePercentages: [number, number][];
-  let scoreAmounts: [number, number][];
+  let percentageAmounts: [number, number][];
 
   const fetchTagScoreRanking = async (tag: string): Promise<void> => {
     try {
@@ -31,7 +31,7 @@
           )}/users/repartitionByScore`
         )
       ).json();
-      scoreAmounts = res.scoreAmounts;
+      percentageAmounts = res.percentageAmounts;
     } catch (error) {}
   };
 
@@ -48,13 +48,13 @@
   </span>
 </h2>
 
-{#if scorePercentages && scoreAmounts}
+{#if scorePercentages && percentageAmounts}
   <div class="row">
     <div class="col-12 col-md-4 my-2">
       <TagScorePercentageTable {scorePercentages} />
     </div>
     <div class="col-12 col-md-8 my-2">
-      <UsersRepartionByTag {scorePercentages} {scoreAmounts} />
+      <UsersRepartionByTag {scorePercentages} {percentageAmounts} />
     </div>
   </div>
 {/if}

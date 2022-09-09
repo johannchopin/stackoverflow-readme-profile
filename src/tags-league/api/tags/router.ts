@@ -2,12 +2,10 @@ import { Router } from 'express'
 import { getManager } from 'typeorm'
 import { PopularTag } from '../../../db/entity/PopularTag'
 
-import { ScoreAmountByTag } from '../../../db/entity/ScoreAmountByTag'
-import { ScorePercentileByTag } from '../../../db/entity/ScorePercentileByTag'
 import { Logger } from '../../../Logger'
 import getScrapedPopularTags from '../../helpers/getScrapedPopularTags'
-import { getOptimisedScoreAmountArray } from '../../utils'
 import { guarded } from '../auth'
+import { getScoreAmountsForTag, getScorePercentageForTag } from './utils'
 
 const router = Router()
 
@@ -53,20 +51,14 @@ router.get(
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
 
-    const scorePercentages = await (await manager.getRepository(ScorePercentileByTag).find({
-      where: { tag },
-      order: { score: 'DESC' },
-      select: ['percentage', 'score']
-    }))
+    const scorePercentages = await getScorePercentageForTag(manager, tag)
 
     if (scorePercentages.length <= 0) {
       res.status(404).send()
       return
     }
 
-    res.json(scorePercentages.map(
-      scorePercentage => [scorePercentage.score, scorePercentage.percentage]
-    ))
+    res.json(scorePercentages)
   }
 )
 
@@ -76,23 +68,36 @@ router.get(
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
 
-    const scoreAmounts = await (await manager.getRepository(ScoreAmountByTag).find({
-      where: { tag },
-      order: { score: 'DESC' },
-      select: ['score', 'amount']
-    }))
+    const [scoreAmounts, scorePercentages] = await Promise.all([
+      getScoreAmountsForTag(manager, tag),
+      getScorePercentageForTag(manager, tag)
+    ])
+
+    const percentages: number[] = []
+    const minScores: number[] = []
+    const userAmounts: number[] = []
+
+    scorePercentages.forEach(([score, percentage]) => {
+      minScores.push(score)
+      percentages.push(percentage)
+    })
+
+    let scoreAmountsIndex = 0
+    minScores.forEach((minScore, index) => {
+      while (scoreAmounts[scoreAmountsIndex][0] >= minScore) {
+        if (userAmounts[index] === undefined) userAmounts[index] = 0
+        userAmounts[index] += scoreAmounts[scoreAmountsIndex][1]
+        scoreAmountsIndex += 1
+      }
+    })
 
     if (scoreAmounts.length <= 0) {
       res.status(404).send()
       return
     }
 
-    const optimisedScoreAmounts = getOptimisedScoreAmountArray(
-      scoreAmounts.map((scoreAmount) => ([scoreAmount.score, scoreAmount.amount]))
-    )
-
     res.json({
-      scoreAmounts: optimisedScoreAmounts
+      percentageAmounts: percentages.map((percentage, index) => [percentage, userAmounts[index]])
     })
   }
 )

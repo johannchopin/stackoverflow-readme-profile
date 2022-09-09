@@ -14,7 +14,6 @@ const deleteStoredScorePercentile = async (manager: EntityManager, tag: string):
     .execute()
 }
 
-// scoresDesc -> array of 100 scores like [444, 236, 34, 4, ...]
 const storeScorePercentile = async (
   percentileScores: { [percentage: string]: number },
   tag: string

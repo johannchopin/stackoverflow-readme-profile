@@ -2,30 +2,19 @@
   import { onMount } from "svelte";
   import Highcharts from "highcharts";
 
-  export let scoreAmounts: number[][];
+  export let percentageAmounts: [number, number][];
   export let scorePercentages: [number, number][];
 
   const CHART_ID = "userRepartionByTag";
   let isMounted = false;
 
-  const renderChart = (scoreAmounts, scorePercentages) => {
-    const percentages: number[] = [];
-    const minScores: number[] = [];
-    const userAmounts: number[] = [];
+  const renderChart = (percentageAmounts, scorePercentages) => {
+    const scoreForPercentages: number[] = [];
+    const topPercentages: number[] = [];
 
     scorePercentages.forEach(([score, percentage]) => {
-      minScores.push(score);
-      percentages.push(percentage);
-    });
-
-    // TODO: Compute that in backend
-    let scoreAmountsIndex = 0;
-    minScores.forEach((minScore, index) => {
-      while (scoreAmounts[scoreAmountsIndex][0] >= minScore) {
-        if (userAmounts[index] === undefined) userAmounts[index] = 0;
-        userAmounts[index] += scoreAmounts[scoreAmountsIndex][1];
-        scoreAmountsIndex += 1;
-      }
+      scoreForPercentages.push(score);
+      topPercentages.push(percentage);
     });
 
     Highcharts.chart(CHART_ID, {
@@ -38,7 +27,7 @@
       },
       xAxis: [
         {
-          categories: percentages,
+          categories: topPercentages,
           crosshair: true,
           title: {
             text: "Top %",
@@ -102,19 +91,19 @@
           name: "Amount of users",
           type: "column",
           yAxis: 1,
-          data: userAmounts,
+          data: percentageAmounts.map(([percentage, amount]) => amount),
         },
         {
           name: "Score",
           type: "spline",
-          data: minScores,
+          data: scoreForPercentages,
         },
       ],
     });
   };
 
   $: {
-    if (isMounted) renderChart(scoreAmounts, scorePercentages);
+    if (isMounted) renderChart(percentageAmounts, scorePercentages);
   }
 
   onMount(() => {

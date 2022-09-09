@@ -13,10 +13,12 @@
     try {
       const res = await (
         await fetch(
-          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(tag)}`
+          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(
+            tag
+          )}/scorePercentages`
         )
       ).json();
-      scorePercentages = res.scorePercentages;
+      scorePercentages = res;
     } catch (error) {}
   };
 
@@ -24,7 +26,9 @@
     try {
       const res = await (
         await fetch(
-          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(tag)}/users`
+          `${API_BASEURL}/tags-league/tags/${encodeURIComponent(
+            tag
+          )}/users/repartitionByScore`
         )
       ).json();
       scoreAmounts = res.scoreAmounts;

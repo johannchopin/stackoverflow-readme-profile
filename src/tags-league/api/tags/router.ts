@@ -23,7 +23,7 @@ router.get(
 )
 
 router.post(
-  '',
+  '/',
   guarded,
   async (req, res) => {
     const scrapedTags = await getScrapedPopularTags()
@@ -48,7 +48,7 @@ router.post(
 )
 
 router.get(
-  '/:tagName',
+  '/:tagName/scorePercentages',
   async (req, res) => {
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
@@ -64,16 +64,14 @@ router.get(
       return
     }
 
-    res.json({
-      scorePercentages: scorePercentages.map(
-        scorePercentage => [scorePercentage.score, scorePercentage.percentage]
-      )
-    })
+    res.json(scorePercentages.map(
+      scorePercentage => [scorePercentage.score, scorePercentage.percentage]
+    ))
   }
 )
 
 router.get(
-  '/:tagName/users',
+  '/:tagName/users/repartitionByScore',
   async (req, res) => {
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)

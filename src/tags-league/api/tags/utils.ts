@@ -30,6 +30,7 @@ export const getTopPercentage = async (
   score: number
 ): Promise<number> => {
   const scorePercentages = await getScorePercentagesForTag(manager, tag)
+  // eslint-disable-next-line no-restricted-syntax
   for (const [minScore, percentage] of scorePercentages) {
     if (score >= minScore) {
       return percentage

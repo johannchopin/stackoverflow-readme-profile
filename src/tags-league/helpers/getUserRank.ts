@@ -60,6 +60,7 @@ const getFetchedUserRank = async (
       userRank.id = userId
       userRank.score = match.score
       userRank.tag = match.tag
+      // eslint-disable-next-line no-await-in-loop
       userRank.topPercentage = await getTopPercentage(manager, tag, match.score)
       return manager.save(userRank)
     }

@@ -44,7 +44,7 @@ export const getLastComputationDate = async (): Promise<Date | null> => {
   return null
 }
 
-const roundToNearestX = (value: number, x: number) => Math.round(value / x) * x
+const roundToNearestX = (value: number, x: number): number => Math.round(value / x) * x
 
 const getOptimisedScoreValue = (score: number): number => {
   if (score > 4000) return roundToNearestX(score, 200)
@@ -71,13 +71,12 @@ export const getOptimisedScoreAmountArray = (scoreAmounts: number[][]): number[]
     scoreAmountOptimised[optimisedScore] += amount
   })
 
-  const optimised: number[][] = [];
+  const optimised: number[][] = []
 
   Object.keys(scoreAmountOptimised).forEach((score) => {
     const amount = scoreAmountOptimised[Number(score)]
     optimised.push([Number(score), amount])
   })
-
 
   return optimised.sort(([scoreA], [scoreB]) => scoreB - scoreA)
 }

@@ -169,7 +169,9 @@ router.get(
       return
     }
 
-    const optimisedScoreAmounts = getOptimisedScoreAmountArray(scoreAmounts.map((scoreAmount) => ([scoreAmount.score, scoreAmount.amount])))
+    const optimisedScoreAmounts = getOptimisedScoreAmountArray(
+      scoreAmounts.map((scoreAmount) => ([scoreAmount.score, scoreAmount.amount]))
+    )
 
     res.json({
       scoreAmounts: optimisedScoreAmounts

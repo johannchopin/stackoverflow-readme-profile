@@ -1,7 +1,5 @@
 /* eslint-disable newline-per-chained-call */
-import {
-  NextFunction, Router, Request, Response
-} from 'express'
+import { Router } from 'express'
 import { body } from 'express-validator'
 import { getManager } from 'typeorm'
 import { LogType } from '../../db/entity/Log'

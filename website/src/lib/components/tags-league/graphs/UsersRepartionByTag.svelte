@@ -18,6 +18,7 @@
       percentages.push(percentage);
     });
 
+    // TODO: Compute that in backend
     let scoreAmountsIndex = 0;
     minScores.forEach((minScore, index) => {
       while (scoreAmounts[scoreAmountsIndex][0] >= minScore) {
@@ -42,6 +43,14 @@
           title: {
             text: "Top %",
           },
+          plotLines: [
+            {
+              color: "#FF0000", // Red
+              width: 2,
+              value: 25, // Position, you'll have to translate this to the values on your x axis
+              label: { text: "User johannchopin", rotation: 0 },
+            },
+          ],
         },
       ],
       yAxis: [

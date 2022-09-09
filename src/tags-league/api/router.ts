@@ -1,22 +1,20 @@
 /* eslint-disable newline-per-chained-call */
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { getManager } from 'typeorm'
 import { LogType } from '../../db/entity/Log'
-import { PopularTag } from '../../db/entity/PopularTag'
-import { ScoreAmountByTag } from '../../db/entity/ScoreAmountByTag'
-import { ScorePercentileByTag } from '../../db/entity/ScorePercentileByTag'
 import { storeLog } from '../../db/utils'
 import { Logger } from '../../Logger'
 import { sleep } from '../../utils'
 import { Auth } from '../Auth'
 import computeScoreScaleByTag from '../helpers/computeScoreScaleByTag'
-import getScrapedPopularTags from '../helpers/getScrapedPopularTags'
-import { getComputationStatus, getLastComputationDate, getOptimisedScoreAmountArray } from '../utils'
+import { getComputationStatus, getLastComputationDate } from '../utils'
 import authRouter, { guarded } from './auth'
+import tagsRouter from './tags/router'
 
 const router = Router()
 router.use(authRouter)
+router.use('/tags', tagsRouter)
+
 let tagsPercentageComputationController = new AbortController()
 
 router.post(
@@ -76,93 +74,5 @@ router.get('/status', async (req, res) => {
 
   res.status(200).json({ status, lastComputation })
 })
-
-router.get(
-  '/tags',
-  async (req, res) => {
-    const manager = getManager()
-
-    const tags = await (await manager.getRepository(PopularTag).find({ select: ['name'] }))
-
-    res.status(200).json(tags.map(tag => decodeURIComponent(tag.name)))
-  }
-)
-
-router.post(
-  '/tags',
-  guarded,
-  async (req, res) => {
-    const scrapedTags = await getScrapedPopularTags()
-
-    const manager = getManager()
-
-    manager.getRepository(PopularTag).clear()
-
-    const tags: PopularTag[] = scrapedTags.map((fetchedTag, index) => {
-      const tag = new PopularTag()
-      tag.id = index
-      tag.name = fetchedTag
-      return tag
-    })
-
-    manager.save(tags)
-
-    Logger.log('Top tags stored in DB')
-
-    res.status(202).json(scrapedTags)
-  }
-)
-
-router.get(
-  '/tags/:tagName',
-  async (req, res) => {
-    const manager = getManager()
-    const tag = encodeURIComponent(req.params.tagName)
-
-    const scorePercentages = await (await manager.getRepository(ScorePercentileByTag).find({
-      where: { tag },
-      order: { score: 'DESC' },
-      select: ['percentage', 'score']
-    }))
-
-    if (scorePercentages.length <= 0) {
-      res.status(404).send()
-      return
-    }
-
-    res.json({
-      scorePercentages: scorePercentages.map(
-        scorePercentage => [scorePercentage.score, scorePercentage.percentage]
-      )
-    })
-  }
-)
-
-router.get(
-  '/tags/:tagName/users',
-  async (req, res) => {
-    const manager = getManager()
-    const tag = encodeURIComponent(req.params.tagName)
-
-    const scoreAmounts = await (await manager.getRepository(ScoreAmountByTag).find({
-      where: { tag },
-      order: { score: 'DESC' },
-      select: ['score', 'amount']
-    }))
-
-    if (scoreAmounts.length <= 0) {
-      res.status(404).send()
-      return
-    }
-
-    const optimisedScoreAmounts = getOptimisedScoreAmountArray(
-      scoreAmounts.map((scoreAmount) => ([scoreAmount.score, scoreAmount.amount]))
-    )
-
-    res.json({
-      scoreAmounts: optimisedScoreAmounts
-    })
-  }
-)
 
 export default router

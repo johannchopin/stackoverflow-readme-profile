@@ -1,4 +1,5 @@
 import { EntityManager, getManager } from 'typeorm'
+import { MIN_SCORE_TO_BE_IN_LEAGUE } from '../../const'
 import { ScorePercentileByTag } from '../../db/entity/ScorePercentileByTag'
 import { ScoreAmountItem } from '../ApiService'
 
@@ -6,8 +7,6 @@ export interface PercentileScore {
   percentage: number
   score: number
 }
-
-const MIN_REPUTATION_TO_BE_IN_LEAGUE = 3
 
 const deleteStoredScorePercentile = async (manager: EntityManager, tag: string): Promise<void> => {
   await manager.createQueryBuilder().delete().from(ScorePercentileByTag).where('tag = :tag', { tag })
@@ -43,7 +42,7 @@ const computeScoreRepartitionByPercentage = async (
     const score = item[0]
     const amount = item[1]
 
-    if (score >= MIN_REPUTATION_TO_BE_IN_LEAGUE) return totalAcc + amount
+    if (score >= MIN_SCORE_TO_BE_IN_LEAGUE) return totalAcc + amount
     return totalAcc
   }, 0)
 
@@ -56,7 +55,7 @@ const computeScoreRepartitionByPercentage = async (
     const score = item[0]
     const amount = item[1]
 
-    if (score >= MIN_REPUTATION_TO_BE_IN_LEAGUE) {
+    if (score >= MIN_SCORE_TO_BE_IN_LEAGUE) {
       const itemCount = count + amount
       const stepOverflowAmount = Math.floor(itemCount / step)
       const stepOverflowRest = itemCount % step

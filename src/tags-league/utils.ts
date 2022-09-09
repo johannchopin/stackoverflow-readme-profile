@@ -1,5 +1,6 @@
 import { getManager } from 'typeorm'
 import { Log, LogType } from '../db/entity/Log'
+import { PopularTag } from '../db/entity/PopularTag'
 
 export type ComputationStatus = 'available' | 'busy'
 
@@ -79,4 +80,9 @@ export const getOptimisedScoreAmountArray = (scoreAmounts: number[][]): number[]
   })
 
   return optimised.sort(([scoreA], [scoreB]) => scoreB - scoreA)
+}
+
+export const isTagInLeague = async (tagName: string): Promise<boolean> => {
+  const manager = getManager()
+  return await manager.findOne(PopularTag, { name: tagName }) !== undefined
 }

@@ -8,11 +8,10 @@ import { sleep } from '../../utils'
 import { Auth } from '../Auth'
 import computeScoreScaleByTag from '../helpers/computeScoreScaleByTag'
 import { getComputationStatus, getLastComputationDate } from '../utils'
-import authRouter, { guarded } from './auth'
+import { guarded } from './middlewares'
 import tagsRouter from './tags/router'
 
 const router = Router()
-router.use(authRouter)
 router.use('/tags', tagsRouter)
 
 let tagsPercentageComputationController = new AbortController()
@@ -73,6 +72,10 @@ router.get('/status', async (req, res) => {
   const lastComputation = await getLastComputationDate()
 
   res.status(200).json({ status, lastComputation })
+})
+
+router.get('/auth', guarded, (req, res) => {
+  res.status(200).send()
 })
 
 export default router

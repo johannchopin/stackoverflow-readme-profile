@@ -9,9 +9,20 @@ import { Log, LogType } from './entity/Log'
 import { ScoreAmountByTag } from './entity/ScoreAmountByTag'
 import { ScorePercentileByTag } from './entity/ScorePercentileByTag'
 import { storeLog } from './utils'
+import { UserRankByTag } from './entity/UserRankByTag'
 
 export const connect = async (): Promise<void> => {
   config()
+
+  const entities = [
+    User,
+    Avatar,
+    PopularTag,
+    Log,
+    ScoreAmountByTag,
+    ScorePercentileByTag,
+    UserRankByTag
+  ]
 
   await createConnection({
     type: 'postgres',
@@ -22,7 +33,7 @@ export const connect = async (): Promise<void> => {
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: ['error'],
-    entities: [User, Avatar, PopularTag, Log, ScoreAmountByTag, ScorePercentileByTag]
+    entities
   }).catch(error => {
     Logger.log('Data Access Error: ')
     Logger.log(error)

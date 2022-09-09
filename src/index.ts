@@ -25,6 +25,9 @@ export const getProfileSvg = async (
 ): Promise<string> => {
   try {
     const user = await getUser(userId, useCache)
+
+    if (!user) throw new Error(`User with id ${userId} doesn't exist`)
+
     const { website, location } = user
 
     const renderParams = {

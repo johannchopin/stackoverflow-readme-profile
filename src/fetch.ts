@@ -42,7 +42,7 @@ const getApiEntryPoint = (id: number): string => {
   return `https://api.stackexchange.com/2.2/users/${id}?site=stackoverflow${token ? `&key=${token}` : ''}`
 }
 
-export const fetchUser = async (id: number): Promise<User> => {
+export const fetchUser = async (id: number): Promise<User | undefined> => {
   try {
     const response = await fetch(getApiEntryPoint(id))
 
@@ -63,6 +63,6 @@ export const fetchUser = async (id: number): Promise<User> => {
       website: user.website_url
     }
   } catch (error) {
-    throw new Error(error)
+    return undefined
   }
 }

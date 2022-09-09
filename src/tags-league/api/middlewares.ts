@@ -1,6 +1,7 @@
 import {
   NextFunction, Router, Request, Response
 } from 'express'
+import { isTagInLeague } from '../utils'
 
 const router = Router()
 
@@ -17,8 +18,16 @@ export const guarded = (req: Request, res: Response, next: NextFunction): void =
   }
 }
 
-router.get('/auth', guarded, (req, res) => {
-  res.status(200).send()
-})
+// check that a tag is part of the league
+export const validTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const tagName = req.params.tagName
 
-export default router
+  if (tagName) {
+    if (!(await isTagInLeague(tagName))) {
+      res.status(404).send(`The tag ${tagName} is not part of the league`)
+      return
+    }
+  }
+
+  next()
+}

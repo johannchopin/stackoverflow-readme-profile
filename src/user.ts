@@ -29,12 +29,13 @@ export const getAvatar = async (
   return storedAvatar.base64
 }
 
-export const getUser = async (userId: number, useCache: boolean = true): Promise<User & {avatar: string}> => {
+export const getUser = async (userId: number, useCache: boolean = true): Promise<(User & { avatar: string }) | undefined> => {
   const storedUser = useCache ? await getStoredUser(userId) : undefined
 
   if (storedUser) {
     if (shouldUpdateUserCache(storedUser)) {
       const user = await fetchUser(userId)
+      if (!user) return undefined
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
 
       updateUser(user)
@@ -55,6 +56,7 @@ export const getUser = async (userId: number, useCache: boolean = true): Promise
   }
 
   const user = await fetchUser(userId)
+  if (!user) return undefined
 
   if (useCache) createUser(user)
   return {

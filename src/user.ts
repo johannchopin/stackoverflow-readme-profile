@@ -29,7 +29,11 @@ export const getAvatar = async (
   return storedAvatar.base64
 }
 
-export const getUser = async (userId: number, useCache: boolean = true): Promise<(User & { avatar: string }) | undefined> => {
+export const getUser = async (
+  userId: number,
+  useCache: boolean = true
+): Promise<(User & { avatar: string }
+) | undefined> => {
   const storedUser = useCache ? await getStoredUser(userId) : undefined
 
   if (storedUser) {

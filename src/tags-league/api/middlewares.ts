@@ -1,9 +1,7 @@
 import {
-  NextFunction, Router, Request, Response
+  NextFunction, Request, Response
 } from 'express'
 import { isTagInLeague } from '../utils'
-
-const router = Router()
 
 export const guarded = (req: Request, res: Response, next: NextFunction): void => {
   const bearer = req.headers.authorization

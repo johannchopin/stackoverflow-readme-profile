@@ -1,11 +1,11 @@
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
-import { EntityManager } from "typeorm";
-import { MIN_SCORE_TO_BE_IN_LEAGUE, MS_IN_DAY } from "../../const";
-import { UserRankByTag } from "../../db/entity/UserRankByTag";
-import { User } from "../../types";
-import { getUser } from "../../user";
-import { Logger } from '../../Logger';
+import { EntityManager } from 'typeorm'
+import { MIN_SCORE_TO_BE_IN_LEAGUE, MS_IN_DAY } from '../../const'
+import { UserRankByTag } from '../../db/entity/UserRankByTag'
+import { User } from '../../types'
+import { getUser } from '../../user'
+import { Logger } from '../../Logger'
 
 interface ScrappedTag {
   tag: string
@@ -38,33 +38,42 @@ const scrapTagsScoreInPage = async (pageUrl: string): Promise<ScrappedTag[]> => 
   }
 }
 
-const getFetchedUserRank = async (manager: EntityManager, userId: number, tag: string): Promise<UserRankByTag | undefined> => {
+const getFetchedUserRank = async (
+  manager: EntityManager,
+  userId: number,
+  tag: string
+): Promise<UserRankByTag | undefined> => {
   const user = await getUser(userId)
   if (!user) return undefined
 
   let currentPage = 1
   let scrappedTags: ScrappedTag[] = []
   do {
+    // eslint-disable-next-line no-await-in-loop
     scrappedTags = await scrapTagsScoreInPage(getUserSoTagsPageUrl(user, currentPage))
 
     const match = scrappedTags.find((scrappedTag) => scrappedTag.tag === tag)
 
     if (match) {
-      const user = new UserRankByTag()
-      user.id = userId
-      user.score = match.score
-      user.tag = match.tag
-      user.topPercentage = 1
-      return manager.save(user)
+      const userRank = new UserRankByTag()
+      userRank.id = userId
+      userRank.score = match.score
+      userRank.tag = match.tag
+      userRank.topPercentage = 1
+      return manager.save(userRank)
     }
 
     currentPage += 1
-  } while (scrappedTags.length > 0 && scrappedTags[0].score >= MIN_SCORE_TO_BE_IN_LEAGUE);
+  } while (scrappedTags.length > 0 && scrappedTags[0].score >= MIN_SCORE_TO_BE_IN_LEAGUE)
 
   return undefined
 }
 
-export const getUserRank = async (manager: EntityManager, userId: number, tag: string): Promise<UserRankByTag | undefined> => {
+export const getUserRank = async (
+  manager: EntityManager,
+  userId: number,
+  tag: string
+): Promise<UserRankByTag | undefined> => {
   const storedUser = await manager.findOne(UserRankByTag, {
     id: userId,
     tag

@@ -17,7 +17,7 @@ export class UserRankByTag {
   @Column({ type: 'float4' })
   topPercentage: number
 
-  @Column({ type: 'smallint' })
+  @Column({ type: 'integer' })
   score: number
 
   @CreateDateColumn({ type: 'timestamp' })

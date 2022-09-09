@@ -2,7 +2,7 @@ import { EntityManager } from 'typeorm'
 import { ScoreAmountByTag } from '../../../db/entity/ScoreAmountByTag'
 import { ScorePercentileByTag } from '../../../db/entity/ScorePercentileByTag'
 
-export const getScorePercentageForTag = async (
+export const getScorePercentagesForTag = async (
   manager: EntityManager,
   tag: string
 ): Promise<[number, number][]> => {
@@ -22,4 +22,19 @@ export const getScoreAmountsForTag = async (
     order: { score: 'DESC' },
     select: ['score', 'amount']
   })).map((scorePercentile) => [scorePercentile.score, scorePercentile.amount])
+}
+
+export const getTopPercentage = async (
+  manager: EntityManager,
+  tag: string,
+  score: number
+): Promise<number> => {
+  const scorePercentages = await getScorePercentagesForTag(manager, tag)
+  for (const [minScore, percentage] of scorePercentages) {
+    if (score >= minScore) {
+      return percentage
+    }
+  }
+
+  return 100
 }

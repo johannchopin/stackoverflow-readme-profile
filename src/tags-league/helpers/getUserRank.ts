@@ -6,6 +6,7 @@ import { UserRankByTag } from '../../db/entity/UserRankByTag'
 import { User } from '../../types'
 import { getUser } from '../../user'
 import { Logger } from '../../Logger'
+import { getTopPercentage } from '../api/tags/utils'
 
 interface ScrappedTag {
   tag: string
@@ -59,7 +60,7 @@ const getFetchedUserRank = async (
       userRank.id = userId
       userRank.score = match.score
       userRank.tag = match.tag
-      userRank.topPercentage = 1
+      userRank.topPercentage = await getTopPercentage(manager, tag, match.score)
       return manager.save(userRank)
     }
 

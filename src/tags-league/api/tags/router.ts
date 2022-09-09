@@ -6,7 +6,7 @@ import { Logger } from '../../../Logger'
 import getScrapedPopularTags from '../../helpers/getScrapedPopularTags'
 import { getUserRank } from '../../helpers/getUserRank'
 import { guarded, validTag } from '../middlewares'
-import { getScoreAmountsForTag, getScorePercentageForTag } from './utils'
+import { getScoreAmountsForTag, getScorePercentagesForTag } from './utils'
 
 const router = Router()
 
@@ -53,7 +53,7 @@ router.get(
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
 
-    const scorePercentages = await getScorePercentageForTag(manager, tag)
+    const scorePercentages = await getScorePercentagesForTag(manager, tag)
 
     if (scorePercentages.length <= 0) {
       res.status(404).send()
@@ -73,7 +73,7 @@ router.get(
 
     const [scoreAmounts, scorePercentages] = await Promise.all([
       getScoreAmountsForTag(manager, tag),
-      getScorePercentageForTag(manager, tag)
+      getScorePercentagesForTag(manager, tag)
     ])
 
     const percentages: number[] = []
@@ -113,9 +113,16 @@ router.get(
     const tag = encodeURIComponent(req.params.tagName)
     const userId = req.params.userId
 
-    getUserRank(manager, Number(userId), tag)
+    const userRank = await getUserRank(manager, Number(userId), tag)
+    if (!userRank) {
+      res.status(404).send()
+      return
+    }
 
-    res.json({})
+    res.json({
+      score: userRank.score,
+      topPercentage: userRank.topPercentage
+    })
   }
 )
 

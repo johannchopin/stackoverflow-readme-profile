@@ -4,11 +4,38 @@
 
   export let percentageAmounts: [number, number][];
   export let scorePercentages: [number, number][];
+  export let userTopPercentage: number = 11;
 
   const CHART_ID = "userRepartionByTag";
   let isMounted = false;
 
-  const renderChart = (percentageAmounts, scorePercentages) => {
+  const getUserTopPercentagePlotLine = (
+    topPercentages: number[],
+    topPercentage: number
+  ) => {
+    const positionInGraph = topPercentages.indexOf(topPercentage);
+    const labelLeftToBar = positionInGraph > topPercentages.length * 0.75;
+    return {
+      color: "#F48024",
+      width: 3,
+      value: positionInGraph,
+      label: {
+        text: "user rank",
+        rotation: 0,
+        textAlign: labelLeftToBar && "right",
+        x: labelLeftToBar ? -2 : 2,
+        style: {
+          fontWeight: "bold",
+        },
+      },
+    };
+  };
+
+  const renderChart = (
+    percentageAmounts,
+    scorePercentages,
+    userTopPercentage
+  ) => {
     const scoreForPercentages: number[] = [];
     const topPercentages: number[] = [];
 
@@ -16,6 +43,10 @@
       scoreForPercentages.push(score);
       topPercentages.push(percentage);
     });
+
+    const plotLines = userTopPercentage
+      ? [getUserTopPercentagePlotLine(topPercentages, userTopPercentage)]
+      : undefined;
 
     Highcharts.chart(CHART_ID, {
       chart: {
@@ -32,14 +63,7 @@
           title: {
             text: "Top %",
           },
-          plotLines: [
-            {
-              color: "#FF0000", // Red
-              width: 2,
-              value: 25, // Position, you'll have to translate this to the values on your x axis
-              label: { text: "User johannchopin", rotation: 0 },
-            },
-          ],
+          plotLines,
         },
       ],
       yAxis: [
@@ -103,7 +127,8 @@
   };
 
   $: {
-    if (isMounted) renderChart(percentageAmounts, scorePercentages);
+    if (isMounted)
+      renderChart(percentageAmounts, scorePercentages, userTopPercentage);
   }
 
   onMount(() => {

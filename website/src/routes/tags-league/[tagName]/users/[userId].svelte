@@ -45,7 +45,7 @@
 <div class="row justify-content-center mt-5">
   <div class="col-10 col-md-4">
     <img
-      src="{API_BASEURL}/profile/8583669?theme=dark&website=true&location=true"
+      src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
       alt="user:{userId}'s SO profile"
       class="w-100"
     />

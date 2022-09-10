@@ -16,7 +16,7 @@
       {#each scorePercentages as scorePercentages}
         <tr>
           <td>{scorePercentages[1]}%</td>
-          <td>{scorePercentages[0]}</td>
+          <td>&#x2265; {scorePercentages[0]}</td>
         </tr>
       {/each}
     </tbody>

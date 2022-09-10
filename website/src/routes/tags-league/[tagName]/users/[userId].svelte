@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import Rank from "$lib/components/tags-league/Rank.svelte";
   import SoTagLink from "$lib/components/tags-league/SoTagLink.svelte";
+  import LoadingAnimation from "$lib/components/tags-league/LoadingAnimation.svelte";
 
   let tag = $page.params.tagName;
   let userId = $page.params.userId;
@@ -53,9 +54,11 @@
   });
 </script>
 
+<LoadingAnimation hide={(score && topPercentage) !== undefined} />
+
 <h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
   Tags League:
-  <SoTagLink {tag} class="ms-2 fs-3" />
+  <SoTagLink {tag} class="ms-2 fs-4" />
 </h1>
 
 {#if score && topPercentage}
@@ -71,7 +74,8 @@
   </div>
   <div class="row justify-content-center mt-4">
     <p class="col-11 col-md-6 m-0 fs-5 text-center lh-sm">
-      This user is part of the <span class="text-primary fw-bold">
+      This user is part of the
+      <span class="text-primary fw-bold">
         top {topPercentage}
         <span class="fs-6" style="margin-left: -.35em;">%</span>
       </span>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { API_BASEURL } from "$lib/constants";
   import UsersRepartionByTag from "./graphs/UsersRepartionByTag.svelte";
+  import SoTagLink from "./SoTagLink.svelte";
 
   import TagScorePercentageTable from "./TagScorePercentageTable.svelte";
 
@@ -43,9 +44,7 @@
 
 <h2 class="fs-4 mt-5">
   Insights of the tag
-  <span class="fs-4 so-tag">
-    {tag}
-  </span>
+  <SoTagLink class="fs-4" {tag} />
 </h2>
 
 {#if scorePercentages && percentageAmounts}

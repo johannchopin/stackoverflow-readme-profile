@@ -1,10 +1,10 @@
+import { EntityManager, getManager } from 'typeorm'
 import {
-  createUser,
   getUser as getStoredUser,
   getUserAvatar,
   shouldUpdateUserCache,
   storeAvatar,
-  updateUser
+  storeUser,
 } from './db/utils'
 import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
@@ -31,7 +31,8 @@ export const getAvatar = async (
 
 export const getUser = async (
   userId: number,
-  useCache: boolean = true
+  useCache: boolean = true,
+  manager = getManager()
 ): Promise<(User & { avatar: string }
 ) | undefined> => {
   const storedUser = useCache ? await getStoredUser(userId) : undefined
@@ -41,8 +42,9 @@ export const getUser = async (
       const user = await fetchUser(userId)
       if (!user) return undefined
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
+      console.log(shouldUpdateAvatar);
 
-      updateUser(user)
+      await storeUser(manager, user)
       return {
         ...user,
         avatar: await getAvatar(user.id, user.avatarLink, shouldUpdateAvatar)
@@ -62,7 +64,7 @@ export const getUser = async (
   const user = await fetchUser(userId)
   if (!user) return undefined
 
-  if (useCache) createUser(user)
+  if (useCache) storeUser(manager, user)
   return {
     ...user,
     avatar: await getAvatar(user.id, user.avatarLink, false, useCache)

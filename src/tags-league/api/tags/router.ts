@@ -5,7 +5,7 @@ import { PopularTag } from '../../../db/entity/PopularTag'
 import { Logger } from '../../../Logger'
 import getScrapedPopularTags from '../../helpers/getScrapedPopularTags'
 import { getUserRank } from '../../helpers/getUserRank'
-import { guarded, validTag } from '../middlewares'
+import { guarded, validTagName, validUserId } from '../middlewares'
 import { getScoreAmountsForTag, getScorePercentagesForTag } from './utils'
 
 const router = Router()
@@ -48,7 +48,7 @@ router.post(
 
 router.get(
   '/:tagName/scorePercentages',
-  validTag,
+  validTagName,
   async (req, res) => {
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
@@ -66,7 +66,7 @@ router.get(
 
 router.get(
   '/:tagName/users/repartitionByScore',
-  validTag,
+  validTagName,
   async (req, res) => {
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)
@@ -107,7 +107,8 @@ router.get(
 
 router.get(
   '/:tagName/users/:userId',
-  validTag,
+  validTagName,
+  validUserId,
   async (req, res) => {
     const manager = getManager()
     const tag = encodeURIComponent(req.params.tagName)

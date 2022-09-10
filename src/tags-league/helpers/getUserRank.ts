@@ -44,7 +44,7 @@ const getFetchedUserRank = async (
   userId: number,
   tag: string
 ): Promise<UserRankByTag | undefined> => {
-  const user = await getUser(userId)
+  const user = await getUser(userId, true, manager)
   if (!user) return undefined
 
   let currentPage = 1

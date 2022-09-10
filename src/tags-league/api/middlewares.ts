@@ -17,7 +17,7 @@ export const guarded = (req: Request, res: Response, next: NextFunction): void =
 }
 
 // check that a tag is part of the league
-export const validTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const validTagName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const tagName = req.params.tagName
 
   if (tagName) {
@@ -25,6 +25,19 @@ export const validTag = async (req: Request, res: Response, next: NextFunction):
       res.status(404).send(`The tag ${tagName} is not part of the league`)
       return
     }
+  }
+
+  next()
+}
+
+// check that the given userId is a numeric valud
+export const validUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const userId = req.params.userId
+  const userIdIsNumber = /^\d+$/.test(userId);
+
+  if (!userIdIsNumber) {
+    res.status(400).send("Given user id should be a number")
+    return
   }
 
   next()

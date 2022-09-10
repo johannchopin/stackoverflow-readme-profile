@@ -1,4 +1,4 @@
-import { getManager } from 'typeorm'
+import { createConnection, EntityManager, getManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
@@ -27,25 +27,19 @@ export const getUserAvatar = async (userId: number): Promise<Avatar | undefined>
   return getManager().findOne(Avatar, { id: userId })
 }
 
-export const storeAvatar = async (userId: number, avatarBase64: string): Promise<void> => {
+export const storeAvatar = async (userId: number, avatarBase64: string): Promise<Avatar> => {
   const manager = getManager()
-
-  const existingAvatar = await getUserAvatar(userId)
 
   const avatar = new Avatar()
   avatar.id = userId
   avatar.base64 = avatarBase64
 
-  if (existingAvatar) {
-    await manager.update(Avatar, { id: userId }, avatar)
-  } else {
-    await manager.save(avatar)
-  }
+  return manager.transaction((m) => {
+    return m.save(avatar)
+  })
 }
 
-export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<User> => {
-  const manager = getManager()
-
+export const storeUser = async (manager: EntityManager, userToInsert: UserType): Promise<User> => {
   const user = new User()
 
   user.id = userToInsert.id
@@ -58,19 +52,9 @@ export const storeUser = async (userToInsert: UserType, action: 'create' | 'upda
   user.website = userToInsert.website
   user.avatarLink = userToInsert.avatarLink
 
-  if (action === 'update') {
-    user.updatedAt = new Date()
-  }
-
-  return manager.save(user)
-}
-
-export const updateUser = async (userToInsert: UserType): Promise<User> => {
-  return storeUser(userToInsert, 'update')
-}
-
-export const createUser = async (userToInsert: UserType): Promise<User> => {
-  return storeUser(userToInsert, 'create')
+  return manager.transaction((m) => {
+    return m.save(user)
+  })
 }
 
 export const getPopularTags = async (): Promise<PopularTag[]> => {

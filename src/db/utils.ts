@@ -37,7 +37,6 @@ export const storeAvatar = async (userId: number, avatarBase64: string): Promise
 
 export const storeUser = async (userToInsert: UserType): Promise<User> => {
   const user = new User()
-  console.log('storeUser', Date.now())
 
   user.id = userToInsert.id
   user.username = userToInsert.username

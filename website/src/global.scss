@@ -45,14 +45,14 @@ code {
 }
 
 .so-tag {
+  @extend .rounded-2;
+  @extend .p-1;
+  @extend .px-2;
+
   color: #9cc1db;
   background-color: #3d4951;
   font-size: 0.8rem;
   border: solid 2px transparent;
-
-  @extend .rounded-2;
-  @extend .p-1;
-  @extend .px-2;
 
   &.clickable {
 

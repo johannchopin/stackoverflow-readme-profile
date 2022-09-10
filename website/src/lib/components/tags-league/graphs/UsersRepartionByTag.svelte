@@ -4,7 +4,7 @@
 
   export let percentageAmounts: [number, number][];
   export let scorePercentages: [number, number][];
-  export let userTopPercentage: number = 11;
+  export let userTopPercentage: number = undefined;
 
   const CHART_ID = "userRepartionByTag";
   let isMounted = false;
@@ -19,13 +19,16 @@
       color: "#F48024",
       width: 3,
       value: positionInGraph,
+      zIndex: 3,
       label: {
         text: "user rank",
         rotation: 0,
         textAlign: labelLeftToBar && "right",
         x: labelLeftToBar ? -2 : 2,
+        y: -5,
         style: {
           fontWeight: "bold",
+          textDecoration: "underline",
         },
       },
     };
@@ -62,6 +65,7 @@
           crosshair: true,
           title: {
             text: "Top %",
+            style: { fontWeight: "bold" },
           },
           plotLines,
         },
@@ -78,6 +82,7 @@
             text: "Score",
             style: {
               color: Highcharts.getOptions().colors[1],
+              fontWeight: "bold",
             },
           },
         },
@@ -87,6 +92,7 @@
             text: "Amount of users",
             style: {
               color: Highcharts.getOptions().colors[0],
+              fontWeight: "bold",
             },
           },
           labels: {

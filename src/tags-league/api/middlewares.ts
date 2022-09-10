@@ -33,10 +33,10 @@ export const validTagName = async (req: Request, res: Response, next: NextFuncti
 // check that the given userId is a numeric valud
 export const validUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const userId = req.params.userId
-  const userIdIsNumber = /^\d+$/.test(userId);
+  const userIdIsNumber = /^\d+$/.test(userId)
 
   if (!userIdIsNumber) {
-    res.status(400).send("Given user id should be a number")
+    res.status(400).send('Given user id should be a number')
     return
   }
 

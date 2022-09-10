@@ -1,10 +1,9 @@
-import { EntityManager, getManager } from 'typeorm'
 import {
   getUser as getStoredUser,
   getUserAvatar,
   shouldUpdateUserCache,
   storeAvatar,
-  storeUser,
+  storeUser
 } from './db/utils'
 import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
@@ -41,7 +40,7 @@ export const getUser = async (
       const user = await fetchUser(userId)
       if (!user) return undefined
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
-      console.log(shouldUpdateAvatar);
+      console.log(shouldUpdateAvatar)
 
       await storeUser(user)
       return {

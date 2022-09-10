@@ -28,19 +28,16 @@ export const getUserAvatar = async (userId: number): Promise<Avatar | undefined>
 }
 
 export const storeAvatar = async (userId: number, avatarBase64: string): Promise<Avatar> => {
-  const manager = getManager()
-
   const avatar = new Avatar()
   avatar.id = userId
   avatar.base64 = avatarBase64
 
-  return manager.transaction((m) => {
-    return m.save(avatar)
-  })
+  return getManager().save(avatar)
 }
 
-export const storeUser = async (manager: EntityManager, userToInsert: UserType): Promise<User> => {
+export const storeUser = async (userToInsert: UserType): Promise<User> => {
   const user = new User()
+  console.log("storeUser", Date.now());
 
   user.id = userToInsert.id
   user.username = userToInsert.username
@@ -52,9 +49,7 @@ export const storeUser = async (manager: EntityManager, userToInsert: UserType):
   user.website = userToInsert.website
   user.avatarLink = userToInsert.avatarLink
 
-  return manager.transaction((m) => {
-    return m.save(user)
-  })
+  return getManager().save(user)
 }
 
 export const getPopularTags = async (): Promise<PopularTag[]> => {

@@ -1,20 +1,21 @@
 import fetch from 'node-fetch'
 import * as cheerio from 'cheerio'
-import { EntityManager } from 'typeorm'
+import { EntityManager, getManager } from 'typeorm'
 import { MIN_SCORE_TO_BE_IN_LEAGUE, MS_IN_DAY } from '../../const'
 import { UserRankByTag } from '../../db/entity/UserRankByTag'
 import { User } from '../../types'
-import { getUser } from '../../user'
 import { Logger } from '../../Logger'
 import { getTopPercentage } from '../api/tags/utils'
+import { getUser } from '../../db/utils'
+import { fetchUser } from '../../fetch'
 
 interface ScrappedTag {
   tag: string
   score: number
 }
 
-const getUserSoTagsPageUrl = (user: User, page = 1): string => {
-  return `https://stackoverflow.com/users/${user.id}/${user.username}?tab=tags&sort=votes&page=${page}`
+const getUserSoTagsPageUrl = (userId: number, userName: string, page = 1): string => {
+  return `https://stackoverflow.com/users/${userId}/${userName}?tab=tags&sort=votes&page=${page}`
 }
 
 const scrapTagsScoreInPage = async (pageUrl: string): Promise<ScrappedTag[]> => {
@@ -44,14 +45,22 @@ const getFetchedUserRank = async (
   userId: number,
   tag: string
 ): Promise<UserRankByTag | undefined> => {
-  const user = await getUser(userId, true, manager)
-  if (!user) return undefined
+  const storedUser = await getUser(userId)
+
+  let userName: string | undefined
+  if (storedUser) {
+    userName = storedUser.username
+  } else {
+    userName = (await fetchUser(userId))?.username
+  }
+
+  if (!userName) return undefined
 
   let currentPage = 1
   let scrappedTags: ScrappedTag[] = []
   do {
     // eslint-disable-next-line no-await-in-loop
-    scrappedTags = await scrapTagsScoreInPage(getUserSoTagsPageUrl(user, currentPage))
+    scrappedTags = await scrapTagsScoreInPage(getUserSoTagsPageUrl(userId, userName, currentPage))
 
     const match = scrappedTags.find((scrappedTag) => scrappedTag.tag === tag)
 
@@ -62,7 +71,7 @@ const getFetchedUserRank = async (
       userRank.tag = match.tag
       // eslint-disable-next-line no-await-in-loop
       userRank.topPercentage = await getTopPercentage(manager, tag, match.score)
-      return manager.save(userRank)
+      return getManager().save(userRank)
     }
 
     currentPage += 1

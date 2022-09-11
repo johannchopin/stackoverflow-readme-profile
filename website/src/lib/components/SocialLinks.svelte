@@ -19,7 +19,11 @@
     </span>
     <span class="visually-hidden">Link to GitHub's repository</span>
   </a>
-  <a class="p-1" href={`${GITHUB_REPO_URL}/stargazers`} target="_blank">
+  <a
+    class="p-1 d-none d-md-inline"
+    href={`${GITHUB_REPO_URL}/stargazers`}
+    target="_blank"
+  >
     <img
       alt="GitHub Repo stars"
       src={`https://img.shields.io/github/stars/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}?style=social`}

@@ -11,8 +11,9 @@
 </script>
 
 <main class="container pt-0 pt-md-5">
-  <div class="mt-3 d-flex justify-content-end">
+  <div class="mt-3 d-flex justify-content-end align-items-center">
     <Navbar />
+    <span class="mx-3 text-primary fs-5" />
     <SocialLinks />
   </div>
   <slot />

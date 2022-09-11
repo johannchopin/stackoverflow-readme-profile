@@ -1,6 +1,6 @@
 name: Propose tag to the tags-league
 title: "Tag proposition: tagname"
-description: "Propose a tag to be included in the tags-league"
+description: "Propose a tag to be included in the 🏆tags-league"
 labels: ["tag-proposition"]
 assignees:
   - johannchopin
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for your interest in expanding the tags-league!
+        Thank you for your interest in expanding the 🏆tags-league!
   - type: input
     id: tagName
     attributes:
@@ -19,8 +19,8 @@ body:
   - type: input
     id: tagLink
     attributes:
-      label: Link to tag's StackOverflow page
-      description: Just provide the link like `https://stackoverflow.com/tags/<tagname>/topusers`
+      label: Link to tag's StackOverflow insights
+      description: Just provide the link like `https://stackoverflow.com/tags/<tagname>/topusers`. Goal is to easily check the tag's pertinence.
       placeholder: ex. https://stackoverflow.com/tags/javascript/topusers
     validations:
       required: true

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Question from "$lib/components/icons/Question.svelte";
+  import LastUpdate from "$lib/components/LastUpdate.svelte";
   import Login from "$lib/components/Login.svelte";
   import { API_BASEURL } from "$lib/constants";
   import { onMount } from "svelte";
@@ -91,13 +92,7 @@
 <h1 class="mb-0 mt-3 fs-3 fw-bold">Tags League admin zone</h1>
 
 {#if lastLeagueComputation}
-  <p class="w-fit-content ms-auto border border-primary p-1 rounded-2 mt-5">
-    <span class="text-primary">Last computation:</span>
-
-    <span class="fw-bold">
-      {lastLeagueComputation.toLocaleString()}
-    </span>
-  </p>
+  <LastUpdate date={lastLeagueComputation} />
 {/if}
 
 {#if apiToken}

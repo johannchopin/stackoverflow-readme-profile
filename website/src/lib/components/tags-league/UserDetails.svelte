@@ -28,6 +28,9 @@
       <span class="fs-6" style="margin-left: -.35em;">%</span>
     </span>
     Stack Overflow answerers in the technology
-    <SoTagLink {tag} /> with a score of {score}.
+    <SoTagLink {tag} class="fw-bold fs-" /> with a score of
+    <span class="badge rounded-2 bg-success p-1 text-dark">
+      {score.toLocaleString()}
+    </span>.
   </p>
 </div>

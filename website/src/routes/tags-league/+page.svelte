@@ -6,15 +6,11 @@
   import { API_BASEURL } from "$lib/constants";
   import TagDetails from "$lib/components/tags-league/TagDetails.svelte";
   import SoCup from "$lib/components/icons/SoCup.svelte";
+  import TagsList from "$lib/components/tags-league/TagsList.svelte";
 
   let tags: string[] = [];
-  let filter = "";
   $: selectedTag = $page.url.searchParams.get("tag");
   $: selectedTagIsValid = tags.includes(selectedTag);
-
-  const getTagRandomDelay = (): string => {
-    return (Math.random() * (0 - 1.2) + 1.2).toFixed(4);
-  };
 
   onMount(async () => {
     tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
@@ -29,30 +25,7 @@
   </span>
 </h1>
 
-<div class="input-group m-0  mt-5 row">
-  <div class="col-6 col-md-4 ms-auto p-0">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Filter by tag name"
-      bind:value={filter}
-    />
-  </div>
-</div>
-
-<ul class="d-flex justify-content-center flex-wrap mt-2 list-unstyled">
-  {#each tags as tag}
-    <li class="my-1" style="animation-delay: {getTagRandomDelay()}s;">
-      <a
-        href={"?tag=" + encodeURIComponent(tag)}
-        class="mx-1 so-tag clickable text-bg-dark text-decoration-none"
-        class:selected={tag === selectedTag}
-        class:d-none={filter.length > 0 && !tag.includes(filter)}
-        >{tag}
-      </a>
-    </li>
-  {/each}
-</ul>
+<TagsList {tags} {selectedTag} />
 
 {#if selectedTag && selectedTagIsValid}
   <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
@@ -63,26 +36,5 @@
   h1 :global(svg) {
     height: 1.8rem;
     width: 1.8rem;
-  }
-
-  ul li,
-  input {
-    opacity: 0;
-    animation: apparition 0.3s forwards;
-  }
-
-  input {
-    animation-delay: 1.7s;
-  }
-
-  @keyframes apparition {
-    from {
-      opacity: 0;
-      transform: translateY(0.5em);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 </style>

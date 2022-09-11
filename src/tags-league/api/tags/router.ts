@@ -125,7 +125,8 @@ router.get(
 
       res.json({
         score: userRank.score,
-        topPercentage: userRank.topPercentage
+        topPercentage: userRank.topPercentage,
+        lastUpdate: userRank.updatedAt
       })
     } catch (error) {
       Logger.error(error.message)

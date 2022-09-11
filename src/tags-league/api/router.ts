@@ -47,6 +47,7 @@ router.post(
       Logger.error('Issue by computing the league')
       await storeLog(LogType.ERROR, error)
       await storeLog(LogType.LEAGUE_COMPUTATION_STOP)
+      res.status(500).send()
     }
   }
 )

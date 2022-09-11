@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { getManager } from 'typeorm'
+import { LogType } from '../../../db/entity/Log'
 import { PopularTag } from '../../../db/entity/PopularTag'
+import { storeLog } from '../../../db/utils'
 
 import { Logger } from '../../../Logger'
 import getScrapedPopularTags from '../../helpers/getScrapedPopularTags'
@@ -110,20 +112,26 @@ router.get(
   validTagName,
   validUserId,
   async (req, res) => {
-    const manager = getManager()
-    const tag = encodeURIComponent(req.params.tagName)
-    const userId = req.params.userId
+    try {
+      const manager = getManager()
+      const tag = encodeURIComponent(req.params.tagName)
+      const userId = req.params.userId
 
-    const userRank = await getUserRank(manager, Number(userId), tag)
-    if (!userRank) {
-      res.status(404).send()
-      return
+      const userRank = await getUserRank(manager, Number(userId), tag)
+      if (!userRank) {
+        res.status(404).send()
+        return
+      }
+
+      res.json({
+        score: userRank.score,
+        topPercentage: userRank.topPercentage
+      })
+    } catch (error) {
+      Logger.error(error.message)
+      storeLog(LogType.ERROR, error.message)
+      res.status(500).send()
     }
-
-    res.json({
-      score: userRank.score,
-      topPercentage: userRank.topPercentage
-    })
   }
 )
 

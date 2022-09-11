@@ -40,7 +40,6 @@ export const getUser = async (
       const user = await fetchUser(userId)
       if (!user) return undefined
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
-      console.log(shouldUpdateAvatar)
 
       await storeUser(user)
       return {

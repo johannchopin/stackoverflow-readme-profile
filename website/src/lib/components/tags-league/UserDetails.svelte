@@ -1,0 +1,33 @@
+<script lang="ts">
+  import { API_BASEURL } from "$lib/constants";
+
+  import Rank from "./Rank.svelte";
+  import SoTagLink from "./SoTagLink.svelte";
+
+  export let topPercentage: number;
+  export let userId: number;
+  export let tag: string;
+  export let score: number;
+</script>
+
+<div class="row justify-content-center align-items-center mt-5">
+  <Rank percentage={topPercentage} />
+
+  <div class="col-10 col-md-3 mt-3 mt-md-0">
+    <img
+      src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
+      alt="user:{userId}'s SO profile"
+    />
+  </div>
+</div>
+<div class="row justify-content-center mt-4">
+  <p class="col-11 col-md-6 m-0 fs-5 text-center lh-sm">
+    This user is part of the
+    <span class="text-primary fw-bold">
+      top {topPercentage}
+      <span class="fs-6" style="margin-left: -.35em;">%</span>
+    </span>
+    Stack Overflow answerers in the technology
+    <SoTagLink {tag} /> with a score of {score}.
+  </p>
+</div>

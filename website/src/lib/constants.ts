@@ -6,6 +6,7 @@ export const API_BASEURL = import.meta.env.VITE_API_BASEURL
 export const GITHUB_REPO_USER = 'johannchopin'
 export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}`
+export const ADD_TAG_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=johannchopin&labels=tag-proposition&template=ADD-TAG-TO-TAGS-LEAGUE.yml&title=Tag+proposition%3A+tagname'
 
 export const SO_PROFILE_URL_REGEXP = /^https:\/\/stackoverflow\.com\/users\/[0-9]+\d\/[a-z]+/g
 

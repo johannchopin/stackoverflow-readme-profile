@@ -95,8 +95,7 @@
     <span class="text-primary">Last computation:</span>
 
     <span class="fw-bold">
-      {lastLeagueComputation.toLocaleDateString()}
-      {lastLeagueComputation.getHours()}:{lastLeagueComputation.getMinutes()}:{lastLeagueComputation.getSeconds()}
+      {lastLeagueComputation.toLocaleString()}
     </span>
   </p>
 {/if}

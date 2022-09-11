@@ -7,8 +7,10 @@
   import Rank from "$lib/components/tags-league/Rank.svelte";
   import SoTagLink from "$lib/components/tags-league/SoTagLink.svelte";
   import LoadingAnimation from "$lib/components/tags-league/LoadingAnimation.svelte";
-  import { error } from "highcharts";
   import Error from "$lib/components/Error.svelte";
+  import UnknownTagError from "$lib/components/tags-league/UnknownTagError.svelte";
+  import UnknownUserError from "$lib/components/tags-league/UnknownUserError.svelte";
+  import UserDetails from "$lib/components/tags-league/UserDetails.svelte";
 
   let tag = $page.params.tagName;
   let userId = $page.params.userId;
@@ -77,40 +79,13 @@
   <SoTagLink {tag} class="ms-2 fs-4" />
 </h1>
 
-{#if errors.invalidTag || errors.invalidUser}
-  <Error title="Invalid tag name">
-    <p class="w-fit-content fs-5">
-      The provided tag <span class="so-tag">{tag}</span> is not currently part of
-      the Tags-league.
-    </p>
-  </Error>
-{/if}
+{#if errors.invalidTag}
+  <UnknownTagError {tag} />
+{:else if errors.invalidUser}
+  <UnknownUserError />
+{:else if scorePercentages && percentageAmounts && topPercentage}
+  <UserDetails {userId} {score} {tag} {topPercentage} />
 
-{#if score && topPercentage}
-  <div class="row justify-content-center align-items-center mt-5">
-    <Rank percentage={topPercentage} />
-
-    <div class="col-10 col-md-3 mt-3 mt-md-0">
-      <img
-        src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
-        alt="user:{userId}'s SO profile"
-      />
-    </div>
-  </div>
-  <div class="row justify-content-center mt-4">
-    <p class="col-11 col-md-6 m-0 fs-5 text-center lh-sm">
-      This user is part of the
-      <span class="text-primary fw-bold">
-        top {topPercentage}
-        <span class="fs-6" style="margin-left: -.35em;">%</span>
-      </span>
-      Stack Overflow answerers in the technology
-      <SoTagLink {tag} /> with a score of {score}.
-    </p>
-  </div>
-{/if}
-
-{#if scorePercentages && percentageAmounts && topPercentage}
   <div class="row">
     <hr
       class="border border-primary border-1 col-8 col-md-6 m-auto opacity-75 my-4"

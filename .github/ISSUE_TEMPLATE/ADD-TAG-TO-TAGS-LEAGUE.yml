@@ -1,6 +1,6 @@
-name: Add Tag
-title: "WIP: Add tag to the tags-league:"
-description: "Propose a tag to include in the tags-league"
+name: Propose tag to the tags-league
+title: "Tag proposition: tagname"
+description: "Propose a tag to be included in the tags-league"
 labels: ["tag-proposition"]
 assignees:
   - johannchopin
@@ -20,7 +20,14 @@ body:
     id: tagLink
     attributes:
       label: Link to tag's StackOverflow page
-      description: Just provide the link like https://stackoverflow.com/tags/<tag>/topusers
+      description: Just provide the link like `https://stackoverflow.com/tags/<tagname>/topusers`
       placeholder: ex. https://stackoverflow.com/tags/javascript/topusers
     validations:
       required: true
+  - type: textarea
+    id: smthgToAdd
+    attributes:
+      label: Any comment?
+      placeholder: Leave a comment
+    validations:
+      required: false

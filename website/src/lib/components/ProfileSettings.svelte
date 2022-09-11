@@ -1,21 +1,22 @@
 <script lang="ts">
   import { SELECT_THEME_TITLE_ID } from "$lib/constants";
-  import { TemplateSettings, user } from "$lib/stores/user";
-  import PenIcon from '$lib/components/icons/Pen.svelte'
+  import { user } from "$lib/stores/user";
+  import type { TemplateSettings } from "$lib/stores/user";
+  import PenIcon from "$lib/components/icons/Pen.svelte";
 
-  export let template: string
-  export let settings: TemplateSettings
+  export let template: string;
+  export let settings: TemplateSettings;
 
-  const TADA_ANIMATION_DURATION = 1000
-  const HIGHLIGHT_CLASS = 'highlight'
-  const themesCtn = document.getElementById(SELECT_THEME_TITLE_ID)
+  const TADA_ANIMATION_DURATION = 1000;
+  const HIGHLIGHT_CLASS = "highlight";
+  const themesCtn = document.getElementById(SELECT_THEME_TITLE_ID);
 
   const onGoToThemeClick = (): void => {
-    themesCtn.classList.add(HIGHLIGHT_CLASS)
+    themesCtn.classList.add(HIGHLIGHT_CLASS);
     setTimeout(() => {
-      themesCtn.classList.remove(HIGHLIGHT_CLASS)
-    }, TADA_ANIMATION_DURATION)
-  }
+      themesCtn.classList.remove(HIGHLIGHT_CLASS);
+    }, TADA_ANIMATION_DURATION);
+  };
 </script>
 
 <div class="mb-3 d-flex">
@@ -36,7 +37,7 @@
 </div>
 
 {#each Object.keys(settings) as setting}
-  {#if settings[setting].type === 'boolean'}
+  {#if settings[setting].type === "boolean"}
     <div class="mt-2 d-flex">
       <label class="form-check-label w-50" for={`${template}-${setting}`}>
         <code class="bg-dark rounded p-1">{setting}</code>
@@ -48,7 +49,7 @@
           role="switch"
           id={`${template}-${setting}`}
           bind:checked={settings[setting].value}
-        >
+        />
       </div>
     </div>
   {/if}

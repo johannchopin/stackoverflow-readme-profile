@@ -7,6 +7,8 @@
   import Rank from "$lib/components/tags-league/Rank.svelte";
   import SoTagLink from "$lib/components/tags-league/SoTagLink.svelte";
   import LoadingAnimation from "$lib/components/tags-league/LoadingAnimation.svelte";
+  import { error } from "highcharts";
+  import Error from "$lib/components/Error.svelte";
 
   let tag = $page.params.tagName;
   let userId = $page.params.userId;
@@ -15,6 +17,10 @@
   let percentageAmounts: [number, number][];
   let score: number;
   let topPercentage: number;
+  let errors = {
+    invalidTag: false,
+    invalidUser: false,
+  };
 
   const fetchTagScoreRanking = async (tag: string): Promise<void> => {
     try {
@@ -22,7 +28,9 @@
         await fetch(`${API_BASEURL}/tags-league/tags/${tag}/scorePercentages`)
       ).json();
       scorePercentages = res;
-    } catch (error) {}
+    } catch (error) {
+      errors.invalidTag = true;
+    }
   };
 
   const fetchTagScoreAmounts = async (tag: string): Promise<void> => {
@@ -33,7 +41,9 @@
         )
       ).json();
       percentageAmounts = res.percentageAmounts;
-    } catch (error) {}
+    } catch (error) {
+      errors.invalidTag = true;
+    }
   };
 
   const fetchUserRank = async (tag: string, userId: string): Promise<void> => {
@@ -43,7 +53,9 @@
       ).json();
       score = res.score;
       topPercentage = res.topPercentage;
-    } catch (error) {}
+    } catch (error) {
+      errors.invalidUser = true;
+    }
   };
 
   onMount(() => {
@@ -54,12 +66,25 @@
   });
 </script>
 
-<LoadingAnimation hide={(score && topPercentage) !== undefined} />
+<LoadingAnimation
+  hide={(score && topPercentage) !== undefined ||
+    errors.invalidTag ||
+    errors.invalidUser}
+/>
 
 <h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
   Tags League:
   <SoTagLink {tag} class="ms-2 fs-4" />
 </h1>
+
+{#if errors.invalidTag || errors.invalidUser}
+  <Error title="Invalid tag name">
+    <p class="w-fit-content fs-5">
+      The provided tag <span class="so-tag">{tag}</span> is not currently part of
+      the Tags-league.
+    </p>
+  </Error>
+{/if}
 
 {#if score && topPercentage}
   <div class="row justify-content-center align-items-center mt-5">
@@ -85,13 +110,13 @@
   </div>
 {/if}
 
-<div class="row">
-  <hr
-    class="border border-primary border-1 col-8 col-md-6 m-auto opacity-75 my-4"
-  />
-</div>
-
 {#if scorePercentages && percentageAmounts && topPercentage}
+  <div class="row">
+    <hr
+      class="border border-primary border-1 col-8 col-md-6 m-auto opacity-75 my-4"
+    />
+  </div>
+
   <div class="row justify-content-center mt-5">
     <div class="col-12 col-md-8">
       <UsersRepartionByTag
@@ -104,9 +129,9 @@
 {/if}
 
 <style lang="scss">
-  @import "../../../../../node_modules/bootstrap/scss/functions";
-  @import "../../../../../node_modules/bootstrap/scss/variables";
-  @import "../../../../../node_modules/bootstrap/scss/mixins";
+  @import "../../../../../../node_modules/bootstrap/scss/functions";
+  @import "../../../../../../node_modules/bootstrap/scss/variables";
+  @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
   :global(.rank) {
     width: 32vw;

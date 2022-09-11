@@ -10,6 +10,7 @@
   let tags: string[] = [];
   let filter = "";
   $: selectedTag = $page.url.searchParams.get("tag");
+  $: selectedTagIsValid = tags.includes(selectedTag);
 
   const getTagRandomDelay = (): string => {
     return (Math.random() * (0 - 1.2) + 1.2).toFixed(4);
@@ -53,7 +54,7 @@
   {/each}
 </ul>
 
-{#if selectedTag}
+{#if selectedTag && selectedTagIsValid}
   <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
   <TagDetails tag={selectedTag} />
 {/if}

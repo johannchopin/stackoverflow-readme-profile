@@ -5,9 +5,8 @@ import { MIN_SCORE_TO_BE_IN_LEAGUE, MS_IN_DAY } from '../../const'
 import { UserRankByTag } from '../../db/entity/UserRankByTag'
 import { Logger } from '../../Logger'
 import { getTopPercentage } from '../api/tags/utils'
-import { getUser, storeLog } from '../../db/utils'
+import { getUser } from '../../db/utils'
 import { fetchUser } from '../../fetch'
-import { LogType } from '../../db/entity/Log'
 
 interface ScrappedTag {
   tag: string

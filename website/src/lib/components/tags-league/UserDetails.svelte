@@ -1,5 +1,6 @@
 <script lang="ts">
   import { API_BASEURL } from "$lib/constants";
+  import { getPathToUserSOProfilePage } from "$lib/utils";
 
   import Rank from "./Rank.svelte";
   import SoTagLink from "./SoTagLink.svelte";
@@ -14,10 +15,12 @@
   <Rank percentage={topPercentage} />
 
   <div class="col-10 col-md-3 mt-3 mt-md-0">
-    <img
-      src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
-      alt="user:{userId}'s SO profile"
-    />
+    <a href={getPathToUserSOProfilePage(userId)} target="_blank">
+      <img
+        src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
+        alt="user:{userId}'s SO profile"
+      />
+    </a>
   </div>
 </div>
 <div class="row justify-content-center mt-4">

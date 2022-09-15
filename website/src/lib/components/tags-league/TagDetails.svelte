@@ -1,6 +1,7 @@
 <script lang="ts">
   import { API_BASEURL } from "$lib/constants";
   import UsersRepartionByTag from "./graphs/UsersRepartionByTag.svelte";
+  import Loader from "./Loader.svelte";
   import SoTagLink from "./SoTagLink.svelte";
 
   import TagScorePercentageTable from "./TagScorePercentageTable.svelte";
@@ -48,7 +49,7 @@
 </h2>
 
 {#if scorePercentages && percentageAmounts}
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-12 col-md-4 my-2">
       <TagScorePercentageTable {scorePercentages} />
     </div>
@@ -56,4 +57,16 @@
       <UsersRepartionByTag {scorePercentages} {percentageAmounts} />
     </div>
   </div>
+{:else}
+  <div
+    class="loader border rounded-2 row justify-content-center align-items-center mx-2 mt-4 p-5"
+  >
+    <Loader />
+  </div>
 {/if}
+
+<style>
+  .loader :global(.loader) {
+    width: 6rem;
+  }
+</style>

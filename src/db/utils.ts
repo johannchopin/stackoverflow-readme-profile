@@ -32,7 +32,12 @@ export const storeAvatar = async (userId: number, avatarBase64: string): Promise
   avatar.id = userId
   avatar.base64 = avatarBase64
 
-  return getManager().save(avatar)
+  try {
+    await getManager().save(avatar)
+    return avatar
+  } catch (error) {
+    return avatar
+  }
 }
 
 export const storeUser = async (userToInsert: UserType): Promise<User> => {
@@ -48,7 +53,12 @@ export const storeUser = async (userToInsert: UserType): Promise<User> => {
   user.website = userToInsert.website
   user.avatarLink = userToInsert.avatarLink
 
-  return getManager().save(user)
+  try {
+    await getManager().save(user)
+    return user
+  } catch (error) {
+    return user
+  }
 }
 
 export const getPopularTags = async (): Promise<PopularTag[]> => {

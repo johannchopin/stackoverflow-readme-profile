@@ -49,7 +49,7 @@ router.post(
 )
 
 router.get(
-  '/:tagName/scorePercentages',
+  '/:tagName/score-percentages',
   validTagName,
   async (req, res) => {
     const manager = getManager()
@@ -67,7 +67,7 @@ router.get(
 )
 
 router.get(
-  '/:tagName/users/repartitionByScore',
+  '/:tagName/users/repartition-by-score',
   validTagName,
   async (req, res) => {
     const manager = getManager()

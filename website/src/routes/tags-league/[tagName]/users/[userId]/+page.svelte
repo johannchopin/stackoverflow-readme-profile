@@ -27,7 +27,7 @@
   const fetchTagScoreRanking = async (tag: string): Promise<void> => {
     try {
       const res = await (
-        await fetch(`${API_BASEURL}/tags-league/tags/${tag}/scorePercentages`)
+        await fetch(`${API_BASEURL}/tags-league/tags/${tag}/score-percentages`)
       ).json();
       scorePercentages = res;
     } catch (error) {
@@ -39,7 +39,7 @@
     try {
       const res = await (
         await fetch(
-          `${API_BASEURL}/tags-league/tags/${tag}/users/repartitionByScore`
+          `${API_BASEURL}/tags-league/tags/${tag}/users/repartition-by-score`
         )
       ).json();
       percentageAmounts = res.percentageAmounts;

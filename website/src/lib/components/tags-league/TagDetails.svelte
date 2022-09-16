@@ -17,7 +17,7 @@
         await fetch(
           `${API_BASEURL}/tags-league/tags/${encodeURIComponent(
             tag
-          )}/scorePercentages`
+          )}/score-percentages`
         )
       ).json();
       scorePercentages = res;
@@ -30,7 +30,7 @@
         await fetch(
           `${API_BASEURL}/tags-league/tags/${encodeURIComponent(
             tag
-          )}/users/repartitionByScore`
+          )}/users/repartition-by-score`
         )
       ).json();
       percentageAmounts = res.percentageAmounts;

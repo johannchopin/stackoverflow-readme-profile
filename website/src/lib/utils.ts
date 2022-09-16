@@ -30,6 +30,6 @@ export const getUserIdInProfileUrl = (url: string): number => {
   return Number(url.replace(`${SO_BASE_URL}/users/`, '').split('/')[0])
 }
 
-export const getPathToUserSOProfilePage = (userId: number): string => {
+export const getPathToUserSOProfilePage = (userId: number | string): string => {
   return 'https://stackoverflow.com/users/' + userId
 }

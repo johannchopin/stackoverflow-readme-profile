@@ -6,7 +6,7 @@
   import SoTagLink from "./SoTagLink.svelte";
 
   export let topPercentage: number;
-  export let userId: number;
+  export let userId: number | string;
   export let tag: string;
   export let score: number;
 </script>

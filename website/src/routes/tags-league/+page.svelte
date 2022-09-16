@@ -7,6 +7,7 @@
   import TagDetails from "$lib/components/tags-league/TagDetails.svelte";
   import SoCup from "$lib/components/icons/SoCup.svelte";
   import TagsList from "$lib/components/tags-league/TagsList.svelte";
+  import ConsultScoreSection from "./components/ConsultScoreSection.svelte";
 
   let tags: string[] = [];
   $: selectedTag = $page.url.searchParams.get("tag");
@@ -30,6 +31,8 @@
 {#if selectedTag && selectedTagIsValid}
   <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
   <TagDetails tag={selectedTag} />
+  <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
+  <ConsultScoreSection tag={selectedTag} />
 {/if}
 
 <style lang="scss">

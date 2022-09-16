@@ -1,5 +1,6 @@
 <script lang="ts">
   import { API_BASEURL } from "$lib/constants";
+  import Graph from "../icons/Graph.svelte";
   import UsersRepartionByTag from "./graphs/UsersRepartionByTag.svelte";
   import Loader from "./Loader.svelte";
   import SoTagLink from "./SoTagLink.svelte";
@@ -44,6 +45,9 @@
 </script>
 
 <h2 class="fs-4 mt-5">
+  <span class="text-primary fs-3">
+    <Graph />
+  </span>
   Insights of the tag
   <SoTagLink class="fs-4" {tag} />
 </h2>

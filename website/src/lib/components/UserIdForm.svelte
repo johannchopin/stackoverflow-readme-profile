@@ -33,7 +33,7 @@
   @import "../../../node_modules/bootstrap/scss/mixins";
 
   @include media-breakpoint-up(md) {
-    :global(.user-id input) {
+    label :global(.user-id input) {
       width: 50% !important;
     }
   }

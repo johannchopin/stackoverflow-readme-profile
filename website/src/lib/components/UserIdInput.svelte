@@ -27,19 +27,21 @@
 
       if (inputMatch) {
         userId = getUserIdInProfileUrl(input);
+        isValid = true;
+      } else {
+        isValid = false;
+        userId = undefined;
       }
-
-      isValid = !!inputMatch;
     }
   };
 
   $: onInputChange(value);
 </script>
 
-<div class="user-id">
+<div class="user-id position-relative">
   <input
     type="text"
-    class="form-control bg-dark text-light"
+    class="form-control bg-dark text-light {$$restProps.class}"
     id="soId"
     placeholder={`Example: ${MY_SO_ID.toString()} or https://stackoverflow.com/users/8583669/johannchopin`}
     minlength={1}
@@ -47,10 +49,11 @@
     required
     autocomplete="off"
     bind:value
+    style={$$restProps.style}
   />
   {#if !isValid}
     <p
-      class="invalid-feedback d-inline-block alert alert-danger p-1 w-fit-content text-dark"
+      class="invalid-feedback d-inline-block alert alert-danger p-1 w-fit-content text-dark position-absolute top-100 start-0"
       role="alert"
     >
       <Emoji symbol="⚠️" />
@@ -60,3 +63,9 @@
     </p>
   {/if}
 </div>
+
+<style>
+  p {
+    z-index: 1;
+  }
+</style>

@@ -8,5 +8,11 @@
       This user doesn't have a sufficient score to be part of the Tags-league or
       isn't a StackOverflow member!
     </p>
+
+    <div class="d-flex justify-content-center mt-3">
+      <a href="/tags-league" class="btn btn-outline-primary">
+        Back to the tags-league
+      </a>
+    </div>
   </div>
 </Error>

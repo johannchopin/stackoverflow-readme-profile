@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { API_BASEURL } from "$lib/constants";
-  import UsersRepartionByTag from "$lib/components/tags-league/graphs/UsersRepartionByTag.svelte";
-
   import { page } from "$app/stores";
   import { onMount } from "svelte";
+
+  import { API_BASEURL } from "$lib/constants";
+  import UsersRepartionByTag from "$lib/components/tags-league/graphs/UsersRepartionByTag.svelte";
   import SoTagLink from "$lib/components/tags-league/SoTagLink.svelte";
   import LoadingAnimation from "$lib/components/tags-league/LoadingAnimation.svelte";
   import UnknownTagError from "$lib/components/tags-league/UnknownTagError.svelte";

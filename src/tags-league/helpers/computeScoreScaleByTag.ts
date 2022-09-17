@@ -37,7 +37,11 @@ const insertScoreAmountItemsInTable = async (
   Logger.log(`Store score amounts for tag: ${tag}`)
 }
 
-const computeScoreScaleByTag = async (auth: Auth, signal: AbortSignal): Promise<void> => {
+const computeScoreScaleByTag = async (
+  auth: Auth,
+  signal: AbortSignal,
+  onTagComputed: (tagName: string) => void
+): Promise<void> => {
   Logger.log('Start tags scraping')
   const manager = getManager()
 
@@ -52,6 +56,7 @@ const computeScoreScaleByTag = async (auth: Auth, signal: AbortSignal): Promise<
       if (!signal.aborted && scoreAmountItems) {
         insertScoreAmountItemsInTable(manager, tag, scoreAmountItems)
         computeScoreRepartitionByPercentage(tag, scoreAmountItems)
+        onTagComputed(decodeURIComponent(tag))
       }
     }
   }

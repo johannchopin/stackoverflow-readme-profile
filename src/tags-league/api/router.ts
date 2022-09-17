@@ -15,6 +15,7 @@ const router = Router()
 router.use('/tags', tagsRouter)
 
 let tagsPercentageComputationController = new AbortController()
+let computedTagNames: string[] = []
 
 router.post(
   '/',
@@ -38,8 +39,13 @@ router.post(
         await sleep(2000) // be sure that cookie valid job is done
 
         await storeLog(LogType.LEAGUE_COMPUTATION_START)
-        await computeScoreScaleByTag(auth, tagsPercentageComputationController.signal)
+        await computeScoreScaleByTag(
+          auth,
+          tagsPercentageComputationController.signal,
+          (tagName) => computedTagNames.push(tagName)
+        )
         await storeLog(LogType.LEAGUE_COMPUTATION_END)
+        computedTagNames = []
         return
       }
       res.status(400).send('Invalid SEDE cookie provided!')
@@ -60,6 +66,7 @@ router.post(
       tagsPercentageComputationController = new AbortController()
       Logger.log('Computation aborted by client')
       storeLog(LogType.LEAGUE_COMPUTATION_STOP)
+      computedTagNames = []
 
       res.status(200).send()
     })
@@ -72,7 +79,7 @@ router.get('/status', async (req, res) => {
   const status = await getComputationStatus()
   const lastComputation = await getLastComputationDate()
 
-  res.status(200).json({ status, lastComputation })
+  res.status(200).json({ status, lastComputation, computedTagNames })
 })
 
 router.get('/auth', guarded, (req, res) => {

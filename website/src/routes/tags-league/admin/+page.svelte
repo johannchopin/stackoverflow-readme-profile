@@ -4,11 +4,22 @@
   import Login from "$lib/components/Login.svelte";
   import { API_BASEURL } from "$lib/constants";
   import { onMount } from "svelte";
+  import ComputedTagsLoader from "./components/ComputedTagsLoader.svelte";
 
   let apiToken;
   let cookie;
+  let tags: string[];
+  let computedTags: string[];
   let isComputingLeague = false;
   let lastLeagueComputation: Date;
+
+  let computationStatusInterval;
+
+  const startComputationStatusInterval = (): void => {
+    computationStatusInterval = setInterval(() => {
+      getComputationStatus();
+    }, 5000);
+  };
 
   const getBody = () => {
     return JSON.stringify({ cookie });
@@ -23,9 +34,20 @@
 
   const getComputationStatus = async (): Promise<void> => {
     const res = await fetch(`${API_BASEURL}/tags-league/status`);
-    const { status, lastComputation } = await res.json();
+    const { status, lastComputation, computedTagNames } = await res.json();
 
     isComputingLeague = status === "busy";
+    computedTags = computedTagNames;
+
+    if (status === "available" && computationStatusInterval) {
+      clearInterval(computationStatusInterval);
+      computationStatusInterval = undefined;
+    }
+
+    if (status === "busy" && !computationStatusInterval) {
+      startComputationStatusInterval();
+    }
+
     if (lastComputation) lastLeagueComputation = new Date(lastComputation);
   };
 
@@ -81,11 +103,14 @@
       return;
     }
 
+    startComputationStatusInterval();
+
     alert("Success!");
   };
 
-  onMount(() => {
+  onMount(async () => {
     getComputationStatus();
+    tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
   });
 </script>
 
@@ -191,6 +216,13 @@
                 bind:value={cookie}
               />
             </div>
+
+            {#if isComputingLeague}
+              <div class="col-12">
+                <ComputedTagsLoader {tags} {computedTags} />
+              </div>
+            {/if}
+
             <div class="col-12 d-flex">
               <button
                 type="submit"

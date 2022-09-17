@@ -64,6 +64,8 @@ const getFetchedUserRank = async (
     const match = scrappedTags.find((scrappedTag) => scrappedTag.tag === tag)
 
     if (match) {
+      if (match.score < MIN_SCORE_TO_BE_IN_LEAGUE) return undefined
+
       const userRank = new UserRankByTag()
       userRank.id = userId
       userRank.score = match.score

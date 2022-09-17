@@ -25,7 +25,7 @@ const getScrapedPopularTags = async (): Promise<string[]> => {
 
   TAGS_TO_INCLUDE.forEach(tagToInclude => {
     if (!fetchedTags.includes(tagToInclude)) {
-      fetchedTags.unshift(tagToInclude)
+      fetchedTags.push(tagToInclude)
     }
   })
 

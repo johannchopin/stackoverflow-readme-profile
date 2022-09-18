@@ -61,7 +61,7 @@ const getFetchedUserRank = async (
     // eslint-disable-next-line no-await-in-loop
     scrappedTags = await scrapTagsScoreInPage(getUserSoTagsPageUrl(userId, userName, currentPage))
 
-    const match = scrappedTags.find((scrappedTag) => scrappedTag.tag === tag)
+    const match = scrappedTags.find((scrappedTag) => encodeURIComponent(scrappedTag.tag) === tag)
 
     if (match) {
       if (match.score < MIN_SCORE_TO_BE_IN_LEAGUE) return undefined

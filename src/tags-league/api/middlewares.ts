@@ -21,7 +21,7 @@ export const validTagName = async (req: Request, res: Response, next: NextFuncti
   const tagName = req.params.tagName
 
   if (tagName) {
-    if (!(await isTagInLeague(tagName))) {
+    if (!(await isTagInLeague(encodeURIComponent(tagName)))) {
       res.status(404).send(`The tag ${tagName} is not part of the league`)
       return
     }

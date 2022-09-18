@@ -10,6 +10,7 @@
   import UnknownUserError from "$lib/components/tags-league/UnknownUserError.svelte";
   import UserDetails from "$lib/components/tags-league/UserDetails.svelte";
   import LastUpdate from "$lib/components/LastUpdate.svelte";
+  import Ranking from "$lib/components/icons/Ranking.svelte";
 
   let tag = $page.params.tagName;
   let userId = $page.params.userId;
@@ -76,8 +77,8 @@
 />
 
 <h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
-  Tags League:
-  <SoTagLink {tag} class="ms-2 fs-4" />
+  <span class="text-primary me-1"><Ranking /></span>
+  Tags League
 </h1>
 
 {#if errors.invalidTag}
@@ -85,7 +86,9 @@
 {:else if errors.invalidUser}
   <UnknownUserError />
 {:else if scorePercentages && percentageAmounts && topPercentage}
-  <LastUpdate date={lastUpdate} />
+  <LastUpdate date={lastUpdate} class="d-none d-md-block" />
+
+  <h2 class="so-tag w-fit-content fs-4 m-auto mt-5 mt-md-0 mb-1">{tag}</h2>
 
   <UserDetails {userId} {score} {tag} {topPercentage} />
 
@@ -104,6 +107,8 @@
       />
     </div>
   </div>
+
+  <LastUpdate date={lastUpdate} class="d-md-none me-auto" />
 {/if}
 
 <style lang="scss">

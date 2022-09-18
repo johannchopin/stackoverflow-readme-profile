@@ -8,7 +8,7 @@
 <Error title="Unknown tag name">
   <p class="w-fit-content fs-5">
     The provided tag <span class="so-tag">{tag}</span> is not currently part of the
-    Tags-league.
+    Tags League.
   </p>
   <p class="fs-6 m-0 text-center">
     Feel free to add it by starting a

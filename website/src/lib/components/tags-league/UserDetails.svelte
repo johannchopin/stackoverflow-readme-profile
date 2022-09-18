@@ -11,7 +11,7 @@
   export let score: number;
 </script>
 
-<div class="row justify-content-center align-items-center mt-5">
+<div class="row justify-content-center align-items-center">
   <Rank percentage={topPercentage} />
 
   <div class="col-10 col-md-3 mt-3 mt-md-0">

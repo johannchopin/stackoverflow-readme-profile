@@ -10,18 +10,20 @@
   <span class="text-primary fs-3">
     <Ranking />
   </span>
-  Get your top user badge
+  Get your Ranking
 </h2>
 
 <div class="row mt-5 justify-content-center">
   <div class="col-11 col-md-5 p-0">
     <UserIdInput bind:userId />
   </div>
-  <div class="col-12 col-md-2 p-0 d-flex mt-3 mt-md-0 justify-content-center">
+  <div
+    class="col-12  col-md-3 col-xl-2 p-0 d-flex mt-3 mt-md-0 justify-content-center"
+  >
     <a
-      href="/tags-league/{tag}/users/{userId}"
+      href="/tags-league/{encodeURIComponent(tag)}/users/{userId}"
       class="btn btn-primary"
-      class:disabled={userId === undefined}>To score page</a
+      class:disabled={userId === undefined}>To ranking page</a
     >
   </div>
 </div>

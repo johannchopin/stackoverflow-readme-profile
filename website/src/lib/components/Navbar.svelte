@@ -16,7 +16,7 @@
     },
     {
       href: "/tags-league",
-      label: "Tags-league",
+      label: "Tags League",
     },
   ];
 </script>

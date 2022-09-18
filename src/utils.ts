@@ -59,8 +59,7 @@ const getStringWithoutLineBreaks = (string: string): string => {
 export const getMinified = (htmlString: string): string => {
   htmlString = minify(htmlString, {
     // minifyCSS: true,
-    ignoreCustomFragments: [/{{[{]?(.*?)[}]?}}/],
-    collapseWhitespace: true
+    ignoreCustomFragments: [/{{[{]?(.*?)[}]?}}/]
   })
   htmlString = replaceAll(htmlString, '   ', '')
   htmlString = replaceAll(htmlString, '  ', '')

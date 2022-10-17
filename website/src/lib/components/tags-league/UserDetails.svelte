@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { API_BASEURL } from "$lib/constants";
+  import { API_BASEURL, SCORE_COMPUTATION_INFOS } from "$lib/constants";
   import { getPathToUserSOProfilePage } from "$lib/utils";
 
   import Rank from "./Rank.svelte";
@@ -32,8 +32,13 @@
     </span>
     Stack Overflow answerers in the technology
     <SoTagLink {tag} class="fw-bold fs-" /> with a score of
-    <span class="badge rounded-2 bg-success p-1 text-dark">
+    <a
+      href={SCORE_COMPUTATION_INFOS}
+      target="_blank"
+      title="How are tag scores calculated?"
+      class="badge rounded-2 bg-success p-1 text-dark text-decoration-none"
+    >
       {score.toLocaleString()}
-    </span>.
+    </a>.
   </p>
 </div>

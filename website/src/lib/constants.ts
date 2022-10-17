@@ -2,6 +2,7 @@ export const MY_SO_ID = 8583669
 export const SO_BASE_URL = 'https://stackoverflow.com'
 export const MY_SO_PROFILE_URL = `${SO_BASE_URL}/users/8583669/johannchopin`
 export const API_BASEURL = import.meta.env.VITE_API_BASEURL
+export const SCORE_COMPUTATION_INFOS = "https://meta.stackoverflow.com/questions/280818/how-are-tag-scores-calculated"
 
 export const GITHUB_REPO_USER = 'johannchopin'
 export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
@@ -12,7 +13,12 @@ export const SO_PROFILE_URL_REGEXP = /^https:\/\/stackoverflow\.com\/users\/[0-9
 
 export const SELECT_THEME_TITLE_ID = 'selectTheme'
 
-export const MD_CODE_TEMPLATE = `[![user::id's SO profile](:path)](${GITHUB_REPO_URL})`
-export const HTML_CODE_TEMPLATE = `<a href="${GITHUB_REPO_URL}">
+export const MD_CODE_PROFILE_TEMPLATE = `[![user::id's SO profile](:path)](${GITHUB_REPO_URL})`
+export const HTML_CODE_PROFILE_TEMPLATE = `<a href="${GITHUB_REPO_URL}">
   <img src=":path" alt="user::id's SO profile">
+</a>`
+
+export const MD_CODE_RANKING_TEMPLATE = `[![user::id's ranking for :tag](:path)](https://johannchopin.github.io/stackoverflow-readme-profile/tags-league/:tag/users/:id)`
+export const HTML_CODE_RANKING_TEMPLATE = `<a href="https://johannchopin.github.io/stackoverflow-readme-profile/tags-league/:tag/users/:id">
+  <img src=":path" alt="user::id's SO ranking for :tag">
 </a>`

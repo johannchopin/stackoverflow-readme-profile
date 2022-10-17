@@ -13,6 +13,18 @@ export const getProfileCode = (codeTemplate: string, userId: number, path: strin
   )
 }
 
+export const getRankingBadgeCode = (codeTemplate: string, tagName: string, userId: string, theme: string): string => {
+  return replaceAll(
+    replaceAll(
+      replaceAll(codeTemplate, ':tag', tagName),
+      ':id',
+      userId
+    ),
+    ':path',
+    getPathToRankingBadge(tagName, userId, theme)
+  )
+}
+
 export const setClipboard = (text) => { navigator.clipboard.writeText(text) }
 
 export const getPathToProfile = (userId: number, template: string, theme: string, options: TemplateSettings): string => {
@@ -24,6 +36,13 @@ export const getPathToProfile = (userId: number, template: string, theme: string
 
   const queryStrings = new URLSearchParams(queryStringsObject).toString()
   return `${API_BASEURL}/${template}/${userId}?${queryStrings}`
+}
+
+export const getPathToRankingBadge = (tagName: string, userId: number | string, theme = 'default'): string => {
+  const queryStringsObject = { theme }
+  const queryStrings = new URLSearchParams(queryStringsObject).toString()
+
+  return `${API_BASEURL}/tags-league-ranking/${tagName}/${userId}?${queryStrings}`
 }
 
 export const getUserIdInProfileUrl = (url: string): number => {

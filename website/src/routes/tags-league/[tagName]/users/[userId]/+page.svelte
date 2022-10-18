@@ -12,6 +12,8 @@
   import Ranking from "$lib/components/icons/Ranking.svelte";
   import BadgePreview from "./components/BadgePreview.svelte";
   import ThemesSelect from "$lib/components/ThemesSelect.svelte";
+  import Markdown from "$lib/components/icons/Markdown.svelte";
+  import Html from "$lib/components/icons/Html.svelte";
 
   const BADGE_PREVIEW_ID = "badgePreview";
 
@@ -99,10 +101,16 @@
 
   <div class="d-flex justify-content-center mt-4">
     <a
+      id="getBadge"
       href={"#" + BADGE_PREVIEW_ID}
       class="btn btn-outline-primary btn-sm m-auto"
       on:click={() => (showBadgePreview = true)}
     >
+      <span class="icons position-relative">
+        <span class="text-white"><Markdown /></span>
+        <span class="text-white"><Html /></span>
+        <span class="placeholder opacity-0"><Html /></span>
+      </span>
       Get your badge
     </a>
   </div>
@@ -164,6 +172,20 @@
     height: 32vw;
   }
 
+  #getBadge {
+    .icons {
+      span:not(.placeholder) {
+        position: absolute;
+        animation: apparition 2.8s infinite;
+
+        &:nth-of-type(2) {
+          opacity: 0;
+          animation-delay: 1.4s;
+        }
+      }
+    }
+  }
+
   #badgePreview {
     overflow: hidden;
     height: 0px;
@@ -190,4 +212,38 @@
       height: fit-content;
     }
   }
+
+  @keyframes apparition {
+    0% {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    65% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(-5px);
+      opacity: 0;
+    }
+  }
+
+  /*
+  @keyframes apparition {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      filter: none;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  */
 </style>

@@ -9,9 +9,11 @@
 
 html,
 body {
+  position: relative;
   color: $light;
   background-color: $bg-color;
   font-family: 'OpenDyslexic', sans-serif;
+  z-index: -2;
 }
 
 input::-webkit-outer-spin-button,

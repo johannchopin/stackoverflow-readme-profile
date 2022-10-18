@@ -17,7 +17,7 @@
 
 {#if show}
   <div
-    class="position-absolute w-100 h-100 d-flex justify-content-center align-items-center ctn"
+    class="position-fixed w-100 h-100 d-flex justify-content-center align-items-center ctn"
     class:hide
   >
     <div class="position-relative leaf-icon">
@@ -65,6 +65,7 @@
 
     & > :global(svg) {
       width: 40vw;
+      height: 40vw;
     }
   }
 

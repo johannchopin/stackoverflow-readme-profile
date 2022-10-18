@@ -41,6 +41,7 @@
       }
     ],
     "no-unused-vars": "off",
+    "no-nested-ternary": "off",
     "no-param-reassign": "off",
     "no-underscore-dangle": "off",
     "semi": [

@@ -22,6 +22,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>Tags League • stackoverflow-readme-profile</title>
+</svelte:head>
+
 <h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
   Welcome to the
   <span class="fs-3 so-tag w-fit-content d-flex align-items-center ms-2">

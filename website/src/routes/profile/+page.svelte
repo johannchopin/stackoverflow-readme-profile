@@ -10,6 +10,10 @@
   };
 </script>
 
+<svelte:head>
+  <title>Profile • stackoverflow-readme-profile</title>
+</svelte:head>
+
 <h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
   Generate your Stackoverflow's profile
 </h1>

@@ -8,17 +8,17 @@
   export let tag: string;
 </script>
 
-<h2 class="fs-4 mt-5">
+<h2 class="fs-4 mt-5 lh-sm">
   <span class="text-primary fs-3">
     <Ranking />
   </span>
-  See your ranking for the tag
-  <SoTagLink class="fs-4" {tag} />
+  See your ranking for the technology
+  <SoTagLink class="fs-5" {tag} />
 </h2>
 
 <div class="d-flex mt-4 align-items-center">
   <h3 class="m-0 p-0 fs-6">
-    <span class="text-primary ms-3 me-1 fw-bold">></span>
+    <span class="text-primary ms-1 ms-md-3 me-1 fw-bold">></span>
     Please enter your Stackoverflow identifier or profile URL
   </h3>
   <FindUserIdHelper />

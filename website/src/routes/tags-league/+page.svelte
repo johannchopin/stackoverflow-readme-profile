@@ -30,7 +30,10 @@
   </span>
 </h1>
 
-<h2 class="fs-4 mt-5">Select your favourite technology</h2>
+<h2 class="fs-4 mt-5">
+  <span class="text-primary ms-0 ms-md-3 me-1 fw-bold">></span>
+  Select your favourite technology
+</h2>
 
 <TagsList {tags} {selectedTag} />
 
@@ -39,12 +42,12 @@
   <ConsultScoreSection tag={selectedTag} />
   <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
 
-  <h2 class="fs-4 mt-5">
+  <h2 class="fs-4 mt-5 lh-sm">
     <span class="text-primary fs-3">
       <Graph />
     </span>
-    Insights of the tag
-    <SoTagLink class="fs-4" tag={selectedTag} />
+    Insights of the technology
+    <SoTagLink class="fs-5" tag={selectedTag} />
   </h2>
 
   {#if revealInsights}

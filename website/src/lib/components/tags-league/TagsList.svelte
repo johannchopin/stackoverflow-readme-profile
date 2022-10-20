@@ -18,7 +18,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Filter by tag name"
+        placeholder="Filter tags by name"
         bind:value={filter}
       />
     </div>

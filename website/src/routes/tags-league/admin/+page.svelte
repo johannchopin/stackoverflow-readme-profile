@@ -62,6 +62,8 @@
       return;
     }
 
+    tags = await res.json();
+
     alert("Tags updated!");
   };
 
@@ -108,9 +110,13 @@
     alert("Success!");
   };
 
+  const getTags = async () => {
+    tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
+  };
+
   onMount(async () => {
     getComputationStatus();
-    tags = await (await fetch(`${API_BASEURL}/tags-league/tags`)).json();
+    getTags();
   });
 </script>
 

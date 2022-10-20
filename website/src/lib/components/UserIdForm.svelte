@@ -1,8 +1,7 @@
 <script lang="ts">
-  import QuestionIcon from "./icons/Question.svelte";
+  import FindUserIdHelper from "./FindUserIdHelper.svelte";
+import QuestionIcon from "./icons/Question.svelte";
   import UserIdInput from "./UserIdInput.svelte";
-
-  const FIND_ID_TITLE = "How to find my UserID in Stack Overflow";
 
   export let userId: number;
 </script>
@@ -12,17 +11,7 @@
     <span class="fw-bold text-primary">1.</span>
     Please enter your Stackoverflow identifier or profile URL
   </h2>
-  <a
-    href="https://meta.stackoverflow.com/questions/281254/how-to-find-my-userid-in-stack-overflow"
-    target="_blank"
-    class="mx-3"
-    title={FIND_ID_TITLE}
-    aria-label={FIND_ID_TITLE}
-  >
-    <span aria-hidden="true">
-      <QuestionIcon />
-    </span>
-  </a>
+  <FindUserIdHelper />
 </label>
 
 <UserIdInput bind:userId />

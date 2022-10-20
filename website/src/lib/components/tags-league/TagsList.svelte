@@ -13,7 +13,7 @@
 </script>
 
 <section class:animate={!selectedTag}>
-  <div class="input-group m-0  mt-5 row">
+  <div class="input-group m-0 mt-2 row">
     <div class="col-6 col-md-4 ms-auto p-0">
       <input
         type="text"
@@ -44,7 +44,7 @@
         href={ADD_TAG_ISSUE_LINK}
         target="_blank"
         id="addTag"
-        class="btn btn-outline-primary btn-sm m-auto"
+        class="btn btn-outline-secondary btn-sm m-auto"
       >
         <Plus />
         Add new tag

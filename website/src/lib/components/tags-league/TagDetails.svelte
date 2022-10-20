@@ -44,14 +44,6 @@
   }
 </script>
 
-<h2 class="fs-4 mt-5">
-  <span class="text-primary fs-3">
-    <Graph />
-  </span>
-  Insights of the tag
-  <SoTagLink class="fs-4" {tag} />
-</h2>
-
 {#if scorePercentages && percentageAmounts}
   <div class="row mt-4">
     <div class="col-12 col-md-4 my-2">

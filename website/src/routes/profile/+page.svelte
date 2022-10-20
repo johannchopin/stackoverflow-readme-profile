@@ -10,6 +10,10 @@
   };
 </script>
 
+<h1 class="mb-0 mt-3 fs-3 fw-bold d-flex flex-wrap align-items-center">
+  Generate your Stackoverflow's profile
+</h1>
+
 <form class="mt-6" on:submit|preventDefault={onSubmit}>
   <UserIdForm bind:userId />
   <ThemesForm />

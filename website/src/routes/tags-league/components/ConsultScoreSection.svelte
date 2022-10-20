@@ -14,6 +14,7 @@
   </span>
   See your ranking for the technology
   <SoTagLink class="fs-5" {tag} />
+  among all Stackoverflow users
 </h2>
 
 <div class="d-flex mt-4 align-items-center">

@@ -22,6 +22,10 @@
   <div class="row p-0 m-0 mt-5">
     <div class="col-12 col-md-8">
       <h1 class="mb-0 fs-2 fw-bold">
+        <span
+          class="mt-3 mb-3 fs-3 fw-bold d-inline-block d-md-none text-primary"
+          >stackoverflow-readme-profile</span
+        >
         Easily share your Stackoverflow's profile on your README
       </h1>
 

@@ -1,4 +1,21 @@
 [
   "svelte",
-  "elasticsearch"
+  "elasticsearch",
+  "go",
+  "rust",
+  "heroku",
+  "next.js",
+  "nuxt.js",
+  "symfony",
+  "apache-kafka",
+  "electron",
+  "ionic-framework",
+  "cordova",
+  "hadoop",
+  "kubernetes",
+  "vim",
+  "elixir",
+  "julia",
+  "redis",
+  "flask"
 ]

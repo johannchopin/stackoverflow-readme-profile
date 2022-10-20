@@ -1,4 +1,6 @@
 import fetch, { Headers } from 'node-fetch'
+import { LogType } from '../db/entity/Log'
+import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { Auth } from './Auth'
 
@@ -28,6 +30,7 @@ export class ApiService {
           `https://data.stackexchange.com/query/job/${jobId}`,
           { headers: this.getHeaders() }
         )
+
         const responseBody = await topUsersResponse.json()
 
         if (!responseBody.running) {
@@ -57,7 +60,16 @@ export class ApiService {
         }
       )
 
-      const jobId = await (await jobIdResponse.json()).job_id
+      const response = await jobIdResponse.json()
+      const jobId = await response.job_id
+
+      if (jobId === undefined) {
+        // job didn't started. Possible reason is that the SEDE cookie is no more valid
+
+        storeLog(LogType.ERROR, response)
+        Logger.log(response)
+        throw new Error("Invalid SEDE cookie");
+      }
 
       try {
         Logger.log(`Start fetching top users for tag: ${tag}`)

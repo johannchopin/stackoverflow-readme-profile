@@ -1,5 +1,6 @@
 <script>
   import Error from "../Error.svelte";
+  import ArrowLeft from "../icons/ArrowLeft.svelte";
 </script>
 
 <Error title="User not in league">
@@ -11,6 +12,7 @@
 
     <div class="d-flex justify-content-center mt-3">
       <a href="/tags-league" class="btn btn-outline-primary">
+        <ArrowLeft />
         Back to the tags-league
       </a>
     </div>

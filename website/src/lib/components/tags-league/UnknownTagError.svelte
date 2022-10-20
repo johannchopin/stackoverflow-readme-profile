@@ -2,6 +2,7 @@
   import { ADD_TAG_ISSUE_LINK } from "$lib/constants";
 
   import Error from "../Error.svelte";
+  import ArrowLeft from "../icons/ArrowLeft.svelte";
   export let tag: string;
 </script>
 
@@ -19,6 +20,7 @@
 
   <div class="d-flex justify-content-center mt-5">
     <a href="/tags-league" class="btn btn-outline-primary">
+      <ArrowLeft />
       Back to the tags-league
     </a>
   </div>

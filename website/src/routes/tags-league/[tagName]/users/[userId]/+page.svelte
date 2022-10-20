@@ -14,6 +14,7 @@
   import ThemesSelect from "$lib/components/ThemesSelect.svelte";
   import Markdown from "$lib/components/icons/Markdown.svelte";
   import Html from "$lib/components/icons/Html.svelte";
+  import X from "$lib/components/icons/X.svelte";
 
   const BADGE_PREVIEW_ID = "badgePreview";
 
@@ -123,7 +124,16 @@
 
   <div id={BADGE_PREVIEW_ID} class:open={showBadgePreview}>
     {#if showBadgePreview}
-      <h2 class="mb-4">Badge preview</h2>
+      <div class="mb-4 d-flex justify-content-between align-items-center">
+        <h2>Badge preview</h2>
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          on:click={() => (showBadgePreview = false)}
+        >
+          <X />
+          Close
+        </button>
+      </div>
 
       <div class="container">
         <h3 class="fs-4">

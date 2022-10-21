@@ -5,12 +5,14 @@
   import { API_BASEURL } from "$lib/constants";
   import { onMount } from "svelte";
   import ComputedTagsLoader from "./components/ComputedTagsLoader.svelte";
+  import Logs from "./components/Logs.svelte";
 
   let apiToken;
   let cookie;
   let tags: string[];
   let computedTags: string[];
   let isComputingLeague = false;
+  let seeLogs = false;
   let lastLeagueComputation: Date;
 
   let computationStatusInterval;
@@ -255,6 +257,36 @@
               {/if}
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="checkLogs">
+        <button
+          class="accordion-button collapsed text-black"
+          type="button"
+          data-bs-toggle="collapse"
+          aria-expanded="false"
+          data-bs-target="#checkLogsBody"
+          aria-controls="checkLogsBody"
+        >
+          Consult the logs
+        </button>
+      </h3>
+      <div
+        id="checkLogsBody"
+        class="accordion-collapse collapse bg-body"
+        aria-labelledby="checkLogs"
+        data-bs-parent="#accordion"
+      >
+        <div class="accordion-body">
+          {#if seeLogs}
+            <Logs {apiToken} />
+          {:else}
+            <button class="btn btn-primary" on:click={() => (seeLogs = true)}>
+              See logs
+            </button>
+          {/if}
         </div>
       </div>
     </div>

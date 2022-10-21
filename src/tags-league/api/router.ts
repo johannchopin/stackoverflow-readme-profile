@@ -1,13 +1,14 @@
 /* eslint-disable newline-per-chained-call */
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { LogType } from '../../db/entity/Log'
+import { LogType } from '../../db/constants'
 import { storeLog } from '../../db/utils'
 import { Logger } from '../../Logger'
 import { sleep } from '../../utils'
 import { Auth } from '../Auth'
 import computeScoreScaleByTag from '../helpers/computeScoreScaleByTag'
 import { getComputationStatus, getLastComputationDate } from '../utils'
+import { getLogs } from './logs'
 import { guarded } from './middlewares'
 import tagsRouter from './tags/router'
 
@@ -84,6 +85,10 @@ router.get('/status', async (req, res) => {
 
 router.get('/auth', guarded, (req, res) => {
   res.status(200).send()
+})
+
+router.get('/logs', guarded, async (req, res) => {
+  res.json(await getLogs())
 })
 
 export default router

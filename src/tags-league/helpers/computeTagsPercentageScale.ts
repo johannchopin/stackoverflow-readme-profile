@@ -1,5 +1,5 @@
 import { getManager } from 'typeorm'
-import { LogType } from '../../db/entity/Log'
+import { LogType } from '../../db/constants'
 import { PopularTag } from '../../db/entity/PopularTag'
 import { TopUser } from '../../db/entity/TopUser'
 import { storeLog } from '../../db/utils'

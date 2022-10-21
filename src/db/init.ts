@@ -5,11 +5,12 @@ import { Logger } from '../Logger'
 import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
-import { Log, LogType } from './entity/Log'
+import { Log } from './entity/Log'
 import { ScoreAmountByTag } from './entity/ScoreAmountByTag'
 import { ScorePercentileByTag } from './entity/ScorePercentileByTag'
 import { storeLog } from './utils'
 import { UserRankByTag } from './entity/UserRankByTag'
+import { LogType } from './constants'
 
 export const connect = async (): Promise<void> => {
   config()

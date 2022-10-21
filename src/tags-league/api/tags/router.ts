@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { getManager } from 'typeorm'
-import { LogType } from '../../../db/entity/Log'
+import { LogType } from '../../../db/constants'
 import { PopularTag } from '../../../db/entity/PopularTag'
 import { storeLog } from '../../../db/utils'
 

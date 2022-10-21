@@ -2,8 +2,9 @@ import { getManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
+import { LogType } from './constants'
 import { Avatar } from './entity/Avatar'
-import { Log, LogType } from './entity/Log'
+import { Log } from './entity/Log'
 import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 

@@ -1,5 +1,6 @@
 import { getManager } from 'typeorm'
-import { Log, LogType } from '../db/entity/Log'
+import { LogType } from '../db/constants'
+import { Log } from '../db/entity/Log'
 import { PopularTag } from '../db/entity/PopularTag'
 
 export type ComputationStatus = 'available' | 'busy'

@@ -1,5 +1,5 @@
 import fetch, { Headers } from 'node-fetch'
-import { LogType } from '../db/entity/Log'
+import { LogType } from '../db/constants'
 import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { Auth } from './Auth'
@@ -135,6 +135,11 @@ export class ApiService {
         if (isResponseACache) scoreAmountItems = res.resultSets[0].rows
         else {
           const jobId = await (res).job_id
+
+          if (!jobId) {
+            throw new Error(`Impossible to start job "Count users by score of a specific tag" for the tag ${tag}`);
+          }
+
           Logger.log(`Start fetching score amount for tag: ${tag}`)
           const data = await this.getJobResponse(jobId, signal)
 
@@ -147,6 +152,7 @@ export class ApiService {
         }
         return []
       } catch (error) {
+        storeLog(LogType.ERROR, error.message)
         Logger.log('Error trying to get response of a query job')
         Logger.log(error)
         return undefined

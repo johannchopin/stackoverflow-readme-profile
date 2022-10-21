@@ -69,7 +69,7 @@ export class ApiService {
 
         storeLog(LogType.ERROR, response)
         Logger.log(response)
-        throw new Error("Invalid SEDE cookie");
+        throw new Error('Invalid SEDE cookie')
       }
 
       try {

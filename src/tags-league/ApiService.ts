@@ -137,7 +137,7 @@ export class ApiService {
           const jobId = await (res).job_id
 
           if (!jobId) {
-            throw new Error(`Impossible to start job "Count users by score of a specific tag" for the tag ${tag}`);
+            throw new Error(`Impossible to start job "Count users by score of a specific tag" for the tag ${tag}`)
           }
 
           Logger.log(`Start fetching score amount for tag: ${tag}`)

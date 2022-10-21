@@ -4,9 +4,7 @@ import {
   Entity,
   PrimaryGeneratedColumn
 } from 'typeorm'
-import { LogType } from '../constants';
-
-
+import { LogType } from '../constants'
 
 @Entity()
 export class Log {

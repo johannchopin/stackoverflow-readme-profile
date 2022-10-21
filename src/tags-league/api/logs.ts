@@ -1,5 +1,5 @@
-import { getManager } from "typeorm";
-import { Log } from "../../db/entity/Log";
+import { getManager } from 'typeorm'
+import { Log } from '../../db/entity/Log'
 
 export const getLogs = async (): Promise<Log[]> => {
   const manager = getManager().getRepository(Log)
@@ -12,4 +12,4 @@ export const getLogs = async (): Promise<Log[]> => {
       take: 50
     }
   )
-} 
+}

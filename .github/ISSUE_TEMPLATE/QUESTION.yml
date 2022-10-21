@@ -1,0 +1,13 @@
+name: Question about stackoverflow-readme-profile
+title: "Question: "
+description: "Simple issue to ask direct questions to the maintainers"
+labels: ["question"]
+assignees:
+  - johannchopin
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+    validations:
+      required: true

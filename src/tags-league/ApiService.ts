@@ -3,6 +3,7 @@ import { LogType } from '../db/entity/Log'
 import { storeLog } from '../db/utils'
 import { Logger } from '../Logger'
 import { Auth } from './Auth'
+import { QUERY } from './SedeQueries/constants'
 
 // type to define [score, amount]
 export type ScoreAmountItem = [number, number]
@@ -52,7 +53,7 @@ export class ApiService {
       Logger.log(`Start job for tag: ${tag}`)
 
       const jobIdResponse = await fetch(
-        'https://data.stackexchange.com/query/run/1/1629390/1986822',
+        QUERY.LIST_USERS_BY_SCORE,
         {
           method: 'POST',
           headers,
@@ -117,7 +118,7 @@ export class ApiService {
       Logger.log(`Start "Count users by score of a specific tag" job for tag: ${tag}`)
 
       const jobIdResponse = await fetch(
-        'https://data.stackexchange.com/query/run/1/1631574/1989329',
+        QUERY.COUNT_USERS_SCORE_TAG,
         {
           method: 'POST',
           headers,

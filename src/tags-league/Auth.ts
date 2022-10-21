@@ -1,5 +1,6 @@
 import fetch, { Headers } from 'node-fetch'
 import { Logger } from '../Logger'
+import { QUERY } from './SedeQueries/constants'
 
 export class Auth {
   constructor(public cookie: string) {
@@ -30,7 +31,7 @@ export class Auth {
     params.append('tagName', 'foobar')
 
     const jobIdResponse = await fetch(
-      'https://data.stackexchange.com/query/run/1/1631255/1988830',
+      QUERY.CHECK_AUTH_COOKIE,
       {
         method: 'POST',
         headers,

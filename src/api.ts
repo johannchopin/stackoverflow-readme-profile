@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 import cors from 'cors'
 
 import { SECONDS_IN_MIN, Template, THEMES } from './const'
@@ -37,11 +37,13 @@ const run = async (): Promise<void> => {
   app.use(express.json())
   app.use(cors())
 
-  app.use('/tags-league', scraperRouter)
-
-  app.get('/_analytics', async (req, res) => {
+  const apiRouter = Router()
+  apiRouter.use('/tags-league', scraperRouter)
+  apiRouter.get('/analytics', async (req, res) => {
     res.json(await getAnalytics())
   })
+
+  app.use('/api', apiRouter)
 
   app.get('/tags-league-ranking/:tagName/:userId', async (req, res) => {
     const { tagName, userId } = req.params

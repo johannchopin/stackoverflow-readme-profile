@@ -3,11 +3,17 @@ export const SO_BASE_URL = 'https://stackoverflow.com'
 export const MY_SO_PROFILE_URL = `${SO_BASE_URL}/users/8583669/johannchopin`
 export const API_BASEURL = import.meta.env.VITE_API_BASEURL
 export const SCORE_COMPUTATION_INFOS = "https://meta.stackoverflow.com/questions/280818/how-are-tag-scores-calculated"
+export const SO_USER_TAGS_URL = 'https://stackoverflow.com/users/current?tab=tags&sort=votes'
 
 export const GITHUB_REPO_USER = 'johannchopin'
 export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}`
+
 export const ADD_TAG_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=johannchopin&labels=tag-proposition&template=ADD-TAG-TO-TAGS-LEAGUE.yml&title=Tag+proposition%3A+tagname'
+export const NEW_QUESTION_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=johannchopin&labels=question&template=QUESTION.yml&title=Question%3A+'
+
+export const LICENSE_URL = GITHUB_REPO_URL + '/blob/main/LICENSE.txt'
+export const CONTRIBUTORS_URL = GITHUB_REPO_URL + '/graphs/contributors'
 
 export const SO_PROFILE_URL_REGEXP = /^https:\/\/stackoverflow\.com\/users\/[0-9]+\d\/[a-z]+/g
 

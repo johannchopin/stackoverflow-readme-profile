@@ -3,7 +3,7 @@
   import Faq from "./Faq.svelte";
 </script>
 
-<section class="position-relative container">
+<section class="position-relative container pb-5">
   <div class="row justify-content-center">
     <div class="col-md-10 col-l-6">
       <p class="fs-5 text-center">

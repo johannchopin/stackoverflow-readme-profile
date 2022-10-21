@@ -42,6 +42,9 @@ const run = async (): Promise<void> => {
   apiRouter.get('/analytics', async (req, res) => {
     res.json(await getAnalytics())
   })
+  apiRouter.use((req, res) => {
+    res.status(404).send()
+  })
 
   app.use('/api', apiRouter)
 

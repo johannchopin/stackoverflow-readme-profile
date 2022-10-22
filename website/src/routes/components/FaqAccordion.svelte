@@ -3,6 +3,9 @@
     LICENSE_URL,
     CONTRIBUTORS_URL,
     SO_USER_TAGS_URL,
+    SEDE_QUERY_URL,
+    STATIC_TAGS_URL,
+    ADD_TAG_ISSUE_LINK,
   } from "$lib/constants";
 </script>
 
@@ -175,7 +178,29 @@
       aria-labelledby="computation"
       data-bs-parent="#accordion"
     >
-      <div class="accordion-body">TODO</div>
+      <div class="accordion-body">
+        <p>
+          The Tags League is computed every week by using the StackExchange Data
+          Explorer (<a
+            href="https://data.stackexchange.com/stackoverflow/queries"
+            target="_blank">SEDE</a
+          >).
+        </p>
+
+        <p>
+          <a href={SEDE_QUERY_URL} target="_blank">A query</a>
+          is used to retrieve the number of users by score for a specific tag. This
+          allows to establish a score scale in percentage which enables to quickly
+          determine the rank of a user according to his score.
+        </p>
+
+        <p>
+          The tags available in the Tags League are stored in a
+          <a href={STATIC_TAGS_URL} target="_blank">static JSON file</a>. You
+          can propose to add one by
+          <a href={ADD_TAG_ISSUE_LINK}>opening an issue</a>.
+        </p>
+      </div>
     </div>
   </div>
 </div>

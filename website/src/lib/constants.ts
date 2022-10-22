@@ -15,6 +15,8 @@ export const NEW_QUESTION_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=
 
 export const LICENSE_URL = GITHUB_REPO_URL + '/blob/main/LICENSE.txt'
 export const CONTRIBUTORS_URL = GITHUB_REPO_URL + '/graphs/contributors'
+export const SEDE_QUERY_URL = GITHUB_REPO_URL + "/blob/main/src/tags-league/SedeQueries/count_users_by_score_of_a_specific_tag.sql"
+export const STATIC_TAGS_URL = GITHUB_REPO_URL + "/blob/main/src/tags-league/TAGS.json"
 
 export const SO_PROFILE_URL_REGEXP = /^https:\/\/stackoverflow\.com\/users\/[0-9]+\d\/[a-z]+/g
 

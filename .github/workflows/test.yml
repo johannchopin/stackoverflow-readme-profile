@@ -12,7 +12,7 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Run tests
@@ -21,4 +21,4 @@ jobs:
           yarn test:types
           yarn lint
           yarn test --coverage
-          bash <(curl -s https://codecov.io/bash) 
+          bash <(curl -s https://codecov.io/bash)

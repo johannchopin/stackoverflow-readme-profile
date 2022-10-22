@@ -4,99 +4,26 @@
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
 		<link rel="icon" href="/stackoverflow-readme-profile/favicon.png" />
-		<title>stackoverflow-readme-profile | Easily share your Stackoverflow's profile on your README</title>
+		<title>stackoverflow-readme-profile • Easily share your Stackoverflow's profile on your README</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content="">
-	<link rel="stylesheet" href="/stackoverflow-readme-profile/_app/assets/pages/__layout.svelte-38e4efb6.css">
-	<link rel="stylesheet" href="/stackoverflow-readme-profile/_app/assets/pages/index.svelte-4cd5be16.css">
-	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/start-96b9d187.js">
-	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/chunks/vendor-29ce4cc7.js">
-	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/pages/__layout.svelte-608e8a34.js">
-	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/pages/index.svelte-396ebd01.js">
+	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/immutable/start-531fc7c1.js">
+	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
+	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/immutable/chunks/index-ec10dd0a.js">
+	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/immutable/chunks/singletons-8ba37e0b.js">
+	<link rel="modulepreload" href="/stackoverflow-readme-profile/_app/immutable/chunks/index-6b13ddb2.js">
 	</head>
 	<body class="border-top border-primary border-4">
 		
+		<script type="module" data-sveltekit-hydrate="45h">
+		import { start } from "/stackoverflow-readme-profile/_app/immutable/start-531fc7c1.js";
 
-
-<main class="container pt-0 pt-md-5 svelte-1fxtu4e"><nav class="d-flex justify-content-end align-items-center mt-3"><a href="https://github.com/johannchopin/stackoverflow-readme-profile" target="_blank" class="me-2 link-light text-decoration-none"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-      GitHub
-    </span>
-    <span class="visually-hidden">Link to GitHub&#39;s repository</span></a>
-  <a class="p-1" href="https://github.com/johannchopin/stackoverflow-readme-profile/stargazers" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/johannchopin/stackoverflow-readme-profile?style=social"></a></nav>
-
-  <h1 class="mb-0 mt-3 fs-3 fw-bold svelte-1fxtu4e">stackoverflow-readme-profile</h1>
-  <p class="ms-3"><span class="fw-bold text-primary me-1">&gt;</span>
-    Easily share your Stackoverflow&#39;s profile on your README
-  </p>
-
-  <form class="mt-6"><label for="soId" class="form-label d-flex align-items-center w-fit-content"><h2 class="m-0 p-0 fs-3"><span class="fw-bold text-primary">1.</span>
-    Please enter your Stackoverflow identifier or profile URL
-  </h2>
-  <a href="https://meta.stackoverflow.com/questions/281254/how-to-find-my-userid-in-stack-overflow" target="_blank" class="mx-3" title="How to find my UserID in Stack Overflow" aria-label="How to find my UserID in Stack Overflow"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"></path></svg></span></a></label>
-
-<div><input type="text" class="form-control bg-dark text-light svelte-1gaq7ng" id="soId" placeholder="Example: 8583669 or https://stackoverflow.com/users/8583669/johannchopin" minlength="2" maxlength="100" required autocomplete="off" value="">
-  
-</div>
-    <section id="selectTheme" class="mt-6 svelte-1lqndro"><h2 class="fs-3"><span class="fw-bold text-primary">2.</span>
-    Select the theme:
-  </h2>
-
-  <form class="d-flex flex-wrap"><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="default" id="theme-default" checked>
-        <label class="form-check-label ms-1" for="theme-default"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #000!important; background: #FFFEFE;"><p class="m-1 fw-bold" style="color: #000">default</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #536675;"></span>
-</div></label>
-      </div><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="dark" id="theme-dark">
-        <label class="form-check-label ms-1" for="theme-dark"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #F48024!important; background: #2D2D2D;"><p class="m-1 fw-bold" style="color: #EAEAEA">dark</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #81C4F8;"></span>
-</div></label>
-      </div><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="cobalt" id="theme-cobalt">
-        <label class="form-check-label ms-1" for="theme-cobalt"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #DD6386!important; background: #193649;"><p class="m-1 fw-bold" style="color: #EAEAEA">cobalt</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #81C4F8;"></span>
-</div></label>
-      </div><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="monokai" id="theme-monokai">
-        <label class="form-check-label ms-1" for="theme-monokai"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #CC215F!important; background: #272822;"><p class="m-1 fw-bold" style="color: #EAEAEA">monokai</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #81C4F8;"></span>
-</div></label>
-      </div><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="graywhite" id="theme-graywhite">
-        <label class="form-check-label ms-1" for="theme-graywhite"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #474B4F!important; background: #FFF;"><p class="m-1 fw-bold" style="color: #474B4F">graywhite</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #536675;"></span>
-</div></label>
-      </div><div class="d-flex align-items-center m-2 cursor-pointer"><input class="form-check-input" type="radio" name="theme" value="hotdog" id="theme-hotdog">
-        <label class="form-check-label ms-1" for="theme-hotdog"><div class="template-preview position-relative border border-2 rounded cursor-pointer svelte-1ggyan1" style="border-color: #FFFF01!important; background: #F61328;"><p class="m-1 fw-bold" style="color: #FFF">hotdog</p>
-  <span class="position-absolute bottom-0 end-0 m-2 rounded svelte-1ggyan1" style="background: #FFFF01;"></span>
-</div></label>
-      </div></form>
-</section>
-
-    <button class="btn btn-outline-primary mt-6" type="submit">Generate your profiles
-    </button></form>
-
-
-  </main>
-
-<footer class="d-flex flex-column align-items-center mt-5 py-4 px-1 px-md-5 bg-dark"><p class="mb-0 ms-2">Build and maintained with ❤️  by <a href="https://github.com/johannchopin" target="_blank">@johannchopin</a></p>
-  <p class="mt-0 ms-2">This website is <a href="https://github.com/johannchopin/stackoverflow-readme-profile/tree/main/website" target="_blank">open source</a>.</p></footer>
-
-
-		<script type="module" data-hydrate="nkox2z">
-		import { start } from "/stackoverflow-readme-profile/_app/start-96b9d187.js";
 		start({
-			target: document.querySelector('[data-hydrate="nkox2z"]').parentNode,
+			env: {},
+			hydrate: null,
 			paths: {"base":"/stackoverflow-readme-profile","assets":"/stackoverflow-readme-profile"},
-			session: {},
-			route: true,
-			spa: false,
-			trailing_slash: "never",
-			hydrate: {
-				status: 200,
-				error: null,
-				nodes: [
-					import("/stackoverflow-readme-profile/_app/pages/__layout.svelte-608e8a34.js"),
-						import("/stackoverflow-readme-profile/_app/pages/index.svelte-396ebd01.js")
-				],
-				url: new URL("http://sveltekit-prerender/stackoverflow-readme-profile"),
-				params: {}
-			}
+			target: document.querySelector('[data-sveltekit-hydrate="45h"]').parentNode,
+			trailing_slash: "never"
 		});
 	</script>
 	</body>

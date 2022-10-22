@@ -11,10 +11,9 @@ const config = {
 
 	kit: {
 		adapter: adapterStatic({
-			// default options are shown
 			pages: 'build',
 			assets: 'build',
-			fallback: null
+			fallback: 'index.html'
 		}),
 		paths: {
 			base: prod ? "/stackoverflow-readme-profile" : ""

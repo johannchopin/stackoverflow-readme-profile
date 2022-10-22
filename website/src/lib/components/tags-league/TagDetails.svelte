@@ -22,7 +22,9 @@
         )
       ).json();
       scorePercentages = res;
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   };
 
   const fetchTagScoreAmounts = async (tag: string): Promise<void> => {
@@ -35,7 +37,9 @@
         )
       ).json();
       percentageAmounts = res.percentageAmounts;
-    } catch (error) {}
+    } catch (error) {
+      //
+    }
   };
 
   $: {

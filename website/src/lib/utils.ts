@@ -1,4 +1,4 @@
-import { API_BASEURL, SO_BASE_URL } from "./constants"
+import { SERVER_BASEURL, SO_BASE_URL } from "./constants"
 import type { TemplateSettings } from "./stores/user"
 
 export const replaceAll = (str: string, find: string, replace: string): string => {
@@ -35,14 +35,14 @@ export const getPathToProfile = (userId: number, template: string, theme: string
   })
 
   const queryStrings = new URLSearchParams(queryStringsObject).toString()
-  return `${API_BASEURL}/${template}/${userId}?${queryStrings}`
+  return `${SERVER_BASEURL}/${template}/${userId}?${queryStrings}`
 }
 
 export const getPathToRankingBadge = (tagName: string, userId: number | string, theme = 'default'): string => {
   const queryStringsObject = { theme }
   const queryStrings = new URLSearchParams(queryStringsObject).toString()
 
-  return `${API_BASEURL}/tags-league-ranking/${tagName}/${userId}?${queryStrings}`
+  return `${SERVER_BASEURL}/tags-league-ranking/${tagName}/${userId}?${queryStrings}`
 }
 
 export const getUserIdInProfileUrl = (url: string): number => {

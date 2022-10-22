@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { API_BASEURL, SCORE_COMPUTATION_INFOS } from "$lib/constants";
+  import { SERVER_BASEURL, SCORE_COMPUTATION_INFOS } from "$lib/constants";
   import { getPathToUserSOProfilePage } from "$lib/utils";
 
   import Rank from "./Rank.svelte";
@@ -17,7 +17,7 @@
   <div class="col-10 col-md-3 mt-3 mt-md-0">
     <a href={getPathToUserSOProfilePage(userId)} target="_blank">
       <img
-        src="{API_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
+        src="{SERVER_BASEURL}/profile/{userId}?theme=dark&website=true&location=true"
         alt="user:{userId}'s SO profile"
       />
     </a>

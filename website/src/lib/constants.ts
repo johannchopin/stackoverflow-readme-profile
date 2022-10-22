@@ -1,7 +1,8 @@
 export const MY_SO_ID = 8583669
 export const SO_BASE_URL = 'https://stackoverflow.com'
 export const MY_SO_PROFILE_URL = `${SO_BASE_URL}/users/8583669/johannchopin`
-export const API_BASEURL = import.meta.env.VITE_API_BASEURL
+export const SERVER_BASEURL = import.meta.env.VITE_API_BASEURL
+export const API_BASEURL = SERVER_BASEURL + '/api'
 export const SCORE_COMPUTATION_INFOS = "https://meta.stackoverflow.com/questions/280818/how-are-tag-scores-calculated"
 export const SO_USER_TAGS_URL = 'https://stackoverflow.com/users/current?tab=tags&sort=votes'
 

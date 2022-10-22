@@ -28,10 +28,10 @@ jobs:
 
       - name: Build
         env:
-          NODE_ENV: production
           VITE_API_BASEURL: https://stackoverflow-readme-profile.johannchopin.fr
         run: |
           npm i
+          NODE_ENV=production
           npm run build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2

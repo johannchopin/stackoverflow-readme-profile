@@ -2,7 +2,6 @@ import { config } from 'dotenv'
 import { createConnection } from 'typeorm'
 
 import { Logger } from '../Logger'
-import { PopularTag } from './entity/PopularTag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
 import { Log } from './entity/Log'
@@ -18,7 +17,6 @@ export const connect = async (): Promise<void> => {
   const entities = [
     User,
     Avatar,
-    PopularTag,
     Log,
     ScoreAmountByTag,
     ScorePercentileByTag,
@@ -47,5 +45,4 @@ export const initDatabase = async (): Promise<void> => {
 
   storeLog(LogType.SERVER_START)
   Logger.log('Database connected')
-  // await initPopularTagsTable()
 }

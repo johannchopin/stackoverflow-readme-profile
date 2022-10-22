@@ -1,50 +1,20 @@
 import { Router } from 'express'
 import { getManager } from 'typeorm'
 import { LogType } from '../../../db/constants'
-import { PopularTag } from '../../../db/entity/PopularTag'
 import { storeLog } from '../../../db/utils'
 
 import { Logger } from '../../../Logger'
-import getScrapedPopularTags from '../../helpers/getScrapedPopularTags'
 import { getUserRank } from '../../helpers/getUserRank'
-import { guarded, validTagName, validUserId } from '../middlewares'
+import { validTagName, validUserId } from '../middlewares'
 import { getScoreAmountsForTag, getScorePercentagesForTag } from './utils'
+import TAGS from '../../TAGS.json'
 
 const router = Router()
 
 router.get(
   '/',
   async (req, res) => {
-    const manager = getManager()
-
-    const tags = await (await manager.getRepository(PopularTag).find({ select: ['name'] }))
-
-    res.status(200).json(tags.map(tag => decodeURIComponent(tag.name)))
-  }
-)
-
-router.post(
-  '/',
-  guarded,
-  async (req, res) => {
-    const scrapedTags = await getScrapedPopularTags()
-
-    const manager = getManager()
-
-    manager.getRepository(PopularTag).clear()
-
-    const tags: PopularTag[] = scrapedTags.map((fetchedTag, index) => {
-      const tag = new PopularTag()
-      tag.id = index
-      tag.name = fetchedTag
-      return tag
-    })
-
-    manager.save(tags)
-
-    Logger.log('Top tags stored in DB')
-
-    res.status(202).json(scrapedTags)
+    res.status(200).json(TAGS.map(tag => decodeURIComponent(tag)))
   }
 )
 

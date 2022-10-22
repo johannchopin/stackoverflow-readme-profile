@@ -28,6 +28,7 @@ jobs:
 
       - name: Build
         env:
+          NODE_ENV: production
           VITE_API_BASEURL: https://stackoverflow-readme-profile.johannchopin.fr
         run: |
           npm i

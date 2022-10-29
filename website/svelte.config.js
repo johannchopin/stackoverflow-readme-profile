@@ -12,11 +12,13 @@ const config = {
 	kit: {
 		adapter: adapterStatic({
 			pages: 'build',
-			assets: 'build'
+			assets: 'build',
+			fallback: '200.html'
 		}),
 		paths: {
 			base: prod ? "/stackoverflow-readme-profile" : ""
-		}
+		},
+		prerender: { entries: [] }
 	}
 };
 

@@ -13,7 +13,7 @@ const config = {
 		adapter: adapterStatic({
 			pages: 'build',
 			assets: 'build',
-			fallback: '200.html'
+			fallback: 'index.html'
 		}),
 		paths: {
 			base: prod ? "/stackoverflow-readme-profile" : ""

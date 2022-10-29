@@ -1,7 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import adapterStatic from '@sveltejs/adapter-static'
-
-const prod = process.env.NODE_ENV === 'production'
+import vercel from '@sveltejs/adapter-vercel';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,15 +8,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapterStatic({
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html'
-		}),
-		paths: {
-			base: prod ? "/stackoverflow-readme-profile" : ""
-		},
-		prerender: { entries: [] }
+		adapter: vercel(),
 	}
 };
 

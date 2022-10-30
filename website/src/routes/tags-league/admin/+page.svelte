@@ -130,7 +130,7 @@
 
 {#if apiToken}
   <div class="accordion mt-1" id="accordion">
-    <div class="accordion-item">
+    <div class="accordion-item text-white">
       <h2 class="accordion-header" id="computePopularTagsHeader">
         <button
           class="accordion-button collapsed"
@@ -163,7 +163,7 @@
         </div>
       </div>
     </div>
-    <div class="accordion-item">
+    <div class="accordion-item text-white">
       <h2 class="accordion-header" id="computeLeagueCalculationHeader">
         <button
           class="accordion-button collapsed"
@@ -260,7 +260,7 @@
         </div>
       </div>
     </div>
-    <div class="accordion-item">
+    <div class="accordion-item text-white">
       <h3 class="accordion-header" id="checkLogs">
         <button
           class="accordion-button collapsed text-black"

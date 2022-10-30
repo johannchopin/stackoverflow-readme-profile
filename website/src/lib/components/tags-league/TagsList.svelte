@@ -29,7 +29,7 @@
       <li class="my-1" style="animation-delay: {getTagRandomDelay()}s;">
         <a
           href={"?tag=" + encodeURIComponent(tag)}
-          class="mx-1 so-tag clickable text-bg-dark text-decoration-none"
+          class="mx-1 so-tag clickable text-decoration-none"
           class:selected={tag === selectedTag}
           class:d-none={filter.length > 0 && !tag.includes(filter)}
           >{tag}

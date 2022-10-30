@@ -106,3 +106,10 @@ docker-compose up # start the engine
 ```bash
 docker-compose stop
 ```
+
+### Remove the container
+
+```bash
+docker-compose down
+docker-compose down --volumes # use it to remove the stored database volume
+```

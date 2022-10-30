@@ -27,7 +27,7 @@ export const HTML_CODE_PROFILE_TEMPLATE = `<a href="${GITHUB_REPO_URL}">
   <img src=":path" alt="user::id's SO profile">
 </a>`
 
-export const MD_CODE_RANKING_TEMPLATE = `[![user::id's ranking for :tag](:path)](https://johannchopin.github.io/stackoverflow-readme-profile/tags-league/:tag/users/:id)`
-export const HTML_CODE_RANKING_TEMPLATE = `<a href="https://johannchopin.github.io/stackoverflow-readme-profile/tags-league/:tag/users/:id">
+export const MD_CODE_RANKING_TEMPLATE = `[![user::id's ranking for :tag](:path)](https://stackoverflow-readme-profile.vercel.app/tags-league/:tag/users/:id)`
+export const HTML_CODE_RANKING_TEMPLATE = `<a href="https://stackoverflow-readme-profile.vercel.app/tags-league/:tag/users/:id">
   <img src=":path" alt="user::id's SO ranking for :tag">
 </a>`

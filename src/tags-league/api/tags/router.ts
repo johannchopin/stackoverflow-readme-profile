@@ -37,7 +37,7 @@ router.post(
     const tags: Tag[] = scrapedTags.map((fetchedTag, index) => {
       const tag = new Tag()
       tag.id = index
-      tag.name = fetchedTag
+      tag.name = encodeURIComponent(fetchedTag)
       return tag
     })
 

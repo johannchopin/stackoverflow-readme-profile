@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
-const PATH_TO_TAGS = "https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/src/tags-league/TAGS.json"
+const PATH_TO_TAGS = 'https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/src/tags-league/TAGS.json'
 
 export const fetchTagsFromGithub = async (): Promise<string[]> => {
-  return await (await fetch(PATH_TO_TAGS)).json()
+  return (await fetch(PATH_TO_TAGS)).json()
 }

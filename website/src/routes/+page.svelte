@@ -7,7 +7,7 @@
 <Presentation />
 
 <style lang="scss">
-  :global(body, main) {
+  :global(html, body) {
     overflow-x: hidden;
     max-width: 100vw;
   }

@@ -8,7 +8,6 @@ import { Logger } from '../../../Logger'
 import { getUserRank } from '../../helpers/getUserRank'
 import { guarded, validTagName, validUserId } from '../middlewares'
 import { getScoreAmountsForTag, getScorePercentagesForTag } from './utils'
-import TAGS from '../../TAGS.json'
 import { fetchTagsFromGithub } from '../../helpers/fetchTagsFromGithub'
 
 const router = Router()

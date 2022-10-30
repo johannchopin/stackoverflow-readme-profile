@@ -5,6 +5,7 @@ import { User as UserType } from '../types'
 import { LogType } from './constants'
 import { Avatar } from './entity/Avatar'
 import { Log } from './entity/Log'
+import { Tag } from './entity/Tag'
 import { User } from './entity/User'
 
 export const getUsers = async (): Promise<User[]> => {
@@ -59,6 +60,10 @@ export const storeUser = async (userToInsert: UserType): Promise<User> => {
   } catch (error) {
     return user
   }
+}
+
+export const getTags = async (): Promise<Tag[]> => {
+  return getManager().find(Tag)
 }
 
 export const storeLog = (type?: LogType, message?: string): Promise<Log> => {

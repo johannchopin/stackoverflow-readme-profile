@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 import { createConnection } from 'typeorm'
 
 import { Logger } from '../Logger'
+import { Tag } from './entity/Tag'
 import { User } from './entity/User'
 import { Avatar } from './entity/Avatar'
 import { Log } from './entity/Log'
@@ -17,6 +18,7 @@ export const connect = async (): Promise<void> => {
   const entities = [
     User,
     Avatar,
+    Tag,
     Log,
     ScoreAmountByTag,
     ScorePercentileByTag,

@@ -57,7 +57,7 @@ const run = async (): Promise<void> => {
       const isUserIdNumber = /^\d+$/.test(userId)
       if (!isUserIdNumber) throw new Error('Given user id should be a number')
 
-      const isTagValid = isTagInLeague(tagName)
+      const isTagValid = await isTagInLeague(tagName)
       if (!isTagValid) throw new Error(`The provided tag ${tagName} is not currently part of the Tags League.`)
 
       const userRank = await getUserRank(manager, Number(userId), tagName)

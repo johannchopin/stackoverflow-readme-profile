@@ -1,20 +1,51 @@
 import { Router } from 'express'
 import { getManager } from 'typeorm'
+import { Tag } from '../../../db/entity/Tag'
 import { LogType } from '../../../db/constants'
 import { storeLog } from '../../../db/utils'
 
 import { Logger } from '../../../Logger'
 import { getUserRank } from '../../helpers/getUserRank'
-import { validTagName, validUserId } from '../middlewares'
+import { guarded, validTagName, validUserId } from '../middlewares'
 import { getScoreAmountsForTag, getScorePercentagesForTag } from './utils'
 import TAGS from '../../TAGS.json'
+import { fetchTagsFromGithub } from '../../helpers/fetchTagsFromGithub'
 
 const router = Router()
 
 router.get(
   '/',
   async (req, res) => {
-    res.status(200).json(TAGS.map(tag => decodeURIComponent(tag)))
+    const manager = getManager()
+
+    const tags = await (await manager.getRepository(Tag).find({ select: ['name'] }))
+
+    res.status(200).json(tags.map(tag => decodeURIComponent(tag.name)))
+  }
+)
+
+router.post(
+  '/',
+  guarded,
+  async (req, res) => {
+    const scrapedTags = await fetchTagsFromGithub()
+
+    const manager = getManager()
+
+    manager.getRepository(Tag).clear()
+
+    const tags: Tag[] = scrapedTags.map((fetchedTag, index) => {
+      const tag = new Tag()
+      tag.id = index
+      tag.name = fetchedTag
+      return tag
+    })
+
+    manager.save(tags)
+
+    Logger.log('Top tags stored in DB')
+
+    res.status(202).json(scrapedTags)
   }
 )
 

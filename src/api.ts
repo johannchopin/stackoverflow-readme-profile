@@ -1,33 +1,19 @@
-import express from 'express'
-import { SECONDS_IN_MIN, Template } from './const'
+import express, { Router } from 'express'
+import cors from 'cors'
+
+import { SECONDS_IN_MIN, Template, THEMES } from './const'
 import { getProfileSvg } from './index'
-import { createConnection } from 'typeorm'
 
-import { renderError, Theme } from './templates'
+import { renderError, renderRankingBadge, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
-import { User } from './db/entity/User'
-import { Avatar } from './db/entity/Avatar'
+import { initDatabase } from './db/init'
 import { getAnalytics } from './analytics'
+import scraperRouter from './tags-league/api/router'
+import { isTagInLeague } from './tags-league/utils'
+import { getUserRank } from './tags-league/helpers/getUserRank'
+import { getManager } from 'typeorm'
 
-createConnection({
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  synchronize: true,
-  entities: [User, Avatar]
-}).catch(error => {
-  console.error('Data Access Error : ', error)
-  process.exit()
-})
-
-const app = express()
-const PORT = 5000
-const CACHE_PERIOD = 10 * SECONDS_IN_MIN // 10mins
-
-const checkQueryStrings = (query: {theme: string; website?: string; location?: string}): void => {
+const checkQueryStrings = (query: { theme: string; website?: string; location?: string }): void => {
   const { theme, website, location } = query
   const isWebsiteParamValid = website === 'true' || website === 'false'
   const isLocationParamValid = location === 'true' || location === 'false'
@@ -41,39 +27,84 @@ const checkQueryStrings = (query: {theme: string; website?: string; location?: s
   }
 }
 
-app.get('/:template/:id', async (req, res) => {
-  const { id, template } = req.params
-  const { theme = 'default', website = 'true', location = 'true' } = req.query
+const run = async (): Promise<void> => {
+  initDatabase()
 
-  const templateValid = isTemplateValid(template)
-  try {
-    if (!templateValid) throw new Error(`Invalid template '${template}'`)
+  const app = express()
+  const PORT = 5000
+  const CACHE_PERIOD = 10 * SECONDS_IN_MIN // 10mins
 
-    res.setHeader('Content-Type', 'image/svg+xml')
-    res.setHeader('Cache-control', `public, max-age=${CACHE_PERIOD}`)
+  app.use(express.json())
+  app.use(cors())
 
-    // @ts-ignore
-    checkQueryStrings({ theme, website, location })
+  const apiRouter = Router()
+  apiRouter.use('/tags-league', scraperRouter)
+  apiRouter.get('/analytics', async (req, res) => {
+    res.json(await getAnalytics())
+  })
+  apiRouter.use((req, res) => {
+    res.status(404).send()
+  })
 
-    const svg = await getProfileSvg(
-      Number(id),
-      template as Template, {
-        theme: theme as unknown as Theme,
-        website: website === 'true',
-        location: location === 'true'
-      }
-    )
+  app.use('/api', apiRouter)
 
-    res.send(svg)
-  } catch (error) {
-    res.send(renderError({ error: (error as Error).message }))
-  }
-})
+  app.get('/tags-league-ranking/:tagName/:userId', async (req, res) => {
+    const { tagName, userId } = req.params
+    const { theme = 'default' } = req.query
+    const manager = getManager()
 
-app.get('/_analytics', async (req, res) => {
-  res.json(await getAnalytics())
-})
+    try {
+      const isUserIdNumber = /^\d+$/.test(userId)
+      if (!isUserIdNumber) throw new Error('Given user id should be a number')
 
-app.listen(PORT, () => {
-  console.log(`stackoverflow-readme-profile's api listening at http://localhost:${PORT}`)
-})
+      const isTagValid = isTagInLeague(tagName)
+      if (!isTagValid) throw new Error(`The provided tag ${tagName} is not currently part of the Tags League.`)
+
+      const userRank = await getUserRank(manager, Number(userId), tagName)
+      if (userRank === undefined) throw new Error("This user doesn't have a sufficient score to be part of the Tags League or isn't a StackOverflow member!")
+
+      res.setHeader('Content-Type', 'image/svg+xml')
+      res.setHeader('Cache-control', `public, max-age=${CACHE_PERIOD}`)
+
+      res.send(renderRankingBadge(tagName, userRank.topPercentage, THEMES[theme as Theme] || THEMES.default))
+    } catch (error) {
+      res.send(renderError({ error: (error as Error).message }))
+    }
+  })
+
+  app.get('/:template/:userId', async (req, res) => {
+    const { userId, template } = req.params
+    const { theme = 'default', website = 'true', location = 'true' } = req.query
+
+    const templateValid = isTemplateValid(template)
+    try {
+      if (!templateValid) throw new Error(`Invalid template '${template}'`)
+
+      res.setHeader('Content-Type', 'image/svg+xml')
+      res.setHeader('Cache-control', `public, max-age=${CACHE_PERIOD}`)
+
+      // @ts-ignore
+      checkQueryStrings({ theme, website, location })
+
+      const svg = await getProfileSvg(
+        Number(userId),
+        template as Template,
+        {
+          theme: theme as unknown as Theme,
+          website: website === 'true',
+          location: location === 'true'
+        }
+      )
+
+      res.send(svg)
+    } catch (error) {
+      res.send(renderError({ error: (error as Error).message }))
+    }
+  })
+
+  app.listen(PORT, () => {
+    console.log(`stackoverflow-readme-profile's api listening at http://localhost:${PORT}`)
+  })
+}
+
+run()

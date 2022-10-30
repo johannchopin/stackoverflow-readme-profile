@@ -1,0 +1,34 @@
+<svg version="1.1" baseProfile="full" width="{{ctnWidth}}" height="34" viewBox="0 0 {{ctnWidth}} 34" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+  <style>
+    {{> global-styles }}
+
+    :root {
+      --color-so-icon: var(--color-primary);
+    }
+
+    text {
+      font-weight: 500;
+      font-size: 17px;
+    }
+    .tag {
+      fill: var(--color-link);
+      font-weight: 700;
+    }
+  </style>
+
+  <rect
+    width="{{ctnWidth}}"
+    height="34"
+    class="ctn"
+    rx="5"
+    ry="5"
+  ></rect>
+
+  {{> so-icon translateX="5px" width="20px" }}
+
+  <text class="animate" transform="translate(32,23)">
+    Top {{rank}}%
+    <tspan class="tag">{{tagName}}</tspan>
+    users
+  </text>
+</svg>

@@ -1,10 +1,9 @@
 import {
-  createUser,
   getUser as getStoredUser,
   getUserAvatar,
   shouldUpdateUserCache,
   storeAvatar,
-  updateUser
+  storeUser
 } from './db/utils'
 import { fetchUserAvatar, fetchUser } from './fetch'
 import { User } from './types'
@@ -21,7 +20,7 @@ export const getAvatar = async (
   if (shouldUpdate || !storedAvatar) {
     let avatar = await fetchUserAvatar(avatarLink)
     avatar = await getResizedBase64(avatar, 100, 100) // resize avatar to smaller one
-    if (useCache) storeAvatar(userId, avatar)
+    if (useCache) await storeAvatar(userId, avatar)
 
     return avatar
   }
@@ -29,15 +28,20 @@ export const getAvatar = async (
   return storedAvatar.base64
 }
 
-export const getUser = async (userId: number, useCache: boolean = true): Promise<User & {avatar: string}> => {
+export const getUser = async (
+  userId: number,
+  useCache: boolean = true,
+): Promise<(User & { avatar: string }
+) | undefined> => {
   const storedUser = useCache ? await getStoredUser(userId) : undefined
 
   if (storedUser) {
     if (shouldUpdateUserCache(storedUser)) {
       const user = await fetchUser(userId)
+      if (!user) return undefined
       const shouldUpdateAvatar = user.avatarLink !== storedUser.avatarLink
 
-      updateUser(user)
+      await storeUser(user)
       return {
         ...user,
         avatar: await getAvatar(user.id, user.avatarLink, shouldUpdateAvatar)
@@ -55,8 +59,9 @@ export const getUser = async (userId: number, useCache: boolean = true): Promise
   }
 
   const user = await fetchUser(userId)
+  if (!user) return undefined
 
-  if (useCache) createUser(user)
+  if (useCache) await storeUser(user)
   return {
     ...user,
     avatar: await getAvatar(user.id, user.avatarLink, false, useCache)

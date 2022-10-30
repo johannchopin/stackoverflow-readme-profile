@@ -2,7 +2,9 @@ import { getManager } from 'typeorm'
 import { MS_IN_DAY } from '../const'
 
 import { User as UserType } from '../types'
+import { LogType } from './constants'
 import { Avatar } from './entity/Avatar'
+import { Log } from './entity/Log'
 import { User } from './entity/User'
 
 export const getUsers = async (): Promise<User[]> => {
@@ -25,25 +27,20 @@ export const getUserAvatar = async (userId: number): Promise<Avatar | undefined>
   return getManager().findOne(Avatar, { id: userId })
 }
 
-export const storeAvatar = async (userId: number, avatarBase64: string): Promise<void> => {
-  const manager = getManager()
-
-  const existingAvatar = await getUserAvatar(userId)
-
+export const storeAvatar = async (userId: number, avatarBase64: string): Promise<Avatar> => {
   const avatar = new Avatar()
   avatar.id = userId
   avatar.base64 = avatarBase64
 
-  if (existingAvatar) {
-    await manager.update(Avatar, { id: userId }, avatar)
-  } else {
-    await manager.save(avatar)
+  try {
+    await getManager().save(avatar)
+    return avatar
+  } catch (error) {
+    return avatar
   }
 }
 
-export const storeUser = async (userToInsert: UserType, action: 'create' | 'update'): Promise<void> => {
-  const manager = getManager()
-
+export const storeUser = async (userToInsert: UserType): Promise<User> => {
   const user = new User()
 
   user.id = userToInsert.id
@@ -56,17 +53,20 @@ export const storeUser = async (userToInsert: UserType, action: 'create' | 'upda
   user.website = userToInsert.website
   user.avatarLink = userToInsert.avatarLink
 
-  if (action === 'update') {
-    user.updatedAt = new Date()
+  try {
+    await getManager().save(user)
+    return user
+  } catch (error) {
+    return user
   }
-
-  manager.save(user)
 }
 
-export const updateUser = async (userToInsert: UserType): Promise<void> => {
-  return storeUser(userToInsert, 'update')
-}
+export const storeLog = (type?: LogType, message?: string): Promise<Log> => {
+  const manager = getManager()
 
-export const createUser = async (userToInsert: UserType): Promise<void> => {
-  return storeUser(userToInsert, 'create')
+  const log = new Log()
+  log.type = type
+  log.message = message
+
+  return manager.save(log)
 }

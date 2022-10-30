@@ -15,7 +15,7 @@ export interface Theme {
 
 export type Template = 'profile' | 'profile-small'
 export const TEMPLATES: Template[] = ['profile', 'profile-small']
-export const THEMES: {[key in ThemeType]: Theme} = {
+export const THEMES: { [key in ThemeType]: Theme } = {
   default: defaultTheme,
   dark: darkTheme,
   cobalt: cobaltTheme,
@@ -29,3 +29,5 @@ export const SECONDS_IN_MIN = 60
 export const MS_IN_DAY = MS_IN_SECONDS * SECONDS_IN_MIN * 60 * 24
 export const MS_IN_WEEK = MS_IN_DAY * 7
 export const MS_IN_MONTH = MS_IN_WEEK * 4
+
+export const MIN_SCORE_TO_BE_IN_LEAGUE = 3

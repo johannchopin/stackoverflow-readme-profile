@@ -1,8 +1,6 @@
 import preprocess from 'svelte-preprocess';
 import adapterStatic from '@sveltejs/adapter-static'
 
-const prod = process.env.NODE_ENV === 'production'
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -11,14 +9,11 @@ const config = {
 
 	kit: {
 		adapter: adapterStatic({
-      // default options are shown
-      pages: 'build',
-      assets: 'build',
-      fallback: null
-    }),
-		paths: {
-			base: prod ? "/stackoverflow-readme-profile": ""
-		}
+			pages: 'build',
+			assets: 'build',
+			fallback: 'index.html'
+		}),
+		prerender: { entries: [] }
 	}
 };
 

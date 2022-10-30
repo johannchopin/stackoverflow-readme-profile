@@ -3,7 +3,7 @@
 </script>
 
 <p
-  class="w-fit-content ms-auto border border-primary p-1 rounded-2 mt-5 
+  class="w-fit-content ms-auto border border-primary border-1 p-1 rounded-2 mt-5 
   {$$restProps.class || ''}"
 >
   <span class="text-primary">Last update:</span>

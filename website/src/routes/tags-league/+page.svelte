@@ -41,33 +41,35 @@
 
 <TagsList {tags} {selectedTag} />
 
-{#if selectedTag && selectedTagIsValid}
-  <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
-  <ConsultScoreSection tag={selectedTag} />
-  <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
+<section id="details">
+  {#if selectedTag && selectedTagIsValid}
+    <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
+    <ConsultScoreSection tag={selectedTag} />
+    <hr class="border border-primary border-1 w-75 m-auto opacity-75 my-4" />
 
-  <h2 class="fs-4 mt-5 lh-sm">
-    <span class="text-primary fs-3">
-      <Graph />
-    </span>
-    Insights of the technology
-    <SoTagLink class="fs-5" tag={selectedTag} />
-  </h2>
+    <h2 class="fs-4 mt-5 lh-sm">
+      <span class="text-primary fs-3">
+        <Graph />
+      </span>
+      Insights of the technology
+      <SoTagLink class="fs-5" tag={selectedTag} />
+    </h2>
 
-  {#if revealInsights}
-    <TagDetails tag={selectedTag} />
-  {:else}
-    <div class="d-flex justify-content-center mt-4">
-      <button
-        class="btn btn-outline-primary mx-auto"
-        on:click={() => (revealInsights = true)}
-      >
-        <Eye />
-        Reveal insights
-      </button>
-    </div>
+    {#if revealInsights}
+      <TagDetails tag={selectedTag} />
+    {:else}
+      <div class="d-flex justify-content-center mt-4">
+        <button
+          class="btn btn-outline-primary mx-auto"
+          on:click={() => (revealInsights = true)}
+        >
+          <Eye />
+          Reveal insights
+        </button>
+      </div>
+    {/if}
   {/if}
-{/if}
+</section>
 
 <style lang="scss">
   h1 :global(svg) {

@@ -10,7 +10,7 @@
 </script>
 
 <div class="accordion mt-2" id="accordion">
-  <div class="accordion-item">
+  <div class="accordion-item text-white">
     <h3 class="accordion-header" id="connectedToSO">
       <button
         class="accordion-button collapsed text-black"
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item text-white">
     <h3 class="accordion-header" id="whyUseIt">
       <button
         class="accordion-button collapsed text-black"
@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item text-white">
     <h3 class="accordion-header" id="tagLeague">
       <button
         class="accordion-button collapsed text-black"
@@ -123,7 +123,7 @@
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item text-white">
     <h3 class="accordion-header" id="requirements">
       <button
         class="accordion-button collapsed text-black"
@@ -159,7 +159,7 @@
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item text-white">
     <h3 class="accordion-header" id="computation">
       <button
         class="accordion-button collapsed text-black"

@@ -7,8 +7,9 @@
 <Presentation />
 
 <style lang="scss">
-  :global(body) {
+  :global(html, body) {
     overflow-x: hidden;
+    max-width: 100vw;
   }
 
   :global(footer.mt-5) {

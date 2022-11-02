@@ -53,6 +53,22 @@
     if (lastComputation) lastLeagueComputation = new Date(lastComputation);
   };
 
+  const computeTagsToUseInLeague = async () => {
+    const res = await fetch(`${API_BASEURL}/tags-league/tags`, {
+      method: "POST",
+      headers: getHeaders(),
+    });
+
+    if (res.status === 403) {
+      alert("invalid admin access");
+      return;
+    }
+
+    tags = await res.json();
+
+    alert("Tags updated!");
+  };
+
   const cancelTagsComputation = async (): Promise<void> => {
     const res = await fetch(`${API_BASEURL}/tags-league/cancel`, {
       method: "POST",
@@ -114,7 +130,40 @@
 
 {#if apiToken}
   <div class="accordion mt-1" id="accordion">
-    <div class="accordion-item">
+    <div class="accordion-item text-white">
+      <h2 class="accordion-header" id="computePopularTagsHeader">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          aria-expanded="false"
+          data-bs-target="#computePopularTags"
+          aria-controls="computePopularTags"
+        >
+          Compute Tags to be used in the league
+        </button>
+      </h2>
+      <div
+        id="computePopularTags"
+        class="accordion-collapse collapse bg-body"
+        aria-labelledby="computePopularTagsHeader"
+        data-bs-parent="#accordion"
+      >
+        <div class="accordion-body">
+          <form
+            class="row g-3"
+            on:submit|preventDefault={computeTagsToUseInLeague}
+          >
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary"
+                >Start computation</button
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item text-white">
       <h2 class="accordion-header" id="computeLeagueCalculationHeader">
         <button
           class="accordion-button collapsed"
@@ -211,7 +260,7 @@
         </div>
       </div>
     </div>
-    <div class="accordion-item">
+    <div class="accordion-item text-white">
       <h3 class="accordion-header" id="checkLogs">
         <button
           class="accordion-button collapsed text-black"

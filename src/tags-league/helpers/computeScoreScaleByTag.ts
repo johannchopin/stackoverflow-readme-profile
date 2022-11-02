@@ -4,7 +4,7 @@ import { Logger } from '../../Logger'
 import { ApiService, ScoreAmountItem } from '../ApiService'
 import { Auth } from '../Auth'
 import computeScoreRepartitionByPercentage from './computeScoreRepartitionByPercentage'
-import TAGS from '../TAGS.json'
+import getStoredTags from './getStoredTags'
 
 export type AmountEntry = [number, number]
 
@@ -48,7 +48,7 @@ const computeScoreScaleByTag = async (
   const api = new ApiService(auth)
 
   // eslint-disable-next-line no-restricted-syntax
-  for (const tag of TAGS) {
+  for (const tag of await getStoredTags(manager)) {
     if (!signal.aborted) {
       // eslint-disable-next-line no-await-in-loop
       const scoreAmountItems = await api.getAmountUsersByScoreByTag(decodeURIComponent(tag), signal)

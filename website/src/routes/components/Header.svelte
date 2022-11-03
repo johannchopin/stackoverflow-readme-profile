@@ -32,7 +32,8 @@
       <div class="d-flex mt-4">
         <a
           href="/profile"
-          class="mx-1 btn btn-outline-primary rounded-3 text-decoration-none bg-transparent text-white"
+          class="mx-1 btn btn-outline-primary rounded-3 text-decoration-none text-white"
+          class:bg-primary={isProfileFocus}
           class:focus={isProfileFocus}
           class:border-primary={isProfileFocus}
           on:mouseenter={focusProfile}
@@ -43,7 +44,8 @@
 
         <a
           href="/tags-league"
-          class="mx-1 btn btn-outline-primary rounded-3 text-decoration-none bg-transparent text-white"
+          class="mx-1 btn btn-outline-primary rounded-3 text-decoration-none text-white"
+          class:bg-primary={isRankingBadgeFocus}
           class:focus={isRankingBadgeFocus}
           class:border-primary={isRankingBadgeFocus}
           on:mouseenter={focusRankingBadge}

@@ -2,6 +2,11 @@
 
 Easily share your Stackoverflow's profile on your README.
 
+<div style="display: flex; justify-content: center;">
+  <img src="https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/banner.png" width="100%" style="max-width: 600px; border-radius: 4px; margin-x: 40px; margin-bottom: 20px;">
+</div>
+
+<div style="display: flex; justify-content: center;">
 <a href="https://github.com/johannchopin/stackoverflow-readme-profile/actions">
   <img src="https://github.com/johannchopin/stackoverflow-readme-profile/actions/workflows/test.yml/badge.svg" alt="test workflow">
 </a>
@@ -14,6 +19,7 @@ Easily share your Stackoverflow's profile on your README.
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji">
 </a>
+</div>
 
 ---
 
@@ -83,7 +89,7 @@ Render a smaller profile badge without the location and the website
 ## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app/tags-league):
 ![Tags league ranking badge: theme default](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/default.svg)
 ![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
-![Tags league ranking badge: theme monokai](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/monokai.svg)
+![Tags league ranking badge: theme dark](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/dark.svg)
 
 <details>
 <summary>💡 How to use?</summary>

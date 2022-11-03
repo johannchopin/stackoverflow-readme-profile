@@ -2,8 +2,6 @@
 
 Easily share your Stackoverflow's profile on your README.
 
-![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile/themes/dark.svg)
-
 <a href="https://github.com/johannchopin/stackoverflow-readme-profile/actions">
   <img src="https://github.com/johannchopin/stackoverflow-readme-profile/actions/workflows/test.yml/badge.svg" alt="test workflow">
 </a>
@@ -18,6 +16,16 @@ Easily share your Stackoverflow's profile on your README.
 </a>
 
 ---
+
+## [➡️ Get your profile badge](https://stackoverflow-readme-profile.vercel.app/profile):
+
+![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile/themes/dark.svg)
+![SO profile-small](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile-small/themes/default.svg)
+
+## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app/tags-league):
+![Tags league ranking badge: theme default](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/default.svg)
+![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
+![Tags league ranking badge: theme monokai](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/monokai.svg)
 
 ## 💡 How to use?
 

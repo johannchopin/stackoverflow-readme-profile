@@ -13,7 +13,7 @@ const BADGES_DATA: { [key in Theme]: { tag: string, rank: number } } = {
   hotdog: { tag: 'hadoop', rank: 42 }
 }
 
-let doc = `# Themes for the ranking badge \n`;
+let doc = '# Themes for the ranking badge \n';
 
 (Object.keys(BADGES_DATA) as Theme[]).forEach(theme => {
   const { tag, rank } = BADGES_DATA[theme]
@@ -28,4 +28,4 @@ let doc = `# Themes for the ranking badge \n`;
   fs.writeFileSync(path.resolve(__dirname, `../docs/tags-league-ranking/themes/${svgFileName}`), svg)
 })
 
-fs.writeFileSync(path.resolve(__dirname, `../docs/tags-league-ranking/README.md`), doc)
+fs.writeFileSync(path.resolve(__dirname, '../docs/tags-league-ranking/README.md'), doc)

@@ -9,6 +9,7 @@
     "start": "ts-node-dev -- src/api.ts",
     "serve": "ts-node -- src/api.ts",
     "docs:gen:template": "ts-node scripts/generateTemplatesDoc.ts",
+    "docs:gen:ranking-template": "ts-node scripts/generateRankingBadgesTemplatesDoc.ts",
     "test": "jest --silent",
     "test:types": "tsc --noEmit",
     "test:manual": "ts-node-dev --files test/run.ts",

@@ -48,7 +48,7 @@ Use it like that in your README:
 
 #### profile
 
-Render a profile image by using the `profile` template:
+Render a profile badge by using the `profile` template:
 
 ```
 https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
@@ -66,7 +66,7 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 
 #### profile-small
 
-Render a smaller profile image without the location and the website
+Render a smaller profile badge without the location and the website
 
 ![profile](./docs/profile-small/themes/dark.svg)
 

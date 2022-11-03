@@ -85,7 +85,25 @@ Render a smaller profile badge without the location and the website
 ![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
 ![Tags league ranking badge: theme monokai](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/monokai.svg)
 
+<details>
+<summary>💡 How to use?</summary>
 
-## License
+> Use the [online generator](https://stackoverflow-readme-profile.vercel.app/tags-league) for a quicker setup
+
+You can generate your SO ranking badge by calling this url with the desired technology ([see the tags list](./src/tags-league/TAGS.json)) and your SO user id:
+
+```
+https://stackoverflow-readme-profile.johannchopin.fr/tags-league-ranking/:tagName/:id
+```
+
+### Params (as query strings)
+
+| param   |  default  | description                                                                |
+| :------ | :-------: | :------------------------------------------------------------------------- |
+| `theme` | `default` | Theme to use. [Check them out here!](./docs/tags-league-ranking/README.md) |
+
+</details>
+
+## 📄 License
 
 [AGPL-3.0](./LICENSE.txt)

@@ -110,7 +110,7 @@ export const renderRankingBadge = (tagName: string, rank: number, theme: ThemeOb
   const FONT_SIZE_PX = 17
   const CTN_MIN_WIDTH = 150
   const rankSpacing = rank >= 100 ? 5 : (rank >= 10 ? 2 : 0)
-  const ctnWidth = CTN_MIN_WIDTH + Math.round(tagName.length * (FONT_SIZE_PX / 1.9)) + rankSpacing
+  const ctnWidth = CTN_MIN_WIDTH + Math.round(tagName.length * (FONT_SIZE_PX / 1.7)) + rankSpacing
 
   const renderedTemplate = rankingBadgeTemplate({
     theme,

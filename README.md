@@ -22,12 +22,8 @@ Easily share your Stackoverflow's profile on your README.
 ![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile/themes/dark.svg)
 ![SO profile-small](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile-small/themes/default.svg)
 
-## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app/tags-league):
-![Tags league ranking badge: theme default](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/default.svg)
-![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
-![Tags league ranking badge: theme monokai](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/monokai.svg)
-
-## 💡 How to use?
+<details>
+<summary>💡 How to use?</summary>
 
 > Use the [online generator](https://stackoverflow-readme-profile.vercel.app/profile) for a quicker setup
 
@@ -45,12 +41,12 @@ Use it like that in your README:
 
 ---
 
-## 📄 Templates
+### 📄 Templates
 
 - [profile](#profile)
 - [profile-small](#profile-small)
 
-### profile
+#### profile
 
 Render a profile image by using the `profile` template:
 
@@ -60,7 +56,7 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 
 ![profile](./docs/profile/themes/dark.svg)
 
-#### Params (as query strings)
+##### Params (as query strings)
 
 | param      |  default  | description                                                    |
 | :--------- | :-------: | :------------------------------------------------------------- |
@@ -68,56 +64,28 @@ https://stackoverflow-readme-profile.johannchopin.fr/profile/:id
 | `website`  |  `true`   | Show or not the website URL (`true` \| `false`)                |
 | `location` |  `true`   | Show or not the location (`true` \| `false`)                   |
 
-### profile-small
+#### profile-small
 
 Render a smaller profile image without the location and the website
 
 ![profile](./docs/profile-small/themes/dark.svg)
 
-#### Params (as query strings)
+##### Params (as query strings)
 
 | param   |  default  | description                                                          |
 | :------ | :-------: | :------------------------------------------------------------------- |
 | `theme` | `default` | Theme to use. [Check them out here!](./docs/profile-small/README.md) |
 
+</details>
+
 ---
 
-## 🐳 Docker
+## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app/tags-league):
+![Tags league ranking badge: theme default](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/default.svg)
+![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
+![Tags league ranking badge: theme monokai](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/monokai.svg)
 
-### Build the image
 
-You can build the image by using the following command:
+## License
 
-```bash
-docker build -t johannchopin/stackoverflow-readme-profile .
-```
-
-### Push the image
-
-You can push the image by using the following command:
-
-```bash
-docker push johannchopin/stackoverflow-readme-profile
-```
-
-### Run the application
-
-To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server. Near to it add a new `.env` file and adapt the variables. You will find an example of it in `./.env.example`. You can then run:
-
-```bash
-docker-compose pull # be sure to get the latest johannchopin/stackoverflow-readme-profile image version
-docker-compose up # start the engine
-```
-
-### Stop the application
-
-```bash
-docker-compose stop
-```
-
-### Remove the container
-
-```bash
-docker-compose down
-docker-compose down --volumes # use it to remove the stored database volume
-```
+[AGPL-3.0](./LICENSE.txt)

@@ -56,4 +56,46 @@ The repo contains generated README files that present the different themes like 
 yarn docs:gen:template TEMPLATE_NAME
 ```
 
-> 💡 I decided to generate them to avoid unnecessary server computation since the templates won't change to much
+> 💡 I decided to generate them to avoid unnecessary server computation since the templates won't change much.
+
+---
+
+## 🐳 Docker
+
+### Build the image
+
+You can build the image by using the following command:
+
+```bash
+docker build -t johannchopin/stackoverflow-readme-profile .
+```
+
+### Push the image
+
+You can push the image by using the following command:
+
+```bash
+docker push johannchopin/stackoverflow-readme-profile
+```
+
+### Run the application
+
+To run the app together with postgresql you will need to copy the `docker-compose.yml` file on you server. Near to it add a new `.env` file and adapt the variables. You will find an example of it in `./.env.example`. You can then run:
+
+```bash
+docker-compose pull # be sure to get the latest johannchopin/stackoverflow-readme-profile image version
+docker-compose up # start the engine
+```
+
+### Stop the application
+
+```bash
+docker-compose stop
+```
+
+### Remove the container
+
+```bash
+docker-compose down
+docker-compose down --volumes # use it to remove the stored database volume
+```

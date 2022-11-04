@@ -23,7 +23,7 @@ Easily share your Stackoverflow's profile on your README.
 
 ---
 
-## [➡️ Get your profile badge](https://stackoverflow-readme-profile.vercel.app/profile):
+## [➡️ Get your profile badge](https://stackoverflow-readme-profile.vercel.app):
 
 ![SO profile](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile/themes/dark.svg)
 ![SO profile-small](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/profile-small/themes/default.svg)
@@ -86,7 +86,7 @@ Render a smaller profile badge without the location and the website
 
 ---
 
-## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app/tags-league):
+## [➡️ Get your ranking badge](https://stackoverflow-readme-profile.vercel.app):
 ![Tags league ranking badge: theme default](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/default.svg)
 ![Tags league ranking badge: theme cobalt](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/cobalt.svg)
 ![Tags league ranking badge: theme dark](https://raw.githubusercontent.com/johannchopin/stackoverflow-readme-profile/main/docs/tags-league-ranking/themes/dark.svg)

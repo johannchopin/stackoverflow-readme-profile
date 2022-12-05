@@ -1,0 +1,65 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: Tags league open API
+  description: API to access tags league's data
+
+servers:
+  - url: https://stackoverflow-readme-profile.johannchopin.fr/api
+
+paths:
+  /tags-league/tags:
+    get:
+      description: List of tags present in the tags league.
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /tags-league/tags/{tagname}/users/{userid}:
+    get:
+      description: Get a user ranking details concerning a specific tag
+      parameters:
+        - name: tagname
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastUpdate:
+                    type: string
+                    format: date
+                    description: The time this data was calculated.
+                    example: "2022-12-04T17:20:23.760Z"
+                    nullable: false
+                  score:
+                    type: integer
+                    format: int64
+                    description: The user score in this tag.
+                    nullable: false
+                  topPercentage:
+                    type: integer
+                    format: int32
+                    description: The user ranking as percentage. If value is `4`` then the user is top 4% in this tag.
+                    nullable: false
+
+        "404":
+          description: Invalid user identifier or tag name or the user is not part of the tag league due to insufficient score.

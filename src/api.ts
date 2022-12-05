@@ -12,6 +12,7 @@ import scraperRouter from './tags-league/api/router'
 import { isTagInLeague } from './tags-league/utils'
 import { getUserRank } from './tags-league/helpers/getUserRank'
 import { getManager } from 'typeorm'
+import { apiDocumentationRouter } from './apiDocumentationRouter'
 
 const checkQueryStrings = (query: { theme: string; website?: string; location?: string }): void => {
   const { theme, website, location } = query
@@ -47,6 +48,7 @@ const run = async (): Promise<void> => {
   })
 
   app.use('/api', apiRouter)
+  app.use('/api-documentation', apiDocumentationRouter)
 
   app.get('/tags-league-ranking/:tagName/:userId', async (req, res) => {
     const { tagName, userId } = req.params

@@ -58,7 +58,7 @@ paths:
                   topPercentage:
                     type: integer
                     format: int32
-                    description: The user ranking as percentage. If value is `4`` then the user is top 4% in this tag.
+                    description: The user ranking as percentage. If value is `4` then the user is top 4% in this tag.
                     nullable: false
 
         "404":

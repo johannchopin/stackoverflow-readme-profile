@@ -5,7 +5,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
 
   onMount(async () => {
-    await import("../../node_modules/bootstrap/dist/js/bootstrap");
+    await import("../../node_modules/bootstrap/dist/js/bootstrap.bundle");
   });
 </script>
 

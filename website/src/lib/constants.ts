@@ -10,6 +10,8 @@ export const GITHUB_REPO_USER = 'johannchopin'
 export const GITHUB_REPO_NAME = 'stackoverflow-readme-profile'
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO_USER}/${GITHUB_REPO_NAME}`
 
+export const OPENAPI_DOC_URL = "https://stackoverflow-readme-profile.johannchopin.fr/api-documentation/"
+
 export const ADD_TAG_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=johannchopin&labels=tag-proposition&template=ADD-TAG-TO-TAGS-LEAGUE.yml&title=Tag+proposition%3A+tagname'
 export const NEW_QUESTION_ISSUE_LINK = GITHUB_REPO_URL + '/issues/new?assignees=johannchopin&labels=question&template=QUESTION.yml&title=Question%3A+'
 

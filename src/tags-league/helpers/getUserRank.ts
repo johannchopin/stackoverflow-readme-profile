@@ -97,9 +97,9 @@ export const getUserRank = async (
     const now = Date.now()
     const lastUpdate = storedUser.updatedAt.getTime()
 
-    const isOlderThanOneDay = now >= lastUpdate + MS_IN_DAY
+    const isOlderThanTwoDay = now >= lastUpdate + (MS_IN_DAY * 2)
 
-    if (isOlderThanOneDay) return getFetchedUserRank(manager, userId, tag)
+    if (isOlderThanTwoDay) return getFetchedUserRank(manager, userId, tag)
     return storedUser
   }
 

@@ -1,6 +1,8 @@
+import { getManager, MoreThanOrEqual } from 'typeorm'
 import { MS_IN_DAY, MS_IN_MONTH, MS_IN_WEEK } from './const'
 import { User } from './db/entity/User'
-import { getUsers } from './db/utils'
+import { UserRankByTag } from './db/entity/UserRankByTag'
+import { getTags, getUsers } from './db/utils'
 
 interface ActiveUsersAnalytics {
   month: number
@@ -46,4 +48,26 @@ export const getAnalytics = async (): Promise<Analytics> => {
       activity: getActiveUsersAnalytics(users)
     }
   }
+}
+
+const getLastWeekUsersAmountForTag = async (tag: string): Promise<number> => {
+  const manager = getManager()
+  return (await manager.getRepository(UserRankByTag).find({
+    where: {
+      tag,
+      updatedAt: MoreThanOrEqual(new Date(Date.now() - 604800000)) // user since last week
+    }
+  })).length
+}
+
+export const getTagsLeagueAnalytics = async (): Promise<Record<string, number>> => {
+  const tags = await (await getTags()).map(tag => tag.name)
+
+  const usersAmountByTag: Record<string, number> = {}
+
+  await Promise.all(tags.map(async (tag) => {
+    usersAmountByTag[tag] = await getLastWeekUsersAmountForTag(tag)
+  }))
+
+  return usersAmountByTag
 }

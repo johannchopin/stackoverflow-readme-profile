@@ -7,7 +7,7 @@ import { getProfileSvg } from './index'
 import { renderError, renderRankingBadge, Theme } from './templates'
 import { isTemplateValid, isThemeValid } from './utils'
 import { initDatabase } from './db/init'
-import { getAnalytics } from './analytics'
+import { getAnalytics, getTagsLeagueAnalytics } from './analytics'
 import scraperRouter from './tags-league/api/router'
 import { isTagInLeague } from './tags-league/utils'
 import { getUserRank } from './tags-league/helpers/getUserRank'
@@ -42,6 +42,9 @@ const run = async (): Promise<void> => {
   apiRouter.use('/tags-league', scraperRouter)
   apiRouter.get('/analytics', async (req, res) => {
     res.json(await getAnalytics())
+  })
+  apiRouter.get('/analytics/tags-league', async (req, res) => {
+    res.json(await getTagsLeagueAnalytics())
   })
   apiRouter.use((req, res) => {
     res.status(404).send()

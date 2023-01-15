@@ -110,6 +110,11 @@ https://stackoverflow-readme-profile.johannchopin.fr/tags-league-ranking/:tagNam
 
 </details>
 
+## 🦄 Contributing
+
+All remarks are welcome so feel free to [open an issue](https://github.com/johannchopin/stackoverflow-readme-profile/issues/new/choose) 😉
+Wants to collaborate? Please read the [contributing guidelines](./CONTRIBUTING.md).
+
 ## 📄 License
 
 [AGPL-3.0](./LICENSE.txt)

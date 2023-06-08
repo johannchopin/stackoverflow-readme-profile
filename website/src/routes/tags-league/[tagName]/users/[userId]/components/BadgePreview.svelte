@@ -10,12 +10,21 @@
   export let tag: string;
   export let theme: string;
 
-  $: pathToBadge = getPathToRankingBadge(tag, userId, theme);
+  $: pathToBadge = getPathToRankingBadge(
+    encodeURIComponent(tag),
+    userId,
+    theme
+  );
 
-  $: mdCode = getRankingBadgeCode(MD_CODE_RANKING_TEMPLATE, tag, userId, theme);
+  $: mdCode = getRankingBadgeCode(
+    MD_CODE_RANKING_TEMPLATE,
+    encodeURIComponent(tag),
+    userId,
+    theme
+  );
   $: htmlCode = getRankingBadgeCode(
     HTML_CODE_RANKING_TEMPLATE,
-    tag,
+    encodeURIComponent(tag),
     userId,
     theme
   );

@@ -57,15 +57,16 @@ const run = async (): Promise<void> => {
     const { tagName, userId } = req.params
     const { theme = 'default' } = req.query
     const manager = getManager()
+    const tag = encodeURIComponent(tagName)
 
     try {
       const isUserIdNumber = /^\d+$/.test(userId)
       if (!isUserIdNumber) throw new Error('Given user id should be a number')
 
-      const isTagValid = await isTagInLeague(tagName)
+      const isTagValid = await isTagInLeague(tag)
       if (!isTagValid) throw new Error(`The provided tag ${tagName} is not currently part of the Tags League.`)
 
-      const userRank = await getUserRank(manager, Number(userId), tagName)
+      const userRank = await getUserRank(manager, Number(userId), tag)
       if (userRank === undefined) throw new Error("This user doesn't have a sufficient score to be part of the Tags League or isn't a StackOverflow member!")
 
       res.setHeader('Content-Type', 'image/svg+xml')

@@ -99,5 +99,7 @@
   "elixir",
   "julia",
   "redis",
-  "flask"
+  "flask",
+  "ethereum",
+  "solidity"
 ]

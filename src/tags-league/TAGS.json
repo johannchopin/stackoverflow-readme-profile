@@ -101,5 +101,6 @@
   "redis",
   "flask",
   "ethereum",
-  "solidity"
+  "solidity",
+  "github"
 ]

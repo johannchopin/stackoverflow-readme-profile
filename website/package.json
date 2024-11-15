@@ -2,7 +2,7 @@
   "name": "website",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --port 3000 --host",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
